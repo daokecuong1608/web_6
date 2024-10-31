@@ -1,0 +1,160 @@
+/* Tùy chỉnh các class CSS cho header */
+.navbar {
+    background-color: #f8f9fa;
+    /* Màu nền của navbar */
+    padding-top     : 1rem;
+    /* Khoảng cách padding trên */
+    padding-right   : 3rem;
+    /* Khoảng cách padding phải */
+    padding-bottom  : 1rem;
+    /* Khoảng cách padding dưới */
+    padding-left    : 3rem;
+    /* Khoảng cách padding trái */
+}
+
+.navbar-brand img {
+    height: 24px;
+    /* Chiều cao của logo */
+}
+
+.nav-link {
+    color: #292727;
+    /* Màu chữ của các liên kết */
+}
+
+.nav-link.active {
+    font-weight: bold;
+    /* Đậm chữ cho liên kết đang hoạt động */
+}
+
+
+/* Hiển thị danh sách thả xuống khi di chuột vào mục cha */
+.nav-item.dropdown:hover .dropdown-menu {
+    display   : block;
+    /* Hiển thị danh sách thả xuống */
+    margin-top: 0;
+    /* Đảm bảo danh sách thả xuống không bị lệch */
+
+}
+
+.nav-link.disabled {
+    color: #938585;
+    /* Màu chữ cho liên kết bị vô hiệu hóa */
+}
+
+.form-control {
+    margin-right: 1rem;
+    /* Tăng khoảng cách bên phải của ô tìm kiếm */
+}
+
+.btn-cart {
+    border          : 1px solid #000;
+    /* Thêm viền cho nút */
+    padding         : 3px;
+    /* Thêm khoảng đệm */
+    display         : inline-flex;
+    /* Căn chỉnh các phần tử bên trong nút */
+    align-items     : center;
+    /* Căn giữa biểu tượng theo chiều dọc */
+    justify-content : center;
+    /* Căn giữa biểu tượng theo chiều ngang */
+    background-color: #f8f9fa;
+    /* Thêm màu nền */
+    transition      : border-color 0.3s, transform 0.3s, background-color 0.3s;
+    /* Thêm hiệu ứng chuyển đổi khi di chuột */
+    margin-right    : 10px;
+    /* Thêm khoảng cách bên phải */
+}
+
+.btn-cart i {
+    font-size : 24px;
+    /* Tăng kích thước biểu tượng */
+    transition: transform 0.3s;
+    /* Thêm hiệu ứng chuyển đổi khi di chuột */
+}
+
+.btn-cart:hover {
+    border-color    : #007bff;
+    /* Thay đổi màu viền khi di chuột */
+    background-color: #b4cbd2;
+    /* Thay đổi màu nền khi di chuột */
+}
+
+.btn-cart:hover i {
+    transform: scale(1.2);
+    /* Tăng kích thước biểu tượng khi di chuột */
+}
+
+.btn-login {
+    display        : inline-flex;
+    /* Căn chỉnh các phần tử bên trong nút */
+    align-items    : center;
+    /* Căn giữa biểu tượng theo chiều dọc */
+    justify-content: center;
+    /* Căn giữa biểu tượng theo chiều ngang */
+    padding        : 5px;
+    /* Thêm khoảng đệm */
+    border         : 2px solid #000;
+    /* Thêm viền cho nút */
+    border-radius  : 5px;
+    /* Thêm bo tròn cho viền */
+    transition     : background-color 0.3s, border-color 0.3s;
+    /* Thêm hiệu ứng chuyển đổi khi di chuột */
+    margin-right   : 10px;
+    /* Thêm khoảng cách bên phải */
+}
+
+.btn-login i {
+    font-size   : 20px;
+    /* Tăng kích thước biểu tượng */
+    transition  : transform 0.3s;
+    /* Thêm hiệu ứng chuyển đổi khi di chuột */
+    margin-right: 5px;
+    /* Thêm khoảng cách 5px bên phải biểu tượng */
+}
+
+.btn-login:hover {
+    background-color: #7d8b99;
+    /* Thay đổi màu nền khi di chuột */
+    border-color    : #091a79;
+    /* Thay đổi màu viền khi di chuột */
+}
+
+.btn-login:hover i {
+    transform: scale(1.2);
+    /* Tăng kích thước biểu tượng khi di chuột */
+}
+
+.btn-outline-success {
+    color           : #28a745;
+    /* Màu chữ của nút outline success */
+    border-color    : #28a745;
+    /* Màu viền của nút outline success */
+    background-color: #f8f9fa;
+    /* Màu nền xám nhạt */
+    border-radius   : 5px;
+    /* Bo tròn viền */
+    transition      : background-color 0.3s, border-color 0.3s;
+    /* Thêm hiệu ứng chuyển đổi khi di chuột */
+}
+
+.btn-outline-success i {
+    font-size : 20px;
+    /* Tăng kích thước biểu tượng */
+    transition: transform 0.3s;
+    /* Thêm hiệu ứng chuyển đổi khi di chuột */
+}
+
+.btn-outline-success:hover {
+    background-color: #28a745;
+    /* Thay đổi màu nền khi di chuột */
+    border-color    : #28a745;
+    /* Thay đổi màu viền khi di chuột */
+    color           : #fff;
+    /* Thay đổi màu chữ khi di chuột */
+}
+
+.btn-outline-success:hover i {
+    transform: scale(1.2);
+    /* Tăng kích thước biểu tượng khi di chuột */
+}
