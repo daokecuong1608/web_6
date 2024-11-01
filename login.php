@@ -1,3 +1,21 @@
+<?php
+
+// // Define root path
+define('__ROOT__', dirname(__FILE__));
+require_once(__ROOT__ . '/class/user.php');
+// // Kiểm tra đường dẫn
+// echo 'User class path: ' . realpath(__ROOT__ . '/class/user.php') . '<br>';
+
+Session::init();
+$user = new user();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $check_login = $user->check_login($email, $password);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +42,7 @@
                             <div class="col-md-6 col-lg-7 d-flex align-items-center">
                                 <div class="card-body p-4 p-lg-5 text-black">
 
-                                    <form>
+                                    <form action="login.php" method="POST">
 
                                         <div class="d-flex align-items-center justify-content-center mb-3 pb-1">
                                             <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
@@ -33,21 +51,28 @@
 
                                         <div data-mdb-input-init class="form-outline mb-4">
                                             <label class="form-label" for="form2Example17">Email address :</label>
-                                            <input type="email" id="form2Example17"
+                                            <input type="email" name="email" id="form2Example17"
                                                 class="form-control form-control-lg" />
                                         </div>
 
                                         <div data-mdb-input-init class="form-outline mb-4">
                                             <label class="form-label" for="form2Example27">Password :</label>
-                                            <input type="password" id="form2Example27"
+                                            <input type="password" name="password" id="form2Example27"
                                                 class="form-control form-control-lg" />
                                         </div>
 
                                         <div class="pt-1 mb-4 d-flex justify-content-center">
                                             <button data-mdb-button-init data-mdb-ripple-init
-                                                class="btn btn-dark btn-lg btn-block w-60" type="button"
+                                                class="btn btn-dark btn-lg btn-block w-60" type="submit" name="login"
                                                 style="width: 60%;">Login</button>
                                         </div>
+
+                                        <?php
+                                    if (isset($check_login)) {
+                                        echo '<div class="alert alert-danger text-center" role="alert">' . $check_login . '</div>';
+                                    }
+                                    ?>
+
 
                                         <a class="small text-muted" href="#!">Forgot password?</a>
                                         <div class="d-flex justify-content-between mt-4">

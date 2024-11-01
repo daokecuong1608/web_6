@@ -100,8 +100,10 @@
                 </div>
                 <div class="col-md-3">
                     <h5>Theo Dõi Chúng Tôi</h5>
-                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/15047/15047435.png" alt="Facebook"
-                            style="width: 24px; margin: 0 5px;"></a> <a href="#"><img
+                    <a href="https://www.facebook.com/scotl.zeros"><img
+                            src="https://cdn-icons-png.flaticon.com/128/15047/15047435.png" alt="Facebook"
+                            style="width: 24px; margin: 0 5px;"></a> <a
+                        href="https://www.instagram.com/_sonjoongki_/"><img
                             src="https://cdn-icons-png.flaticon.com/128/3955/3955024.png" alt="Instagram"
                             style="width: 24px; margin: 0 5px;"></a> <a href="#"><img
                             src="https://cdn-icons-png.flaticon.com/128/5968/5968958.png" alt="Twitter"

@@ -4,11 +4,11 @@
     /* Màu nền của navbar */
     padding-top     : 1rem;
     /* Khoảng cách padding trên */
-    padding-right   : 3rem;
+    padding-right   : 1rem;
     /* Khoảng cách padding phải */
     padding-bottom  : 1rem;
     /* Khoảng cách padding dưới */
-    padding-left    : 3rem;
+    padding-left    : 1rem;
     /* Khoảng cách padding trái */
 }
 

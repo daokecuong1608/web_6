@@ -1,3 +1,18 @@
+<?php
+session_start();
+if(isset($_SESSION['login'])){
+    $login = $_SESSION['login'];
+    $username = $_SESSION['username'];
+    $userid = $_SESSION['userid'];
+}else{
+    $login = "";
+    $username = "";
+    $userid = "";
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,6 +57,7 @@
                             <li><a class="dropdown-item" href="/#">Danh sách thể loại</a></li>
                         </ul>
                     </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">Thương hiệu</a>
@@ -54,6 +70,8 @@
                             <li><a class="dropdown-item" href="/#">Danh sách thương hiệu</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Hàng mới về</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Hàng bán chạy</a></li>
                     <li class="nav-item"><a class="nav-link disabled">Hết hàng</a></li>
                 </ul>
 
@@ -70,9 +88,36 @@
                     <a><i class="bi bi-cart"></i></a>
                 </button>
 
+                <?php
+                    if($username ===""){
+                    ?>
                 <a class="btn btn-login" href="login.php" style="white-space: nowrap;">
                     <i class="bi bi-person"></i> <!-- Bootstrap person icon -->
                 </a>
+                <?php
+                    } else{
+                 ?>
+                <span class="navbar-text">
+                    <b> <?php echo htmlspecialchars($username); ?>!</b>
+                </span>
+
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" aria-expanded="false">
+                            Tài khoản
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="userMenu">
+                            <li><a class="dropdown-item" href="profile.php">Xem hồ sơ</a></li>
+                            <li><a class="dropdown-item" href="account_settings.php">Cài đặt tài khoản</a></li>
+                            <li><a class="dropdown-item" href="./handle/logout.php">Đăng xuất</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <?php
+                }
+                ?>
+
             </div>
         </div>
     </nav>

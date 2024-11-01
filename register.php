@@ -33,27 +33,39 @@
                             <div class="card-body p-5">
                                 <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-                                <form>
+                                <?php
+                                if (isset($_SESSION['error'])) {
+                                    echo '<div class="alert alert-danger">' . $_SESSION['error'] . '</div>';
+                                    unset($_SESSION['error']);
+                                }
+                                if (isset($_SESSION['success'])) {
+                                    echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
+                                    unset($_SESSION['success']);
+                                }
+                                ?>
 
+                                <form action="handle/register_process.php" method="POST">
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1cg">Your Name</label>
-                                        <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                                        <input type="text" name="name" id="form3Example1cg"
+                                            class="form-control form-control-lg" />
                                     </div>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <label class="form-label" for="form3Example3cg">Your Email</label>
-                                        <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
+                                        <input type="email" name="email" id="form3Example3cg"
+                                            class="form-control form-control-lg" />
                                     </div>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <label class="form-label" for="form3Example4cg">Password</label>
-                                        <input type="password" id="form3Example4cg"
+                                        <input type="password" name="password" id="form3Example4cg"
                                             class="form-control form-control-lg" />
                                     </div>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <label class="form-label" for="form3Example4cdg">Repeat your password</label>
-                                        <input type="password" id="form3Example4cdg"
+                                        <input type="password" name="confirm_password" id="form3Example4cdg"
                                             class="form-control form-control-lg" />
                                     </div>
 
@@ -67,9 +79,8 @@
                                     </div>
 
                                     <div class="d-flex justify-content-center">
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                            class="btn btn-success btn-lg gradient-custom-4 text-body"
-                                            style="width: 60%;">Register</button>
+                                        <button type="submit"
+                                            class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">Register</button>
                                     </div>
 
                                     <p class="text-center text-muted mt-5 mb-0">Have already an account? <a
@@ -84,6 +95,22 @@
             </div>
         </div>
     </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        const password = document.getElementById('form3Example4cg');
+        const confirmPassword = document.getElementById('form3Example4cdg');
+
+        form.addEventListener('submit', function(event) {
+            if (password.value !== confirmPassword.value) {
+                event.preventDefault();
+                alert('Mật khẩu và xác nhận mật khẩu không khớp!');
+            }
+        });
+    });
+    </script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
