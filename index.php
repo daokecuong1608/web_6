@@ -37,7 +37,7 @@
                     ],
                     [
                         'image' => './images/product/sp1.jpg',
-                        'name' => 'Sản phẩm 2',
+                        'name' => 'Sản phẩm 2',  
                         'price' => '700,000 VND',
                         'cost' => '400,000 VND'
                     ],

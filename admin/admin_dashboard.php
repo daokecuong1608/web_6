@@ -19,9 +19,12 @@
                 <div class="sidebar-sticky">
                     <h4>Quản lý cửa hàng</h4>
                     <a href="../index.php">Trang chủ</a> <!-- Cập nhật liên kết -->
-                    <a href="#">Quản lý sản phẩm</a>
+                    <a href="../product/productlist.php">Quản lý sản phẩm</a>
                     <a href="#">Quản lý đơn hàng</a>
                     <a href="#">Quản lý khách hàng</a>
+                    <a href="../product/sizesanphamlists.php">Quản lý Size</a>
+                    <a href="../product/anhsanphamlists.php">Quản lý Ảnh</a>
+                    <a href="../product/colorlist.php">Quản lý Ảnh</a>
                     <a href="#">Báo cáo</a>
                     <a href="#">Cài đặt</a>
                     <a href="../handle/logout.php">Đăng xuất</a>
@@ -36,7 +39,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Sản phẩm</h5>
                                 <p class="card-text">Quản lý các sản phẩm trong cửa hàng.</p>
-                                <a href="#" class="btn btn-primary">Quản lý sản phẩm</a>
+                                <a href="../product/productlist.php" class="btn btn-primary">Quản lý sản phẩm</a>
                             </div>
                         </div>
                     </div>
@@ -55,6 +58,36 @@
                                 <h5 class="card-title">Khách hàng</h5>
                                 <p class="card-text">Quản lý thông tin khách hàng.</p>
                                 <a href="#" class="btn btn-primary">Quản lý khách hàng</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Sản phẩm</h5>
+                                <p class="card-text">Quản lý các size sản phẩm .</p>
+                                <a href="../product/sizesanphamlists.php" class="btn btn-primary">Quản lý size</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Ảnh</h5>
+                                <p class="card-text">Quản lý các ảnh của sản phẩm .</p>
+                                <a href="../product/anhsanphamlists.php" class="btn btn-primary">Quản lý ảnh</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Màu</h5>
+                                <p class="card-text">Quản lý các màu của sản phẩm .</p>
+                                <a href="../product/colorlist.php" class="btn btn-primary">Quản lý màu </a>
                             </div>
                         </div>
                     </div>
