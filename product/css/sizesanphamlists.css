@@ -1,4 +1,4 @@
-/* sizesanphamlists.css */
+/* anhsanphamlists.css */
 
 body {
     font-family     : Arial, sans-serif;
@@ -7,7 +7,7 @@ body {
     padding         : 20px;
 }
 
-.sz-content-right {
+.anh-content-right {
     width           : 80%;
     /* Chiều rộng của form chiếm khoảng 80% màn hình */
     padding         : 20px;
@@ -16,6 +16,13 @@ body {
     border-radius   : 8px;
     margin          : 20px auto 0;
     /* Căn giữa form theo chiều ngang và cách header 20px */
+}
+
+.button-container {
+    display        : flex;
+    justify-content: space-between;
+    margin-bottom  : 20px;
+    /* Sử dụng Flexbox để căn chỉnh các nút */
 }
 
 .table-content table {
@@ -60,10 +67,13 @@ h2 {
 }
 
 .back-button {
-    text-align   : center;
-    /* Căn chỉnh nút quay về sang giữa */
-    margin-bottom: 20px;
-    /* Thêm khoảng cách dưới cho nút quay về */
+    text-align: left;
+    /* Căn chỉnh nút quay về sang trái */
+}
+
+.add-button {
+    text-align: right;
+    /* Căn chỉnh nút thêm ảnh mới sang phải */
 }
 
 .btn {
@@ -81,13 +91,21 @@ h2 {
     /* Hiển thị nút dưới dạng khối nội tuyến */
     text-align      : center;
     /* Căn chỉnh văn bản trong nút sang giữa */
-    transition      : background-color 0.3s ease;
-    /* Thêm hiệu ứng chuyển đổi màu nền */
 }
 
 .btn:hover {
     background-color: #0056b3;
     /* Thay đổi màu nền của nút khi di chuột qua */
+}
+
+.btn-primary {
+    background-color: #28a745;
+    /* Đặt màu nền cho nút thêm ảnh mới là màu xanh lá cây */
+}
+
+.btn-primary:hover {
+    background-color: #218838;
+    /* Thay đổi màu nền của nút thêm ảnh mới khi di chuột qua */
 }
 
 .btn-danger {

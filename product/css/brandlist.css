@@ -1,4 +1,4 @@
-/* productlist.css */
+/* brandlist.css */
 
 body {
     font-family     : Arial, sans-serif;
@@ -7,7 +7,7 @@ body {
     padding         : 20px;
 }
 
-.list-pro-content-right {
+.lis-tl-content-right {
     width           : 80%;
     padding         : 20px;
     background-color: #fff;
@@ -18,34 +18,34 @@ body {
     /* Thêm viền cho form */
 }
 
-.lis-button-container {
+.button-container {
     display        : flex;
     justify-content: space-between;
     margin-bottom  : 20px;
 }
 
-.table-content table {
+.tl-table-content table {
     width          : 100%;
     border-collapse: collapse;
 }
 
-.lis-table-content th,
-.lis-table-content td {
+.tl-table-content th,
+.tl-table-content td {
     border        : 1px solid #ddd;
     padding       : 8px;
     text-align    : center;
     vertical-align: middle;
 }
 
-.lis-table-content th {
+.tl-table-content th {
     background-color: #f2f2f2;
 }
 
-.lis-table-content tr:nth-child(even) {
+.tl-table-content tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-.lis-table-content tr:hover {
+.tl-table-content tr:hover {
     background-color: #f1f1f1;
 }
 
@@ -85,24 +85,18 @@ h2 {
     background-color: #218838;
 }
 
-.btn-view {
-    background-color: #17a2b8;
-}
-
-.btn-view:hover {
-    background-color: #138496;
-}
-
 .btn-edit {
-    background-color: #28a745;
+    background-color: #ffc107;
+    color           : #fff;
 }
 
 .btn-edit:hover {
-    background-color: #218838;
+    background-color: #e0a800;
 }
 
 .btn-delete {
     background-color: #dc3545;
+    color           : #fff;
 }
 
 .btn-delete:hover {

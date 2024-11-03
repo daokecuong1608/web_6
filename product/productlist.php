@@ -17,15 +17,17 @@ $product = new product(); // Đảm bảo tên lớp là Product với chữ P v
 
 <body>
 
-    <div class="pro-content-right">
-        <div class="button-container">
-
+    <div class="list-pro-content-right">
+        <div class="lis-button-container">
+            <div class="back-button">
+                <a href="../admin/admin_dashboard.php" class="btn">Quay lại trang quản lý</a>
+            </div>
             <div class="add-button">
                 <a href="productadd.php" class="btn btn-primary">Thêm sản phẩm mới</a>
             </div>
         </div>
 
-        <div class="table-content">
+        <div class="lis-table-content">
             <h2>Danh sách sản phẩm</h2>
             <table>
                 <tr>
@@ -59,7 +61,7 @@ $product = new product(); // Đảm bảo tên lớp là Product với chữ P v
                     <td><?php echo $result['sanpham_baoquan']; ?></td>
                     <td>
                         <?php if (!empty($result['sanpham_anh'])): ?>
-                        <img src="images/product/<?php echo $result['sanpham_anh']; ?>" alt="" width="100px">
+                        <img src="../images/product/<?php echo $result['sanpham_anh']; ?>" alt="" width="100px">
                         <?php else: ?>
                         Không có ảnh
                         <?php endif; ?>
@@ -69,7 +71,8 @@ $product = new product(); // Đảm bảo tên lớp là Product với chữ P v
                     <td><a href="sizesanphamlist.php?sanpham_id=<?php echo $result['sanpham_id'] ?>"
                             class="btn btn-view">Xem</a></td>
                     <td>
-                        <a href="productedit.php?id=<?php echo $result['sanpham_id']; ?>" class="btn btn-edit">Sửa</a>
+                        <a href="productedit.php?sanpham_id=<?php echo $result['sanpham_id']; ?>"
+                            class="btn btn-edit">Sửa</a>
                         <a href="productdelete.php?sanpham_id=<?php echo $result['sanpham_id']; ?>"
                             class="btn btn-delete">Xóa</a>
                     </td>
@@ -83,9 +86,6 @@ $product = new product(); // Đảm bảo tên lớp là Product với chữ P v
                 }
                 ?>
             </table>
-        </div>
-        <div class="back-button">
-            <a href="../admin/admin_dashboard.php" class="btn">Quay lại trang quản lý</a>
         </div>
     </div>
 

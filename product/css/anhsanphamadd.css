@@ -1,0 +1,56 @@
+/* anhsanphamadd.css */
+
+body {
+    font-family     : Arial, sans-serif;
+    background-color: #c6c9cb;
+    margin          : 0;
+    padding         : 20px;
+}
+
+.add-anh-content-right {
+    width           : 60%;
+    padding         : 20px;
+    background-color: #fff;
+    box-shadow      : 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius   : 8px;
+    margin          : 20px auto 0;
+}
+
+.subcartegory-add-content {
+    width: 100%;
+}
+
+label {
+    font-weight  : bold;
+    margin-bottom: 5px;
+    display      : block;
+}
+
+select,
+input[type="file"],
+.subcartegory-input {
+    width        : 100%;
+    padding      : 10px;
+    margin-bottom: 20px;
+    border       : 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button.admin-btn,
+a.admin-btn {
+    padding         : 10px 20px;
+    background-color: #007bff;
+    color           : #fff;
+    text-decoration : none;
+    border-radius   : 5px;
+    display         : inline-block;
+    text-align      : center;
+    border          : none;
+    cursor          : pointer;
+    margin-top      : 10px;
+}
+
+button.admin-btn:hover,
+a.admin-btn:hover {
+    background-color: #0056b3;
+}

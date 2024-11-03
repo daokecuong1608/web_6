@@ -24,7 +24,9 @@
                     <a href="#">Quản lý khách hàng</a>
                     <a href="../product/sizesanphamlists.php">Quản lý Size</a>
                     <a href="../product/anhsanphamlists.php">Quản lý Ảnh</a>
-                    <a href="../product/colorlist.php">Quản lý Ảnh</a>
+                    <a href="../product/colorlist.php">Quản lý Màu</a>
+                    <a href="../product/categorylist.php">Quản lý danh mục</a>
+                    <a href="../product/brandlist.php">Quản lý loại sản phẩm </a>
                     <a href="#">Báo cáo</a>
                     <a href="#">Cài đặt</a>
                     <a href="../handle/logout.php">Đăng xuất</a>
@@ -67,12 +69,13 @@
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
                             <div class="card-body">
-                                <h5 class="card-title">Sản phẩm</h5>
+                                <h5 class="card-title">Size</h5>
                                 <p class="card-text">Quản lý các size sản phẩm .</p>
                                 <a href="../product/sizesanphamlists.php" class="btn btn-primary">Quản lý size</a>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
                             <div class="card-body">
@@ -82,6 +85,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
                             <div class="card-body">
@@ -92,8 +96,34 @@
                         </div>
                     </div>
                 </div>
-            </main>
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Danh mục</h5>
+                                <p class="card-text">Quản lý danh mục sản phẩm .</p>
+                                <a href="../product/categorylist.php" class="btn btn-primary">Quản lý danh mục </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Loại sản phẩm</h5>
+                                <p class="card-text">Quản lý Loại sản phẩm .</p>
+                                <a href="../product/brandlist.php" class="btn btn-primary">Quản lý loại sản phẩm </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
         </div>
+        </main>
+    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

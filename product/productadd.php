@@ -1,0 +1,78 @@
+<?php
+include_once "../class/product.php"; // Bao gồm tệp chứa định nghĩa của lớp product
+
+$product = new product(); 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+    $insert_product = $product->insert_product($_POST, $_FILES);
+    header('Location: productlist.php');
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm sản phẩm </title>
+    <link href="css/productadd.css" rel="stylesheet"> <!-- Liên kết tệp CSS -->
+</head>
+
+<body>
+    <div class="add-pro-content-right">
+        <div class="product-add-content">
+            <?php
+                if (isset($insert_product)) {
+                    echo $insert_product;
+                }
+                ?>
+            <h2>Thêm sản phẩm</h2>
+            <form action="productadd.php" method="POST" enctype="multipart/form-data">
+
+                <label for="tenSanPham">Tên sản phẩm<span style="color: red;">*</span></label> <br>
+                <input required type="text" name="sanpham_tieude" id="tenSanPham"> <br>
+                <label for="maSanPham">Mã sản phẩm<span style="color: red;">*</span></label> <br>
+                <input required type="text" name="sanpham_ma" id="maSanPham"> <br>
+
+                <label for="color">Chọn Màu sản phẩm<span style="color: red;">*</span></label> <br>
+                <select required name="color_id" id="color">
+                    <option value="">Chọn màu</option>
+                    <?php
+                        $show_color = $product->show_color();
+                        if ($show_color) {
+                            while ($result_color = $show_color->fetch_assoc()) {
+                    ?>
+                    <option value="<?php echo $result_color['color_id'] ?>">
+                        <?php echo $result_color['color_ten'] ?>
+                    </option>
+                    <?php
+                            }
+                        }
+                    ?>
+                </select><br>
+                <label for="size">Chọn Size sản phẩm<span style="color: red;">*</span></label> <br>
+                <div class="sanpham-size" id="size">
+                    <p>S</p> <input type="checkbox" name="sanpham_size[]" value="S">
+                    <p>M</p> <input type="checkbox" name="sanpham_size[]" value="M">
+                    <p>L</p> <input type="checkbox" name="sanpham_size[]" value="L">
+                    <p>XL</p> <input type="checkbox" name="sanpham_size[]" value="XL">
+                    <p>XXL</p> <input type="checkbox" name="sanpham_size[]" value="XXL">
+                </div>
+                <label for="">Giá sản phẩm<span style="color: red;">*</span></label> <br>
+                <input required type="text" name="sanpham_gia"> <br>
+                <label for="">Chi tiết<span style="color: red;">*</span></label> <br>
+                <textarea class="ckeditor" required name="sanpham_chitiet" cols="60" rows="5"></textarea><br>
+                <label for="">Bảo quản<span style="color: red;">*</span></label> <br>
+                <textarea class="ckeditor" required name="sanpham_baoquan" cols="60" rows="5"></textarea><br>
+                <label for="">Ảnh đại diện<span style="color: red;">*</span></label> <br>
+                <input required type="file" name="sanpham_anh"> <br>
+                <label for="">Ảnh Sản phẩm<span style="color: red;">*</span></label> <br>
+                <input required type="file" multiple name="sanpham_anhs[]"> <br>
+                <button class="admin-btn" name="submit" type="submit">Gửi</button>
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

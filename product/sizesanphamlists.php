@@ -19,8 +19,13 @@ $get_all_size =  $product -> get_all_size();
 
 <body>
 
-
     <div class="sz-content-right">
+        <div class="button-container">
+
+            <div class="add-button">
+                <a href="sizesanphamadd.php" class="btn btn-primary">Thêm size</a>
+            </div>
+        </div>
         <div class="table-content">
             <h2>Danh sách size sản phẩm</h2>
 
@@ -56,11 +61,11 @@ $get_all_size =  $product -> get_all_size();
 
                 ?>
             </table>
+            <div class="back-button">
+                <a href="../admin/admin_dashboard.php" class="btn">Quay lại trang quản lý</a>
+            </div>
+        </div>
 
-        </div>
-        <div class="back-button">
-            <a href="../admin/admin_dashboard.php" class="btn">Quay lại trang quản lý</a>
-        </div>
     </div>
 </body>
 

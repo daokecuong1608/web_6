@@ -4,26 +4,34 @@ $brand = new brand(); // Đảm bảo tên lớp là Brand với chữ B viết 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $color_ten = $_POST['color_ten'];
+    //lấy tên gốc của tệp
     $file_name = $_FILES['color_anh']['name'];
+    //lây tên tạm của tệp trên máy chủ
     $file_temp = $_FILES['color_anh']['tmp_name'];
     $file_error = $_FILES['color_anh']['error'];
 
     if ($file_error === UPLOAD_ERR_OK) {
         if (!empty($file_name)) {
+            //tach duoi file
             $div = explode('.', $file_name);
+            //chuyển đổi đuôi file thành chữ thường
             $file_ext = strtolower(end($div));
+            //mảng chứa các đuôi file được phép tải lên
             $allowed_extensions = array("jpg", "jpeg", "png", "gif");
 
             if (in_array($file_ext, $allowed_extensions)) {
+              //SD chuỗi hàm băm MD5 để tạo tên file mới để tránh trùng lặp
                 $color_anh = substr(md5(time()), 0, 10) . '.' . $file_ext;
+                //đường dẫn thư mục lưu file
                 $upload_dir = realpath(__DIR__ . '/../images/color') . DIRECTORY_SEPARATOR;
+                //đường dẫn file sau khi tải lên
                 $upload_image = $upload_dir . $color_anh;
 
                 // Kiểm tra và tạo thư mục nếu chưa tồn tại
                 if (!is_dir($upload_dir)) {
                     mkdir($upload_dir, 0755, true);
                 }
-
+                 //lưu file vào thư mục chỉ định
                 if (move_uploaded_file($file_temp, $upload_image)) {
                     echo "Tệp đã được tải lên thành công.";
                 } else {
