@@ -41,7 +41,8 @@ $get_anh = $product->get_anh($sanpham_id);
                     <td><?php echo $result['sanpham_id'] ?></td>
                     <td><?php echo $result['sanpham_ma'] ?></td>
                     <td><img style="width: 150px; height: auto"
-                            src="images/product/<?php echo $result['sanpham_anh'] ?>" alt=""></td>
+                            src="../images/product/<?php echo $result['sanpham_anh'] ?>" alt="">
+                    </td>
                     <td><a href="anhsanphamdelete.php?sanpham_anh_id=<?php echo $result['sanpham_anh_id'] ?>"
                             class="btn btn-danger">Xóa</a></td>
                 </tr>

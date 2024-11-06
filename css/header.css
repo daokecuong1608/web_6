@@ -22,25 +22,63 @@
     /* Màu chữ của các liên kết */
 }
 
-.nav-link.active {
-    font-weight: bold;
-    /* Đậm chữ cho liên kết đang hoạt động */
+
+/* header.css */
+
+/* Đặt kiểu dáng cho menu thả xuống */
+.navbar-nav .dropdown-menu {
+    display         : none;
+    /* Ẩn menu thả xuống mặc định */
+    position        : absolute;
+    background-color: #746d6d;
+    box-shadow      : 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index         : 1000;
+    margin-top      : 0;
+    border-radius   : 0;
+    border          : 1px solid #ddd;
+}
+
+/* Hiển thị menu thả xuống khi di chuột vào danh mục */
+.navbar-nav .nav-item:hover .dropdown-menu {
+    display: block;
+}
+
+/* Đặt kiểu dáng cho các mục trong menu thả xuống */
+.navbar-nav .dropdown-menu .dropdown-item {
+    padding        : 10px 20px;
+    color          : #333;
+    text-decoration: none;
+    display        : block;
+    white-space    : nowrap;
+}
+
+/* Thay đổi màu nền và màu chữ khi di chuột vào các mục trong menu thả xuống */
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color           : #007bff;
+}
+
+/* Đặt kiểu dáng cho các danh mục */
+.navbar-nav .nav-item {
+    position: relative;
+}
+
+/* Đặt kiểu dáng cho các liên kết trong danh mục */
+.navbar-nav .nav-link {
+    padding        : 10px 20px;
+    color          : #333;
+    text-decoration: none;
+    display        : block;
+    white-space    : nowrap;
+}
+
+/* Thay đổi màu nền và màu chữ khi di chuột vào các liên kết trong danh mục */
+.navbar-nav .nav-link:hover {
+    background-color: #f8f9fa;
+    color           : #007bff;
 }
 
 
-/* Hiển thị danh sách thả xuống khi di chuột vào mục cha */
-.nav-item.dropdown:hover .dropdown-menu {
-    display   : block;
-    /* Hiển thị danh sách thả xuống */
-    margin-top: 0;
-    /* Đảm bảo danh sách thả xuống không bị lệch */
-
-}
-
-.nav-link.disabled {
-    color: #938585;
-    /* Màu chữ cho liên kết bị vô hiệu hóa */
-}
 
 .form-control {
     margin-right: 1rem;

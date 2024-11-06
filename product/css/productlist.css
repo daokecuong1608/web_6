@@ -8,7 +8,7 @@ body {
 }
 
 .list-pro-content-right {
-    width           : 80%;
+    width           : 90%;
     padding         : 20px;
     background-color: #fff;
     box-shadow      : 0 0 10px rgba(0, 0, 0, 0.1);
@@ -107,4 +107,12 @@ h2 {
 
 .btn-delete:hover {
     background-color: #c82333;
+}
+
+.action-buttons {
+    display        : flex;
+    justify-content: center;
+    gap            : 10px;
+    /* Khoảng cách giữa các nút */
+
 }

@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm sản phẩm </title>
     <link href="css/productadd.css" rel="stylesheet"> <!-- Liên kết tệp CSS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Liên kết thư viện jQuery -->
 </head>
 
 <body>
@@ -33,6 +34,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 <input required type="text" name="sanpham_tieude" id="tenSanPham"> <br>
                 <label for="maSanPham">Mã sản phẩm<span style="color: red;">*</span></label> <br>
                 <input required type="text" name="sanpham_ma" id="maSanPham"> <br>
+
+                <label for="">Chọn danh mục<span style="color: red;">*</span></label> <br>
+                <select required="required" name="danhmuc_id" id="danhmuc_id">
+                    <option value="">--Chọn--</option>
+                    <?php
+                        $show_danhmuc = $product->show_danhmuc();
+                        if ($show_danhmuc) {
+                            while ($result = $show_danhmuc->fetch_assoc()) {
+                    ?>
+                    <option value="<?php echo $result['danhmuc_id'] ?>"><?php echo $result['danhmuc_ten'] ?></option>
+                    <?php
+                            }
+                        }
+                    ?>
+                </select>
+
+                <label for="">Chọn Loại sản phẩm<span style="color: red;">*</span></label> <br>
+                <select required="required" name="loaisanpham_id" id="loaisanpham_id">
+                    <option value="">--Chọn--</option>
+                </select>
+
 
                 <label for="color">Chọn Màu sản phẩm<span style="color: red;">*</span></label> <br>
                 <select required name="color_id" id="color">
@@ -73,6 +95,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             </form>
         </div>
     </div>
+
+    <script>
+    $(document).ready(function() {
+        $("#danhmuc_id").change(function() {
+            var x = $(this).val();
+            $.get("../ajax/productadd_ajax.php", {
+                danhmuc_id: x
+            }, function(data) {
+                $("#loaisanpham_id").html(data);
+            });
+        });
+    });
+    </script>
+
 </body>
 
 </html>

@@ -35,6 +35,8 @@ class product{
     public function insert_product($data , $file){
     $sanpham_tieude = $data['sanpham_tieude'];
     $sanpham_ma = $data['sanpham_ma'];
+    $danhmuc_id = $data['danhmuc_id'];
+    $loaisanpham_id = $data['loaisanpham_id'];
     $color_id = $data['color_id'];
     $sanpham_gia = $data['sanpham_gia'];
     $sanpham_chitiet = $data['sanpham_chitiet'];
@@ -71,9 +73,10 @@ class product{
             return false;
         }
     }
-    $query = "INSERT INTO tbl_sanpham(sanpham_tieude,sanpham_ma,color_id,sanpham_gia,sanpham_chitiet,sanpham_baoquan,sanpham_anh) VALUES 
-    ('$sanpham_tieude','$sanpham_ma','$color_id','$sanpham_gia','$sanpham_chitiet','$sanpham_baoquan','$sanpham_anh')";
-    $result = $this -> db ->insert($query);
+      $query = "INSERT INTO tbl_sanpham (sanpham_tieude,sanpham_ma,danhmuc_id,loaisanpham_id,color_id,sanpham_gia,sanpham_chitiet,sanpham_baoquan,sanpham_anh) 
+            VALUES 
+          ('$sanpham_tieude','$sanpham_ma','$danhmuc_id','$loaisanpham_id','$color_id','$sanpham_gia','$sanpham_chitiet','$sanpham_baoquan','$sanpham_anh')";
+          $result = $this ->db ->insert($query);
     //Thêm các tệp ảnh phụ và kích thước sản phẩm vào cơ sở dữ liệu
     if($result){
         // lấy ID của sản phẩm vừa được thêm vào cơ sở dữ liệu.
@@ -101,10 +104,11 @@ class product{
 
     // Phương thức  lấy  sản phẩm
     public function show_product(){
-      $query = "SELECT tbl_sanpham.* , tbl_color.color_ten
-      FROM tbl_sanpham 
-                    INNER JOIN tbl_color ON tbl_sanpham.color_id = tbl_color.color_id
-                     ORDER BY tbl_sanpham.sanpham_id DESC  ";
+      $query = "SELECT tbl_sanpham.* ,tbl_danhmuc.danhmuc_ten,tbl_loaisanpham.loaisanpham_ten,tbl_color.color_ten
+        FROM tbl_sanpham INNER JOIN tbl_danhmuc ON tbl_sanpham.danhmuc_id = tbl_danhmuc.danhmuc_id
+        INNER JOIN tbl_loaisanpham ON tbl_sanpham.loaisanpham_id = tbl_loaisanpham.loaisanpham_id
+        INNER JOIN tbl_color ON tbl_sanpham.color_id = tbl_color.color_id
+         ORDER BY tbl_sanpham.sanpham_id DESC  ";
         $result = $this -> db ->select($query);
         return $result;
     }
@@ -118,6 +122,18 @@ class product{
     public function show_danhmuc(){
         $query = "SELECT * FROM tbl_danhmuc ORDER BY danhmuc_id DESC";
         $result = $this -> db ->select($query);
+        return $result;
+    }
+
+    public function show_loaisanpham(){
+        $query = "SELECT * FROM tbl_loaisanpham ORDER BY loaisanpham_id DESC";
+        $result = $this -> db ->select($query);
+        return $result;
+    }
+
+    public function show_loaisanpham_by_danhmuc($danhmuc_id) {
+        $query = "SELECT * FROM tbl_loaisanpham WHERE danhmuc_id = '$danhmuc_id'";
+        $result = $this->db->select($query);
         return $result;
     }
 
@@ -219,6 +235,8 @@ public function delete_product_anh($sanpham_id){
 public function update_product($data, $file, $sanpham_id) {
     $sanpham_tieude = $data['sanpham_tieude'];
     $sanpham_ma = $data['sanpham_ma'];
+    $danhmuc_id = $data['danhmuc_id'];
+    $loaisanpham_id = $data['loaisanpham_id'];
     $color_id = $data['color_id'];
     $sanpham_gia = $data['sanpham_gia'];
     $sanpham_chitiet = $data['sanpham_chitiet'];
@@ -260,6 +278,8 @@ public function update_product($data, $file, $sanpham_id) {
     $query = "UPDATE tbl_sanpham SET 
         sanpham_tieude = '$sanpham_tieude',
         sanpham_ma = '$sanpham_ma',
+        anhmuc_id = '$danhmuc_id', 
+        loaisanpham_id = '$loaisanpham_id', 
         color_id = '$color_id',
         sanpham_gia = '$sanpham_gia',
         sanpham_chitiet = '$sanpham_chitiet',

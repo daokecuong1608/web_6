@@ -34,6 +34,8 @@ $product = new product(); // Đảm bảo tên lớp là Product với chữ P v
                     <th>Stt</th>
                     <th>Tiêu đề</th>
                     <th>Mã sản phẩm </th>
+                    <th>Danh mục</th>
+                    <th>Loại sản phẩm</th>
                     <th>Màu</th>
                     <th>Giá</th>
                     <th>Chi tiết</th>
@@ -55,6 +57,8 @@ $product = new product(); // Đảm bảo tên lớp là Product với chữ P v
                     <td><?php echo $i; ?></td>
                     <td><?php echo $result['sanpham_tieude']; ?></td>
                     <td><?php echo $result['sanpham_ma']; ?></td>
+                    <td> <?php echo $result['danhmuc_ten']  ?></td>
+                    <td> <?php echo $result['loaisanpham_ten']  ?></td>
                     <td><?php echo $result['color_ten']; ?></td>
                     <td><?php echo $result['sanpham_gia']; ?></td>
                     <td><?php echo $result['sanpham_chitiet']; ?></td>
@@ -77,8 +81,6 @@ $product = new product(); // Đảm bảo tên lớp là Product với chữ P v
                             class="btn btn-delete">Xóa</a>
                     </td>
                 </tr>
-
-
                 <?php
                     }
                 } else {

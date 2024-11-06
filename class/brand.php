@@ -51,7 +51,6 @@ public function delete_brand($loaisanpham_id){
         $alert = "<span class = 'alert-style'> Delete Thất bại</span>";
          return $alert;
         }
-
 }
 
 public function delete_color($color_id){

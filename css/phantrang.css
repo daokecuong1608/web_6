@@ -1,0 +1,80 @@
+/* phantrang.css */
+
+/* Căn giữa danh sách phân trang */
+.pagination-container {
+    display        : flex;
+    justify-content: center;
+    margin-top     : 20px;
+}
+
+/* Kiểu dáng cho danh sách phân trang */
+.pagination {
+    display   : flex;
+    list-style: none;
+    padding   : 0;
+}
+
+/* Kiểu dáng cho các mục trong danh sách phân trang */
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+/* Kiểu dáng cho các liên kết trong danh sách phân trang */
+.pagination .page-link {
+    display        : block;
+    padding        : 10px 15px;
+    color          : #007bff;
+    text-decoration: none;
+    border         : 1px solid #ddd;
+    border-radius  : 5px;
+    transition     : background-color 0.3s, color 0.3s;
+}
+
+/* Kiểu dáng cho các liên kết khi di chuột */
+.pagination .page-link:hover {
+    background-color: #007bff;
+    color           : #fff;
+}
+
+/* Kiểu dáng cho mục phân trang đang hoạt động */
+.pagination .active .page-link {
+    background-color: #007bff;
+    color           : #fff;
+    border-color    : #007bff;
+}
+
+/* Căn giữa thẻ h1 */
+.text-center {
+    text-align: center;
+}
+
+/* Căn giữa phần tiêu đề và giá bán */
+.card-body.text-center {
+    text-align: center;
+}
+
+/* In đậm và đổi màu đỏ cho phần giá bán */
+.card-body .price {
+    font-weight: bold;
+    color      : red;
+}
+
+
+/* Kiểu dáng cho các nút */
+.card-body .btn {
+    margin-top  : 10px;
+    margin-right: 5px;
+    transition  : background-color 0.3s, color 0.3s;
+}
+
+/* Hiệu ứng hover cho nút "Mua ngay" */
+.card-body .btn-primary:hover {
+    background-color: #0056b3;
+    color           : #fff;
+}
+
+/* Hiệu ứng hover cho nút "Xem nhanh" */
+.card-body .btn-secondary:hover {
+    background-color: #6c757d;
+    color           : #fff;
+}

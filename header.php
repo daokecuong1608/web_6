@@ -9,9 +9,17 @@ if(isset($_SESSION['login'])){
     $username = "";
     $userid = "";
 }
+?>
 
+<?php
+if (!defined('__ROOT__')) {
+    define('__ROOT__', dirname(__FILE__)); // Định nghĩa hằng số __ROOT__ nếu chưa được định nghĩa
+}
+require_once(__ROOT__ . '/class/index_class.php'); // Đường dẫn chính xác đến tệp index_class.php
+$index = new index();
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,39 +49,48 @@ if(isset($_SESSION['login'])){
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="/#">Trang chủ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Combo giảm giá</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Thể loại</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/#">Áo</a></li>
-                            <li><a class="dropdown-item" href="/#">Váy</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="/#">Danh sách thể loại</a></li>
-                        </ul>
-                    </li>
 
+                    <?php
+                        $show_danhmuc = $index->show_danhmuc();
+                        if ($show_danhmuc) {
+                            while ($result = $show_danhmuc->fetch_assoc()) {
+                    ?>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Thương hiệu</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/#2">Chic-Land</a></li>
-                            <li><a class="dropdown-item" href="/#">Elise</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="/#">Danh sách thương hiệu</a></li>
+                        <a class="nav-link dropdown-toggle" href="#"
+                            id="navbarDropdown<?php echo $result['danhmuc_id']; ?>" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <?php echo $result['danhmuc_ten']; ?>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown<?php echo $result['danhmuc_id']; ?>">
+                            <?php
+                    $danhmuc_id = $result['danhmuc_id'];
+                    $show_loaisanpham = $index->show_loaisanpham($danhmuc_id);
+                    if ($show_loaisanpham) {
+                        while ($result_sp = $show_loaisanpham->fetch_assoc()) {
+                     ?>
+                            <li><a class="dropdown-item" href="/#"><?php echo $result_sp['loaisanpham_ten']; ?></a></li>
+                            <?php
+                    }
+                }
+            ?>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#">Hàng mới về</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Hàng bán chạy</a></li>
-                    <li class="nav-item"><a class="nav-link disabled">Hết hàng</a></li>
+                    <?php
+            }
+        }
+    ?>
                 </ul>
+
+
+
+
+
+
+
 
                 <form class="d-flex m-2" role="search" style="margin: 10px !important;">
                     <input class="form-control me-2" type="search" name="searchQuery" placeholder="Nội dung tìm kiếm"

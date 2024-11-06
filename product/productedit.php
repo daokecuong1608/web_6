@@ -25,6 +25,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update sản phẩm </title>
     <link href="css/productedit.css" rel="stylesheet"> <!-- Liên kết tệp CSS -->
+
 </head>
 
 <body>
@@ -45,6 +46,44 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                 <label for="maSanPham">Mã sản phẩm <span style="color: red;">*</span> </label><br>
                 <input value="<?php echo $result['sanpham_ma'] ?>" require type="text" name="sanpham_ma"
                     id="maSanPham"><br>
+
+
+                <label for="">Chọn danh mục<span style="color: red;">*</span></label> <br>
+                <select required="required" name="danhmuc_id" id="danhmuc_id">
+                    <option value="">--Chọn--</option>
+                    <?php
+                        $show_danhmuc = $product ->show_danhmuc();
+                        if($show_danhmuc){
+                            while($result_danhmuc=$show_danhmuc->fetch_assoc()){
+                        ?>
+                    <option <?php if($result_danhmuc['danhmuc_id']== $result['danhmuc_id']) {echo "selected";} ?>
+                        value="<?php echo $result_danhmuc['danhmuc_id'] ?>"><?php echo $result_danhmuc['danhmuc_ten'] ?>
+                    </option>
+                    <?php
+                        }}
+                        ?>
+                </select><br>
+
+                <label for="">Chọn Loại sản phẩm<span style="color: red;">*</span></label> <br>
+                <select required="required" name="loaisanpham_id" id="loaisanpham_id">
+                    <option value="">--Chọn--</option>
+                    <?php
+                        $show_loaisanpham = $product ->show_loaisanpham();
+                        if($show_loaisanpham){
+                            while($result_loaisanpham=$show_loaisanpham->fetch_assoc()){
+                        ?>
+                    <option
+                        <?php if($result_loaisanpham['loaisanpham_id']== $result['loaisanpham_id']) {echo "selected";} ?>
+                        value="<?php echo $result_loaisanpham['loaisanpham_id'] ?>">
+                        <?php echo $result_loaisanpham['loaisanpham_ten'] ?>
+                    </option>
+                    <?php
+                        }}
+                        ?>
+
+                </select>
+
+
 
                 <label for="color">Chọn Màu sản phẩm<span style="color: red;">*</span></label> <br>
                 <select require="require" name="color_id" id="color">
