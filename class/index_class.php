@@ -17,6 +17,13 @@ class index {
         $this->fm = new Format;
     }
 
+    public function show_cart($session_id)
+    {
+        $query = "SELECT * FROM tbl_cart WHERE session_idA = '$session_id' ORDER BY cart_id DESC";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
     public function show_danhmuc()
     {
         $query = "SELECT * FROM tbl_danhmuc ORDER BY danhmuc_id";
@@ -59,6 +66,28 @@ class index {
         WHERE tbl_sanpham.loaisanpham_id = '$loaisanpham_id' && tbl_sanpham.sanpham_id != '$sanpham_id'
         ORDER BY tbl_sanpham.sanpham_id DESC LIMIT 0,5  ";
         $result = $this->db->select($query);
+        return $result;
+    }
+
+
+    public function insert_cart($sanpham_anh, $session_idA, $sanpham_id, $sanpham_tieude, $sanpham_gia, $color_anh, $quantitys, $sanpham_size){
+        $query = "INSERT INTO tbl_cart (sanpham_anh,session_idA,sanpham_id,sanpham_tieude,sanpham_gia,color_anh,quantitys,sanpham_size) VALUES 
+        ('$sanpham_anh','$session_idA','$sanpham_id','$sanpham_tieude','$sanpham_gia','$color_anh','$quantitys','$sanpham_size')";
+        $result = $this->db->insert($query);
+        return $result;
+    }
+
+    public function delete_cart($cart_id)
+    {
+        $query = "DELETE  FROM tbl_cart WHERE cart_id = '$cart_id'";
+        $result = $this->db->delete($query);
+        if ($result) {
+            $query = "SELECT * FROM tbl_cart ORDER BY cart_id";
+            $resultA = $this->db->select($query);
+            if ($resultA == null) {
+                Session::set('SL', null);
+            }
+        }
         return $result;
     }
 

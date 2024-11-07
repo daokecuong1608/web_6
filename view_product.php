@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 if (!defined('__ROOT__')) {
     define('__ROOT__', dirname(__FILE__)); // Định nghĩa hằng số __ROOT__ nếu chưa được định nghĩa
 }
@@ -14,6 +16,10 @@ if(isset($_GET['sanpham_id']) && $_GET['sanpham_id'] != NULL ){
     header('Location: index.php');
     exit();
 }
+
+// Kiểm tra trạng thái đăng nhập
+$is_logged_in = isset($_SESSION['login']) && $_SESSION['login'] === true;
+
 ?>
 
 
@@ -29,12 +35,14 @@ if(isset($_GET['sanpham_id']) && $_GET['sanpham_id'] != NULL ){
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="css/view_product.css" rel="stylesheet"> <!-- Liên kết tệp CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Liên kết jQuery -->
+
+
 </head>
 
 <body>
 
     <?php
-        include 'header.php';
         include 'carousel.php';
     ?>
 
@@ -244,6 +252,55 @@ if(isset($_GET['sanpham_id']) && $_GET['sanpham_id'] != NULL ){
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+    </script>
+
+    <script>
+    $(document).ready(function() {
+        var s = '';
+        $('.size-item-input').each(function(index) {
+            $(this).change(function() {
+                s = $(this).val();
+            });
+        });
+        $('.add-cart-btn').click(function() {
+            if (s == "") {
+                $('.size-alert').text('Vui lòng chọn size*');
+            } else {
+                <?php if ($is_logged_in) { ?>
+                var x = $(this).parent().parent().find('.sanpham_tieude').text();
+                var se = $(this).parent().parent().find('.session_id').val();
+                var sp = $(this).parent().parent().find('.sanpham_id').val();
+                var y = $(this).parent().parent().parent().find('.sanpham_anh').attr('src');
+                var z = $(this).parent().parent().find('.sanpham_gia').val();
+                var c = $(this).parent().parent().find('.color_anh').attr('src');
+                var q = $(this).parent().parent().find('.quantitys').val();
+                $.ajax({
+                    url: "ajax/cart_ajax.php",
+                    method: "POST",
+                    data: {
+                        session_id: se,
+                        sanpham_id: sp,
+                        sanpham_tieude: x,
+                        sanpham_anh: y,
+                        sanpham_gia: z,
+                        color_anh: c,
+                        quantitys: q,
+                        sanpham_size: s
+                    },
+                    success: function(data) {
+                        console.log(data); // Kiểm tra phản hồi từ server
+                        $(location).attr('href', 'cart.php');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText); // Kiểm tra lỗi nếu có
+                    }
+                });
+                <?php } else { ?>
+                $(location).attr('href', 'login.php');
+                <?php } ?>
+            }
+        });
+    });
     </script>
 </body>
 
