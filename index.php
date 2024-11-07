@@ -64,7 +64,8 @@ if ($conn->connect_error) {
                         <p class="card-text price">Giá bán:
                             <?php echo number_format($row['sanpham_gia'], 0, ',', '.') . ' VNĐ' ?></p>
                         <a href="mua_ngay.php?id=<?php echo $row['sanpham_id']; ?>" class="btn btn-info">Mua ngay</a>
-                        <a href="xem_nhanh.php?id=<?php echo $row['sanpham_id']; ?>" class="btn btn-secondary">Xem
+                        <a href="view_product.php?sanpham_id=<?php echo $row['sanpham_id']; ?>"
+                            class="btn btn-secondary">Xem
                             nhanh</a>
                     </div>
                 </div>

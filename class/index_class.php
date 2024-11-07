@@ -29,9 +29,38 @@ class index {
         return $result;
     }
 
+
+    public function get_sanpham($sanpham_id){
+        $query = "SELECT tbl_sanpham.*, tbl_danhmuc.danhmuc_ten,tbl_loaisanpham.loaisanpham_ten,tbl_color.color_ten,tbl_color.color_anh
+        FROM tbl_sanpham INNER JOIN tbl_danhmuc ON tbl_sanpham.danhmuc_id = tbl_danhmuc.danhmuc_id
+        INNER JOIN tbl_loaisanpham ON tbl_sanpham.loaisanpham_id = tbl_loaisanpham.loaisanpham_id
+        INNER JOIN tbl_color ON tbl_sanpham.color_id = tbl_color.color_id
+        WHERE tbl_sanpham.sanpham_id = '$sanpham_id'
+        ORDER BY tbl_sanpham.sanpham_id DESC  ";
+        $result = $this->db->select($query);
+        return $result;
+    }
+    public function get_anh($sanpham_id)
+    {
+        $query = "SELECT * FROM tbl_sanpham_anh WHERE sanpham_id = '$sanpham_id' ORDER BY sanpham_anh_id DESC";
+        $result = $this->db->select($query);
+        return $result;
+    }
+    public function get_size($sanpham_id){
+        $query = "SELECT * FROM tbl_sanpham_size WHERE sanpham_id = '$sanpham_id' ORDER BY sanpham_size_id DESC";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
+    public function get_sanphamlienquan($loaisanpham_id, $sanpham_id) {
+        $query = "SELECT tbl_sanpham.*, tbl_danhmuc.danhmuc_ten,tbl_loaisanpham.loaisanpham_ten
+        FROM tbl_sanpham INNER JOIN tbl_danhmuc ON tbl_sanpham.danhmuc_id = tbl_danhmuc.danhmuc_id
+        INNER JOIN tbl_loaisanpham ON tbl_sanpham.loaisanpham_id = tbl_loaisanpham.loaisanpham_id
+        WHERE tbl_sanpham.loaisanpham_id = '$loaisanpham_id' && tbl_sanpham.sanpham_id != '$sanpham_id'
+        ORDER BY tbl_sanpham.sanpham_id DESC LIMIT 0,5  ";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
 }
-
-
-
-
 ?>
