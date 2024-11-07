@@ -30,7 +30,7 @@
     display         : none;
     /* Ẩn menu thả xuống mặc định */
     position        : absolute;
-    background-color: #746d6d;
+    background-color: #cdc4c4;
     box-shadow      : 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index         : 1000;
     margin-top      : 0;
@@ -46,7 +46,7 @@
 /* Đặt kiểu dáng cho các mục trong menu thả xuống */
 .navbar-nav .dropdown-menu .dropdown-item {
     padding        : 10px 20px;
-    color          : #333;
+    color          : #504f4f;
     text-decoration: none;
     display        : block;
     white-space    : nowrap;
@@ -66,7 +66,7 @@
 /* Đặt kiểu dáng cho các liên kết trong danh mục */
 .navbar-nav .nav-link {
     padding        : 10px 20px;
-    color          : #333;
+    color          : #717171;
     text-decoration: none;
     display        : block;
     white-space    : nowrap;

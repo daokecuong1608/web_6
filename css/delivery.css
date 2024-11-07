@@ -1,0 +1,152 @@
+/* delivery.css */
+
+/* Kiểu dáng cho tiêu đề giao hàng */
+.delivery-top-wap {
+    margin-bottom: 20px;
+}
+
+.delivery-top {
+    display        : flex;
+    justify-content: space-between;
+    align-items    : center;
+    padding        : 10px 0;
+}
+
+.delivery-top-item {
+    flex      : 1;
+    text-align: center;
+    font-size : 18px;
+    color     : #333;
+}
+
+.delivery-top-item i {
+    font-size: 24px;
+    color    : #007bff;
+}
+
+/* Làm mờ biểu tượng giỏ hàng và thanh toán */
+.delivery-top-cart i,
+.delivery-top-payment i {
+    opacity: 0.5;
+    /* Đặt độ mờ cho biểu tượng */
+}
+
+/* Kiểu dáng cho form địa chỉ giao hàng */
+.delivery-content-left {
+    padding-right: 20px;
+}
+
+.delivery-content-left h3 {
+    font-size    : 24px;
+    font-weight  : bold;
+    margin-bottom: 20px;
+}
+
+.delivery-content-left-input-top {
+    margin-bottom: 20px;
+}
+
+.delivery-content-left-input-top-item {
+    margin-bottom: 20px;
+}
+
+.delivery-content-left-input-top-item label {
+    display      : block;
+    font-weight  : bold;
+    margin-bottom: 5px;
+}
+
+.delivery-content-left-input-top-item input,
+.delivery-content-left-input-top-item select {
+    width        : 100%;
+    padding      : 10px;
+    border       : 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.delivery-content-left-input-bottom {
+    margin-bottom: 20px;
+}
+
+.delivery-content-left-input-bottom label {
+    display      : block;
+    font-weight  : bold;
+    margin-bottom: 5px;
+}
+
+.delivery-content-left-input-bottom input,
+.delivery-content-left-input-bottom select {
+    width        : 100%;
+    padding      : 10px;
+    border       : 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Kiểu dáng cho phần thanh toán */
+.delivery-content-right {
+    padding-left: 20px;
+    margin-top  : 40px;
+    /* Tăng khoảng cách của phần thanh toán với phần trên */
+}
+
+.delivery-content-right h3 {
+    text-align: center;
+    /* Đặt phần thanh toán vào giữa form */
+}
+
+.delivery-content-right table {
+    width          : 100%;
+    border-collapse: collapse;
+}
+
+.delivery-content-right table th,
+.delivery-content-right table td {
+    padding      : 10px;
+    text-align   : left;
+    border-bottom: 1px solid #ddd;
+}
+
+.delivery-content-right table th {
+    background-color: #f8f8f8;
+    text-transform  : uppercase;
+    font-weight     : bold;
+}
+
+.delivery-content-right table td p {
+    margin: 0;
+}
+
+.delivery-content-right-button {
+    margin-top     : 20px;
+    display        : flex;
+    justify-content: space-between;
+}
+
+.delivery-content-right-button a {
+    padding         : 10px 20px;
+    background-color: #6c757d;
+    color           : #fff;
+    border          : none;
+    cursor          : pointer;
+    transition      : background-color 0.3s;
+    text-align      : center;
+    text-decoration : none;
+}
+
+.delivery-content-right-button a:hover {
+    background-color: #5a6268;
+}
+
+.delivery-content-right-button button {
+    padding         : 10px 20px;
+    background-color: #007bff;
+    color           : #fff;
+    border          : none;
+    cursor          : pointer;
+    transition      : background-color 0.3s;
+    text-align      : center;
+}
+
+.delivery-content-right-button button:hover {
+    background-color: #0056b3;
+}
