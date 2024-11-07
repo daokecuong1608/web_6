@@ -120,6 +120,74 @@ class index {
         return $result;
     }
 
+    public function insert_payment($session_id, $deliver_method, $method_payment, $today){
+//kiem tra xem payment da ton tai chua
+$query = "SELECT * FROM tbl_payment WHERE session_id = '$session_id' ORDER BY payment_id DESC";
+$result = $this->db->select($query);
+
+//neu chua ton tai 
+if($result == null){
+    //lay san pham trong gio hang
+    $query = "SELECT * FROM tbl_cart WHERE session_idA = '$session_id' ORDER BY cart_id";
+    $result_cart = $this->db->select($query);
+    //neu co san pham trong gio hang
+    if($result_cart){
+        while($result_c = $result_cart->fetch_assoc()){
+            $cart_id = $result_c['cart_id'];
+            $sanpham_anh = $result_c['sanpham_anh'];
+            $sanpham_id = $result_c['sanpham_id'];
+            $sanpham_tieude = $result_c['sanpham_tieude'];
+            $sanpham_gia = $result_c['sanpham_gia'];
+            $color_anh = $result_c['color_anh'];
+            $quantitys = $result_c['quantitys'];
+            $sanpham_size = $result_c['sanpham_size'];
+            $query = "INSERT INTO tbl_carta (sanpham_anh,session_id,sanpham_id,sanpham_tieude,sanpham_gia,color_anh,quantitys,sanpham_size) VALUES 
+             ('$sanpham_anh','$session_id','$sanpham_id','$sanpham_tieude','$sanpham_gia','$color_anh','$quantitys','$sanpham_size')";
+           $result_carta = $this->db->insert($query);
+           //neu insert thanh cong xoa san pham trong gio hang
+           if($result_carta){
+                $query = "DELETE  FROM tbl_cart WHERE cart_id = '$cart_id'";
+                $result = $this->db->delete($query);
+                Session::set('SL', null);
+           }
+        }
+    }
+    $query = "INSERT INTO tbl_payment (session_id,giaohang,thanhtoan,order_date) VALUES 
+    ('$session_id','$deliver_method','$method_payment','$today')";
+    $result = $this->db->insert($query);
+    return $result;
+}else{
+    $query = "SELECT* FROM tbl_cart WHERE session_idA = '$session_id' ORDER BY cart_id DESC";
+    $result_cart = $this->db->select($query);
+    if($result_cart){
+        while($result_c = $result_cart->fetch_assoc()){
+            $cart_id = $result_c['cart_id'];
+            $sanpham_anh = $result_c['sanpham_anh'];
+            $sanpham_id = $result_c['sanpham_id'];
+            $sanpham_tieude = $result_c['sanpham_tieude'];
+            $sanpham_gia = $result_c['sanpham_gia'];
+            $color_anh = $result_c['color_anh'];
+            $quantitys = $result_c['quantitys'];
+            $sanpham_size = $result_c['sanpham_size'];
+            $query = "INSERT INTO tbl_carta (sanpham_anh,session_id,sanpham_id,sanpham_tieude,sanpham_gia,color_anh,quantitys,sanpham_size) VALUES 
+             ('$sanpham_anh','$session_id','$sanpham_id','$sanpham_tieude','$sanpham_gia','$color_anh','$quantitys','$sanpham_size')";
+           $result_carta = $this->db->insert($query);
+           //neu insert thanh cong xoa san pham trong gio hang
+           if($result_carta){
+                $query = "DELETE  FROM tbl_cart WHERE cart_id = '$cart_id'";
+                $result = $this->db->delete($query);
+                Session::set('SL', null);
+           }
+        }
+    }
+    header('Location:success.php');
+}
+
+}
+
+    
+
+
     public function delete_cart($cart_id){
         $query = "DELETE  FROM tbl_cart WHERE cart_id = '$cart_id'";
         $result = $this->db->delete($query);

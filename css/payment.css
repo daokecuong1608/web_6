@@ -1,0 +1,115 @@
+/* payment.css */
+
+/* Kiểu dáng cho tiêu đề thanh toán */
+.payment-top-wrap {
+    margin-bottom: 20px;
+}
+
+.payment-top {
+    display        : flex;
+    justify-content: space-between;
+    align-items    : center;
+    padding        : 10px 0;
+}
+
+.payment-top-item {
+    flex      : 1;
+    text-align: center;
+    font-size : 18px;
+    color     : #333;
+}
+
+.payment-top-item i {
+    font-size: 24px;
+    color    : #007bff;
+}
+
+/* Kiểu dáng cho form thanh toán */
+.payment-content-left {
+    padding-right: 20px;
+}
+
+.payment-content-left h3 {
+    font-size    : 24px;
+    font-weight  : bold;
+    margin-bottom: 20px;
+}
+
+.payment-content-left-method-delivery,
+.payment-content-left-method-payment {
+    margin-bottom: 20px;
+}
+
+.payment-content-left-method-delivery-item,
+.payment-content-left-method-payment-item {
+    margin-bottom: 10px;
+}
+
+.payment-content-left-method-payment-item-img {
+    margin-bottom: 20px;
+}
+
+.payment-content-left-method-payment-item label {
+    margin-left: 10px;
+}
+
+.payment-content-right-payment {
+    margin-top: 20px;
+}
+
+.payment-content-right-payment button {
+    padding         : 10px 20px;
+    background-color: #007bff;
+    color           : #fff;
+    border          : none;
+    cursor          : pointer;
+    transition      : background-color 0.3s;
+    text-align      : center;
+}
+
+.payment-content-right-payment button:hover {
+    background-color: #0056b3;
+}
+
+.payment-content-right-button {
+    margin-top : 20px;
+    display    : flex;
+    align-items: center;
+}
+
+.payment-content-right-button input {
+    width        : 70%;
+    padding      : 10px;
+    border       : 1px solid #ddd;
+    border-radius: 5px;
+    margin-right : 10px;
+}
+
+.payment-content-right-button button {
+    padding         : 12px 24px;
+    /* Tăng kích thước của nút */
+    background-color: #28a745;
+    color           : #fff;
+    border          : none;
+    cursor          : pointer;
+    transition      : background-color 0.3s;
+    text-align      : center;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+}
+
+.payment-content-right-button button:hover {
+    background-color: #218838;
+}
+
+.payment-content-right-button .btn-check i {
+    background-color: #000;
+    /* Màu nền đen */
+    color           : #fff;
+    /* Màu tích trắng */
+    padding         : 5px;
+    border-radius   : 50%;
+    font-size       : 16px;
+    /* Tăng kích thước của biểu tượng */
+}
