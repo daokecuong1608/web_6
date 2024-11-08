@@ -17,6 +17,13 @@ class index {
         $this->fm = new Format;
     }
 
+    public function show_order($session_id)
+    {
+        $query = "SELECT * FROM tbl_order WHERE session_idA = '$session_id' ORDER BY order_id DESC LIMIT 1";
+        $result = $this->db->selectdc($query);
+        return $result;
+    }
+
     public function show_diachi_px($quan_huyen_id)
     {
         $query = "SELECT DISTINCT tinh_tp,ma_tinh,quan_huyen,ma_qh,phuong_xa,ma_px FROM tbl_diachi WHERE ma_qh = '$quan_huyen_id' ORDER BY ma_px";
@@ -106,9 +113,14 @@ class index {
             $query = "INSERT INTO tbl_order (session_idA,loaikhach,customer_name,customer_phone,customer_tinh,customer_huyen,customer_xa,customer_diachi) VALUES 
             ('$session_idA','$loaikhach','$customer_name','$customer_phone','$customer_tinh','$customer_huyen','$customer_xa','$customer_diachi')";
             $result = $this->db->insert($query);
-            header('Location:payment.php');
+            if ($result) {
+                header('Location: payment.php');
+                exit(); // Thêm exit() để dừng thực thi mã sau khi chuyển hướng
+            }  
         } else {
-            header('Location:payment.php');
+            header('Location: payment.php');
+            exit(); // Thêm exit() để dừng thực thi mã sau khi chuyển hướng      
+            
         }
         return $result;
     }

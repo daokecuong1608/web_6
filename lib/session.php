@@ -14,10 +14,11 @@ class Session{
            }
        }
     }
-
+// Lưu trữ dữ liệu vào phiên làm việc
     public static function set($key, $val){
         $_SESSION[$key] = $val;
      }
+     // Truy xuất dữ liệu từ phiên làm việc
      public static function get($key){
         if (isset($_SESSION[$key])) {
          return $_SESSION[$key];
@@ -34,20 +35,5 @@ class Session{
         }
      }
     
-     public static function checkLogin(){
-        self::init();
-        if (self::get("user_login")== true) {
-       //   header("Location:productlist.php");
-        }
      }
-    
-     public static function destroy(){
-      session_destroy();
-      header("Location:index.php");
-     }
-     public static function destroyAdmin(){
-       session_destroy();
-       header("Location:login.php");
-      }
-    }
     ?>

@@ -1,0 +1,64 @@
+/* success.css */
+
+/* Kiểu dáng cho phần tiêu đề */
+.success-top {
+    text-align   : center;
+    margin-top   : 20px;
+    margin-bottom: 20px;
+}
+
+.success-top p {
+    font-size  : 28px;
+    font-weight: bold;
+    color      : #378000;
+}
+
+/* Kiểu dáng cho phần nội dung */
+.success-text {
+    text-align   : center;
+    margin-bottom: 20px;
+}
+
+.success-text p {
+    font-size  : 18px;
+    line-height: 1.6;
+    color      : #333;
+}
+
+/* Kiểu dáng cho các nút */
+.success-button {
+    text-align   : center;
+    margin-bottom: 20px;
+}
+
+.success-button a {
+    text-decoration: none;
+}
+
+.success-button button {
+    padding         : 10px 20px;
+    margin          : 10px;
+    font-size       : 16px;
+    font-weight     : bold;
+    color           : #fff;
+    background-color: #378000;
+    border          : none;
+    border-radius   : 5px;
+    cursor          : pointer;
+    transition      : background-color 0.3s;
+}
+
+.success-button button:hover {
+    background-color: #2e6b00;
+}
+
+/* Kiểu dáng cho phần liên hệ */
+.success p {
+    text-align: center;
+    font-size : 16px;
+    color     : #333;
+}
+
+.success p span {
+    font-weight: bold;
+}

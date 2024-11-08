@@ -14,7 +14,7 @@ class Database{
 public function __construct(){
     $this->connectDB();
 }
-
+//Tạo một đối tượng mysqli mới với các tham số kết nối
 public function connectDB(){
     $this->link = new mysqli($this->host, $this->user, $this->pass, $this->dbname);
     if(!$this->link){
