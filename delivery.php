@@ -3,6 +3,7 @@ if (!defined('__ROOT__')) {
     define('__ROOT__', dirname(__FILE__));
 }
 require_once(__ROOT__ . '/class/index_class.php'); // Đường dẫn chính xác đến tệp index_class.php
+session_start();
 $index = new index();
 $session_idA = session_id();
 ?>
@@ -38,7 +39,7 @@ $insert_order = $index->insert_order($session_idA, $loaikhach, $customer_name, $
 <body>
 
     <?php
-include 'header.php';
+// include 'header.php';
 include 'carousel.php';
 ?>
 
