@@ -195,6 +195,18 @@ public function get_all_anh(){
     return $result;
 }
 
+public function get_order_status($session_idA) {
+    $query = "SELECT status FROM tbl_payment WHERE session_idA = ?";
+    $stmt = $this->db->link->prepare($query);
+    $stmt->bind_param("s", $session_idA);
+    $stmt->execute();
+    $stmt->bind_result($status);
+    $stmt->fetch();
+    $stmt->close();
+    return $status;
+}
+
+
 
 // Phương thức xóa 
 public function delete_size_sanpham($sanpham_size_id){
@@ -348,7 +360,14 @@ public function update_product($data, $file, $sanpham_id) {
     }
 }
 
-
+public function update_order_status($session_idA, $new_status) {
+    $query = "UPDATE tbl_payment SET status = ? WHERE session_idA = ?";
+    $stmt = $this->db->link->prepare($query);
+    $stmt->bind_param("is", $new_status, $session_idA);
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+}
 
 }
 ?>

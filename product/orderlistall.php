@@ -53,11 +53,16 @@ $product = new product(); // Đảm bảo tên lớp là Product với chữ P v
                         <?php echo $result['quan_huyen']  ?>, <?php echo $result['tinh_tp']  ?></td>
                     <td> <?php echo $result['giaohang']  ?></td>
                     <td> <?php echo $result['thanhtoan']  ?></td>
-                    <td> <a href="orderdetail.php?order_ma=<?php echo $result['session_idA'] ?>">Xem</a></td>
-
-                    <td><?php if($result['status']==1){echo "Đã hoàn thành";} else {echo "Chưa hoàn thành";} ?></td>
-
+                    <td> <a href="orderdetail.php?order_ma=<?php echo $result['session_idA'] ?>"
+                            class="btn btn-info">Xem</a></td>
+                    <td>
+                        <a href="changestatus.php?session_idA=<?php echo $result['session_idA']; ?>"
+                            class="btn btn-warning">
+                            <?php if($result['status'] == 1) { echo "Đã hoàn thành"; } else { echo "Chưa hoàn thành"; } ?>
+                        </a>
+                    </td>
                     <td><a href="orderdelete.php?session_idA=<?php echo $result['session_idA'] ?>"
+                            class="btn btn-danger"
                             onclick="return confirm('Đơn hàng sẽ bị xóa vĩnh viễn, bạn có chắc muốn tiếp tục không?');">Xóa</a>
                     </td>
                 </tr>

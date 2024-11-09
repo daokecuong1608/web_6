@@ -1,4 +1,4 @@
-/* orderdetail.css */
+/* orderlistall.css */
 
 /* Định dạng cho phần tiêu đề */
 h1 {
@@ -10,12 +10,12 @@ h1 {
 
 /* Định dạng cho container để căn giữa nội dung */
 .container {
-    width         : 80%;
-    /* Đặt chiều rộng container */
-    display       : flex;
-    flex-direction: column;
-    /* Đưa form vào giữa màn hình */
-    min-height    : 100vh;
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    justify-content: flex-start;
+    /* Đưa danh sách lên trên */
+    min-height     : 100vh;
     /* Đảm bảo chiều cao tối thiểu là 100% chiều cao màn hình */
 }
 
@@ -74,4 +74,34 @@ h1 {
 .btn-primary:hover {
     background-color: #0056b3;
     border-color    : #004085;
+}
+
+.btn-warning {
+    color           : #fff;
+    background-color: #bebcb5;
+    border-color    : #b1b0ab;
+    padding         : 5px 10px;
+    border-radius   : 5px;
+    text-decoration : none;
+    transition      : background-color 0.3s;
+}
+
+.btn-warning:hover {
+    background-color: #77756e;
+    border-color    : #5f5d57;
+}
+
+.btn-danger {
+    color           : #fff;
+    background-color: #dc3545;
+    border-color    : #dc3545;
+    padding         : 5px 10px;
+    border-radius   : 5px;
+    text-decoration : none;
+    transition      : background-color 0.3s;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color    : #bd2130;
 }
