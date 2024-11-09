@@ -128,6 +128,19 @@ class index {
         return $result;
     }
 
+
+    public function get_loaisanpham($loaisanpham_id)
+    {
+        $query = "SELECT tbl_sanpham.*, tbl_danhmuc.danhmuc_ten,tbl_loaisanpham.loaisanpham_ten
+        FROM tbl_sanpham INNER JOIN tbl_danhmuc ON tbl_sanpham.danhmuc_id = tbl_danhmuc.danhmuc_id
+        INNER JOIN tbl_loaisanpham ON tbl_sanpham.loaisanpham_id = tbl_loaisanpham.loaisanpham_id
+        WHERE tbl_sanpham.loaisanpham_id = '$loaisanpham_id'
+        ORDER BY tbl_sanpham.sanpham_id DESC  ";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
+
     public function insert_order(
         $session_idA,
         $loaikhach,

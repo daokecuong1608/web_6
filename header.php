@@ -84,7 +84,9 @@ echo "Session ID: " . $session_id;
                             if ($show_loaisanpham) {
                                 while ($result_sp = $show_loaisanpham->fetch_assoc()) {
                             ?>
-                            <li><a class="dropdown-item" href="/#"><?php echo $result_sp['loaisanpham_ten']; ?></a></li>
+                            <li><a class="dropdown-item"
+                                    href="category.php?loaisanpham_id=<?php echo $result_sp['loaisanpham_id']?>"><?php echo $result_sp['loaisanpham_ten']; ?></a>
+                            </li>
                             <?php
                             }
                         }
