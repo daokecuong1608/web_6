@@ -1,0 +1,77 @@
+/* orderdetail.css */
+
+/* Định dạng cho phần tiêu đề */
+h1 {
+    text-align   : center;
+    margin-bottom: 20px;
+    font-size    : 24px;
+    color        : #333;
+}
+
+/* Định dạng cho container để căn giữa nội dung */
+.container {
+    width         : 80%;
+    /* Đặt chiều rộng container */
+    display       : flex;
+    flex-direction: column;
+    /* Đưa form vào giữa màn hình */
+    min-height    : 100vh;
+    /* Đảm bảo chiều cao tối thiểu là 100% chiều cao màn hình */
+}
+
+/* Định dạng cho bảng */
+.table {
+    width          : 100%;
+    /* Đặt chiều rộng bảng */
+    margin-bottom  : 20px;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    text-align: center;
+    border    : 1px solid #ddd;
+    /* Tạo đường kẻ giữa các cột và dòng */
+    padding   : 10px;
+}
+
+.table th {
+    background-color: #f8f8f8;
+    font-weight     : bold;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.table-striped tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Định dạng cho các liên kết */
+.table a {
+    color          : #007bff;
+    text-decoration: none;
+    transition     : color 0.3s;
+}
+
+.table a:hover {
+    color: #0056b3;
+}
+
+/* Định dạng cho các nút */
+.btn-primary {
+    color           : #fff;
+    background-color: #007bff;
+    border-color    : #007bff;
+    padding         : 10px 20px;
+    border-radius   : 5px;
+    text-decoration : none;
+    transition      : background-color 0.3s;
+    margin-top      : 20px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color    : #004085;
+}

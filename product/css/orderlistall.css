@@ -1,0 +1,90 @@
+/* orderlistall.css */
+
+/* Định dạng cho phần tiêu đề */
+h1 {
+    text-align   : center;
+    margin-bottom: 20px;
+    font-size    : 24px;
+    color        : #333;
+}
+
+/* Định dạng cho container để căn giữa nội dung */
+.container {
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    justify-content: flex-start;
+    /* Đưa danh sách lên trên */
+    min-height     : 100vh;
+    /* Đảm bảo chiều cao tối thiểu là 100% chiều cao màn hình */
+}
+
+/* Định dạng cho bảng */
+.table {
+    width          : 100%;
+    /* Đặt chiều rộng bảng */
+    margin-bottom  : 20px;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    text-align: center;
+    border    : 1px solid #ddd;
+    padding   : 10px;
+}
+
+.table th {
+    background-color: #f8f8f8;
+    font-weight     : bold;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.table-striped tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Định dạng cho các liên kết */
+.table a {
+    color          : #007bff;
+    text-decoration: none;
+    transition     : color 0.3s;
+}
+
+.table a:hover {
+    color: #0056b3;
+}
+
+/* Định dạng cho các nút */
+.btn-info {
+    color           : #fff;
+    background-color: #17a2b8;
+    border-color    : #17a2b8;
+    padding         : 5px 10px;
+    border-radius   : 5px;
+    text-decoration : none;
+    transition      : background-color 0.3s;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+    border-color    : #117a8b;
+}
+
+.btn-danger {
+    color           : #fff;
+    background-color: #dc3545;
+    border-color    : #dc3545;
+    padding         : 5px 10px;
+    border-radius   : 5px;
+    text-decoration : none;
+    transition      : background-color 0.3s;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color    : #bd2130;
+}

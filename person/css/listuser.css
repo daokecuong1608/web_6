@@ -1,0 +1,61 @@
+h1 {
+    text-align   : center;
+    color        : black;
+    font-size    : 30px;
+    margin-bottom: 20px;
+}
+
+.container {
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    min-height    : 100vh;
+}
+
+.table {
+
+    width          : 80%;
+    margin-bottom  : 20px;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    text-align: center;
+    border    : 1px solid black;
+    padding   : 10px;
+}
+
+.table th {
+    background-color: #bdb8b8;
+    font-weight     : bold;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.table-striped tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Định dạng cho nút */
+.btn-center {
+    display        : flex;
+    justify-content: center;
+    margin-top     : 10px;
+}
+
+.btn-center button {
+    padding         : 10px 40px;
+    background-color: #49494a;
+    color           : #fff;
+    border          : none;
+    border-radius   : 5px;
+    cursor          : pointer;
+    transition      : background-color 0.3s;
+}
+
+.btn-center button:hover {
+    background-color: #25272a;
+}

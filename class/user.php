@@ -1,5 +1,7 @@
 <?php
-
+if (!defined('__ROOT__')) {
+    define('__ROOT__', dirname(dirname(__FILE__))); // Định nghĩa hằng số __ROOT__ nếu chưa được định nghĩa
+}
 require_once(__ROOT__ . '/lib/session.php' );
 require_once(__ROOT__ . '/lib/database.php' );
 
@@ -46,5 +48,26 @@ class user{
         }
     }
 
+    public function show_user(){
+            $query = "SELECT * FROM users";
+            $result = $this->db->select($query);
+            return $result;
+        }
+        public function delete_user($userid) {
+            $query = "DELETE FROM users WHERE id = ?";
+            $stmt = $this->db->link->prepare($query);
+            if ($stmt === false) {
+                return "Xóa người dùng thất bại: " . $this->db->link->error;
+            }
+            $stmt->bind_param("i", $userid);
+            $result = $stmt->execute();
+            $stmt->close();
+    
+            if ($result) {
+                return "Xóa người dùng thành công";
+            } else {
+                return "Xóa người dùng thất bại";
+            }
+        }
 }
 ?>

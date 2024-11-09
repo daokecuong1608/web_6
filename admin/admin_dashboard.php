@@ -20,8 +20,8 @@
                     <h4>Quản lý cửa hàng</h4>
                     <a href="../index.php">Trang chủ</a> <!-- Cập nhật liên kết -->
                     <a href="../product/productlist.php">Quản lý sản phẩm</a>
-                    <a href="#">Quản lý đơn hàng</a>
-                    <a href="#">Quản lý khách hàng</a>
+                    <a href="../product/orderlistall.php">Quản lý đơn hàng</a>
+                    <a href="../person/listuser.php">Quản lý khách hàng</a>
                     <a href="../product/sizesanphamlists.php">Quản lý Size</a>
                     <a href="../product/anhsanphamlists.php">Quản lý Ảnh</a>
                     <a href="../product/colorlist.php">Quản lý Màu</a>
@@ -50,7 +50,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Đơn hàng</h5>
                                 <p class="card-text">Quản lý các đơn hàng của khách hàng.</p>
-                                <a href="#" class="btn btn-primary">Quản lý đơn hàng</a>
+                                <a href="../product/orderlistall.php" class="btn btn-primary">Quản lý đơn hàng</a>
                             </div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Khách hàng</h5>
                                 <p class="card-text">Quản lý thông tin khách hàng.</p>
-                                <a href="#" class="btn btn-primary">Quản lý khách hàng</a>
+                                <a href="../person/listuser.php" class="btn btn-primary">Quản lý khách hàng</a>
                             </div>
                         </div>
                     </div>
