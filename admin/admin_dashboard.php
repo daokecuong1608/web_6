@@ -22,6 +22,7 @@
                     <a href="../product/productlist.php">Quản lý sản phẩm</a>
                     <a href="../product/orderlistall.php">Quản lý đơn hàng</a>
                     <a href="../person/listuser.php">Quản lý khách hàng</a>
+                    <a href="../product/stafflist.php">Quản lý nhân viên</a>
                     <a href="../product/sizesanphamlists.php">Quản lý Size</a>
                     <a href="../product/anhsanphamlists.php">Quản lý Ảnh</a>
                     <a href="../product/colorlist.php">Quản lý Màu</a>
@@ -115,6 +116,16 @@
                                 <h5 class="card-title">Loại sản phẩm</h5>
                                 <p class="card-text">Quản lý Loại sản phẩm .</p>
                                 <a href="../product/brandlist.php" class="btn btn-primary">Quản lý loại sản phẩm </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Nhân viên</h5>
+                                <p class="card-text">Quản lý Loại nhân viên .</p>
+                                <a href="../product/stafflist.php" class="btn btn-primary">Quản lý nhân viên </a>
                             </div>
                         </div>
                     </div>
