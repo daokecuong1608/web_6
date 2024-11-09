@@ -1,5 +1,14 @@
 <?php
-session_start();
+@ob_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Kiểm tra trạng thái đăng nhập trước khi khởi tạo phiên
+if (isset($_COOKIE['PHPSESSID']) && session_status() == PHP_SESSION_NONE) {
+    session_start(); // Khởi tạo phiên nếu chưa có phiên nào được khởi tạo
+}
+
 if(isset($_SESSION['login'])){
     $login = $_SESSION['login'];
     $username = $_SESSION['username'];
@@ -17,8 +26,10 @@ if (!defined('__ROOT__')) {
 }
 require_once(__ROOT__ . '/class/index_class.php'); // Đường dẫn chính xác đến tệp index_class.php
 $index = new index();
-
+$session_id = session_id();
+echo "Session ID: " . $session_id;
 ?>
+
 
 
 <!DOCTYPE html>

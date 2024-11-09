@@ -34,6 +34,7 @@ public function select($query){
       return false;
     }
    }
+   
    public function selectdc($query){
     mysqli_set_charset($this->link,'UTF8');
     $result = $this->link->query($query) or 

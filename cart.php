@@ -109,7 +109,7 @@ if (!isset($_GET['id'])) {
                         </table>
                     </div>
                 </div>
-                
+
                 <div class="col-md-4">
                     <div class="cart-content-right">
                         <table class="table">

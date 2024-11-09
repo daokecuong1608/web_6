@@ -1,22 +1,14 @@
 <?php
-
-session_start();
-
-if (!defined('__ROOT__')) {
-    define('__ROOT__', dirname(__FILE__)); // Định nghĩa hằng số __ROOT__ nếu chưa được định nghĩa
-}
-require_once(__ROOT__ . '/class/index_class.php'); // Đường dẫn chính xác đến tệp index_class.php
-$index = new index();
-
+include 'header.php';
+include 'carousel.php';
 
 if(isset($_GET['sanpham_id']) && $_GET['sanpham_id'] != NULL ){
-    $sanpham_id = $_GET['sanpham_id'];
+$sanpham_id = $_GET['sanpham_id'];
 }else {
-    // Xử lý khi không có id trong URL, ví dụ:
-    header('Location: index.php');
-    exit();
+// Xử lý khi không có id trong URL, ví dụ:
+header('Location: index.php');
+exit();
 }
-
 // Kiểm tra trạng thái đăng nhập
 $is_logged_in = isset($_SESSION['login']) && $_SESSION['login'] === true;
 
@@ -42,9 +34,7 @@ $is_logged_in = isset($_SESSION['login']) && $_SESSION['login'] === true;
 
 <body>
 
-    <?php
-        include 'carousel.php';
-    ?>
+
 
     <Session class="pruduct">
         <div class="container mt-5">

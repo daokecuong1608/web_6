@@ -21,6 +21,16 @@ class user{
         $query = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
         $result = $this->db->select($query);
         if($result != false){
+
+        // Hủy phiên hiện tại (nếu có)
+        if (session_status() == PHP_SESSION_ACTIVE) {
+            session_unset();
+            session_destroy();
+        }
+
+   // Khởi tạo phiên mới
+   session_start();
+            
             $value = $result->fetch_assoc();
             Session::set("login", true);
             Session::set("username", $value['username']);

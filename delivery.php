@@ -1,23 +1,25 @@
 <?php
-if (!defined('__ROOT__')) {
-    define('__ROOT__', dirname(__FILE__));
-}
-require_once(__ROOT__ . '/class/index_class.php'); // Đường dẫn chính xác đến tệp index_class.php
-session_start();
-$index = new index();
+@ob_start(); // Khởi tạo bộ đệm đầu ra
+include 'header.php';
 $session_idA = session_id();
 ?>
 <?php
-if($_SERVER['REQUEST_METHOD'] === 'POST' ){
-$session_idA = session_id();
-$loaikhach = $_POST['loaikhach'];
-$customer_name = $_POST['customer_name'];
-$customer_phone = $_POST['customer_phone'];
-$customer_tinh = $_POST['customer_tinh'];
-$customer_huyen = $_POST['customer_huyen'];
-$customer_xa = $_POST['customer_xa'];
-$customer_diachi = $_POST['customer_diachi'];
-$insert_order = $index->insert_order($session_idA, $loaikhach, $customer_name, $customer_phone, $customer_tinh, $customer_huyen, $customer_xa, $customer_diachi);  
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $session_idA = session_id();
+    $loaikhach = $_POST['loaikhach'];
+    $customer_name = $_POST['customer_name'];
+    $customer_phone = $_POST['customer_phone'];
+    $customer_tinh = $_POST['customer_tinh'];
+    $customer_huyen = $_POST['customer_huyen'];
+    $customer_xa = $_POST['customer_xa'];
+    $customer_diachi = $_POST['customer_diachi'];
+    $insert_order = $index->insert_order($session_idA, $loaikhach, $customer_name, $customer_phone, $customer_tinh, $customer_huyen, $customer_xa, $customer_diachi);
+    if ($insert_order) {
+        header('Location: payment.php');
+        exit(); // Dừng thực thi mã sau khi chuyển hướng
+    } else {
+        echo "Failed to insert order.";
+    }
 } 
 ?>
 
@@ -39,7 +41,6 @@ $insert_order = $index->insert_order($session_idA, $loaikhach, $customer_name, $
 <body>
 
     <?php
-// include 'header.php';
 include 'carousel.php';
 ?>
 
@@ -154,7 +155,7 @@ include 'carousel.php';
                             $session_id = session_id();
                             $SL = 0;
                             $TT = 0;
-                            $show_cartB = $index->show_cart($session_id);
+                            $show_cartB = $index->show_cartB($session_id);
                             if ($show_cartB) {
                                 while ($result_cart = $show_cartB->fetch_assoc()) {
                             ?>
