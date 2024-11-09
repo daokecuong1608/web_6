@@ -16,6 +16,11 @@ class index {
         $this->fm = new Format;
     }
 
+    public function searchProducts($searchQuery) {
+        $query = "SELECT * FROM tbl_sanpham WHERE sanpham_tieude LIKE '%$searchQuery%'";
+        return $this->db->select($query);
+    }
+
     public function delete_cart($cart_id){
         $query = "DELETE  FROM tbl_cart WHERE cart_id = '$cart_id'";
         $result = $this->db->delete($query);

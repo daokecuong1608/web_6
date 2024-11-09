@@ -79,16 +79,16 @@ echo "Session ID: " . $session_id;
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown<?php echo $result['danhmuc_id']; ?>">
                             <?php
-                    $danhmuc_id = $result['danhmuc_id'];
-                    $show_loaisanpham = $index->show_loaisanpham($danhmuc_id);
-                    if ($show_loaisanpham) {
-                        while ($result_sp = $show_loaisanpham->fetch_assoc()) {
-                     ?>
+                            $danhmuc_id = $result['danhmuc_id'];
+                            $show_loaisanpham = $index->show_loaisanpham($danhmuc_id);
+                            if ($show_loaisanpham) {
+                                while ($result_sp = $show_loaisanpham->fetch_assoc()) {
+                            ?>
                             <li><a class="dropdown-item" href="/#"><?php echo $result_sp['loaisanpham_ten']; ?></a></li>
                             <?php
-                    }
-                }
-            ?>
+                            }
+                        }
+                    ?>
                         </ul>
                     </li>
                     <?php
@@ -97,7 +97,8 @@ echo "Session ID: " . $session_id;
         ?>
                 </ul>
 
-                <form class="d-flex m-2" role="search" style="margin: 10px !important;">
+                <form class="d-flex m-2" role="search" style="margin: 10px !important;" method="GET"
+                    action="search.php">
                     <input class="form-control me-2" type="search" name="searchQuery" placeholder="Nội dung tìm kiếm"
                         aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">

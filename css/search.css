@@ -1,0 +1,66 @@
+/* search.css */
+
+/* Định dạng cho phần tiêu đề */
+h1 {
+    text-align   : center;
+    margin-top   : 20px;
+    margin-bottom: 20px;
+    font-size    : 24px;
+    color        : #333;
+}
+
+/* Định dạng cho phần chứa kết quả tìm kiếm */
+.container {
+    margin-top: 20px;
+}
+
+/* Định dạng cho các thẻ card hiển thị sản phẩm */
+.card {
+    border       : 1px solid #ddd;
+    border-radius: 5px;
+    overflow     : hidden;
+    transition   : box-shadow 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    width : 100%;
+    height: auto;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size    : 18px;
+    margin-bottom: 10px;
+    color        : #007bff;
+}
+
+.card-text {
+    font-size: 16px;
+    color    : #555;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color    : #007bff;
+    transition      : background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color    : #0056b3;
+}
+
+/* Định dạng cho thông báo không tìm thấy kết quả */
+p {
+    text-align: center;
+    font-size : 18px;
+    color     : #777;
+    margin-top: 20px;
+}
