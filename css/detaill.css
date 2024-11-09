@@ -40,27 +40,29 @@
 }
 
 .product-row {
-    display    : flex;
-    align-items: center;
-}
-
-.product-image {
-    flex      : 1;
-    text-align: center;
+    display: table-row;
 }
 
 .product-image img {
-    max-width: 100px;
+    max-width: 50px;
+    /* Thu nhỏ kích thước ảnh */
     height   : auto;
 }
 
-.product-info {
-    flex        : 3;
-    padding-left: 20px;
+.product-title,
+.product-color,
+.product-size,
+.product-quantity,
+.product-price {
+    padding   : 10px;
+    border    : 1px solid #ddd;
+    text-align: left;
 }
 
-.product-info p {
-    margin: 5px 0;
+.product-color img {
+    max-width: 30px;
+    /* Thu nhỏ kích thước ảnh màu */
+    height   : auto;
 }
 
 .detail-content-right-bottom {

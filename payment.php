@@ -5,7 +5,6 @@ include 'header.php'; // Đường dẫn chính xác đến tệp header.php
 include 'carousel.php'
 ?>
 <?php
-
 $index = new index();
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 $session_idA = session_id();
@@ -35,8 +34,6 @@ $insert_payment = $index ->insert_payment($session_idA,$deliver_method,$method_p
 </head>
 
 <body>
-
-
     <section class="payment">
 
         <div class="container">

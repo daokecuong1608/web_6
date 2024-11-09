@@ -13,7 +13,7 @@ $session_id = session_id();
     <title>Chi tiết đơn hàng</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="css/delivery.css" rel="stylesheet"> <!-- Liên kết tệp CSS -->
+    <link href="css/detaill.css" rel="stylesheet"> <!-- Liên kết tệp CSS -->
 </head>
 
 <body>
@@ -74,24 +74,21 @@ $session_id = session_id();
 
                             $SL = 0;
                             $TT = 0;
-                            $show_carta = $index->show_cart($session_id);
+                            $show_carta = $index->show_carta($session_id);
                             if ($show_carta) {
                                 while ($result = $show_carta->fetch_assoc()) {
 
                             ?>
                             <tr class="product-row">
                                 <td class="product-image"><img src="<?php echo $result['sanpham_anh'] ?>" alt=""></td>
-                                <td class="product-info">
-                                    <p><?php echo $result['sanpham_tieude'] ?></p>
-                                    <p><img src="<?php echo $result['color_anh'] ?>" alt=""></p>
-                                    <p>Size: <?php echo $result['sanpham_size'] ?></p>
-                                    <p>SL: <span><?php echo $result['quantitys'] ?></span></p>
-                                    <p>Giá: <?php $resultC = number_format($result['sanpham_gia']);
-                                            echo $resultC ?><sup>đ</sup></p>
+                                <td class="product-title"><?php echo $result['sanpham_tieude'] ?></td>
+                                <td class="product-color"><img src="<?php echo $result['color_anh'] ?>" alt=""></td>
+                                <td class="product-size"><?php echo $result['sanpham_size'] ?></td>
+                                <td class="product-quantity"><?php echo $result['quantitys'] ?></td>
+                                <td class="product-price">
+                                    <?php $resultC = number_format($result['sanpham_gia']); echo $resultC ?><sup>đ</sup>
                                 </td>
-                                <?php $a = (int)$result['sanpham_gia'];
-                                    $b = (int)$result['quantitys'];
-                                    $TTA = $a * $b;   ?>
+                                <?php $a = (int)$result['sanpham_gia']; $b = (int)$result['quantitys']; $TTA = $a * $b; ?>
                             </tr>
                             <?php
                                 $SL = $SL + $result['quantitys'];
