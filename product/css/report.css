@@ -1,0 +1,81 @@
+/* report.css */
+
+/* Định dạng cho phần tiêu đề */
+h1 {
+    text-align   : center;
+    margin-bottom: 20px;
+    font-size    : 24px;
+    color        : #333;
+    border       : 2px solid #ddd;
+    padding      : 10px;
+    border-radius: 5px;
+}
+
+/* Định dạng cho container để căn giữa nội dung */
+.report-container {
+    width           : 50%;
+    /* Đặt chiều rộng container */
+    margin          : 0 auto;
+    /* Căn giữa container */
+    border          : 2px solid #ddd;
+    /* Tạo border cho container */
+    padding         : 20px;
+    border-radius   : 5px;
+    background-color: #fff;
+}
+
+/* Định dạng cho các mục báo cáo */
+.report-item {
+    margin-bottom: 20px;
+    text-align   : center;
+}
+
+.report-item h2 {
+    font-size: 20px;
+    color    : #333;
+}
+
+.report-item p {
+    font-size  : 18px;
+    color      : #007bff;
+    font-weight: bold;
+}
+
+/* Định dạng cho nút */
+.btn {
+    display         : inline-block;
+    color           : #fff;
+    background-color: #007bff;
+    border-color    : #007bff;
+    padding         : 10px 20px;
+    border-radius   : 5px;
+    text-decoration : none;
+    transition      : background-color 0.3s;
+    text-align      : center;
+    margin-top      : 20px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    border-color    : #004085;
+}
+
+.btn-primary {
+    background-color: #28a745;
+    border-color    : #28a745;
+}
+
+.btn-primary:hover {
+    background-color: #218838;
+    border-color    : #1e7e34;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color    : #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color    : #545b62;
+}

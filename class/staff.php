@@ -1,6 +1,7 @@
 <?php
-define('__ROOT__', dirname(dirname(__FILE__))); // Định nghĩa hằng số __ROOT__
-include_once __ROOT__ . "/helper/format.php";
+if (!defined('__ROOT__')) {
+    define('__ROOT__', dirname(dirname(__FILE__))); // Định nghĩa hằng số __ROOT__ nếu chưa được định nghĩa
+}include_once __ROOT__ . "/helper/format.php";
 include_once __ROOT__ . "/lib/database.php";
 
 class staff{
@@ -43,5 +44,14 @@ public function delete_staff($staff_id){
     return $result;
 
 }
+
+
+public function get_staff_count() {
+    $query = "SELECT COUNT(*) as staff_count FROM tbl_staff";
+    $result = $this->db->select($query);
+    $row = $result->fetch_assoc();
+    return $row['staff_count'];
+}
+
 }
 ?>

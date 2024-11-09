@@ -28,8 +28,7 @@
                     <a href="../product/colorlist.php">Quản lý Màu</a>
                     <a href="../product/categorylist.php">Quản lý danh mục</a>
                     <a href="../product/brandlist.php">Quản lý loại sản phẩm </a>
-                    <a href="#">Báo cáo</a>
-                    <a href="#">Cài đặt</a>
+                    <a href="../product/report.php">Báo cáo</a>
                     <a href="../handle/logout.php">Đăng xuất</a>
                 </div>
             </nav>

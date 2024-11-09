@@ -152,6 +152,12 @@ public function show_orderAll(){
         return $result;
     }
 
+    public function get_product_count() {
+        $query = "SELECT COUNT(*) as product_count FROM tbl_sanpham";
+        $result = $this->db->select($query);
+        $row = $result->fetch_assoc();
+        return $row['product_count'];
+    }
 
     public function get_sanpham($sanpham_id){
         $query = "SELECT*FROM tbl_sanpham  WHERE tbl_sanpham.sanpham_id = '$sanpham_id'";
@@ -367,6 +373,26 @@ public function update_order_status($session_idA, $new_status) {
     $result = $stmt->execute();
     $stmt->close();
     return $result;
+}
+
+public function get_order_count() {
+    $query = "SELECT COUNT(*) as order_count FROM tbl_payment WHERE status = 1 OR status = 0";
+    $result = $this->db->select($query);
+    $row = $result->fetch_assoc();
+    return $row['order_count'];
+}
+
+public function get_total_sales() {
+    $query = "SELECT SUM(quantitys) as total_sales FROM tbl_carta";
+    $result = $this->db->select($query);
+    $row = $result->fetch_assoc();
+    return $row['total_sales'];
+}
+public function get_total_sales_from_carta() {
+    $query = "SELECT SUM(sanpham_gia * quantitys) as total_sales FROM tbl_carta";
+    $result = $this->db->select($query);
+    $row = $result->fetch_assoc();
+    return $row['total_sales'];
 }
 
 }
