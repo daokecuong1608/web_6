@@ -48,6 +48,11 @@ if(isset($_POST['submit'])){
                 <label for="staff_address">Địa chỉ</label>
                 <input type="text" name="staff_address" id="staff_address" class="form-control">
             </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control">
+            </div>
             <div>
                 <input type="submit" name="submit" value="Thêm nhân viên" class="btn btn-primary">
             </div>

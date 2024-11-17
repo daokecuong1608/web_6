@@ -1,7 +1,7 @@
 <?php
 include 'header.php';
 include 'carousel.php';
-$session_id = session_id();
+$userid = $_SESSION['user_id']; // Lấy ra user_id từ phiên
 
 ?>
 <!DOCTYPE html>
@@ -23,14 +23,14 @@ $session_id = session_id();
             <div class="detail-top">
                 <p>CHI TIẾT ĐƠN HÀNG</p>
             </div>
-            <h1>Mã đơn hàng:<span style="font-size: 20px; color: #378000;">IVY<?php $ma = substr($session_id, 0, 8);
+            <h1>Mã đơn hàng:<span style="font-size: 20px; color: #378000;">IVY<?php $ma = substr($userid, 0, 8);
                                                                             echo $ma   ?></span></h1>
             <div class="detail-text">
                 <div class="detail-text-left-content">
                     <p><span style="font-weight: bold; color:red">Thông tin giao hàng</span></p>
                     <br>
                     <?php
-                    $show_order = $index->show_order($session_id);
+                    $show_order = $index->show_order($userid);
                     if ($show_order) {
                         while ($result = $show_order->fetch_assoc()) {
                     ?>
@@ -44,7 +44,7 @@ $session_id = session_id();
                     }
                     ?>
                     <?php
-                    $show_payment = $index->show_payment($session_id);
+                    $show_payment = $index->show_payment($userid);
                     if ($show_payment) {
                         while ($result = $show_payment->fetch_assoc()) {
                     ?>
@@ -74,7 +74,7 @@ $session_id = session_id();
 
                             $SL = 0;
                             $TT = 0;
-                            $show_carta = $index->show_carta($session_id);
+                            $show_carta = $index->show_carta($userid);
                             if ($show_carta) {
                                 while ($result = $show_carta->fetch_assoc()) {
 

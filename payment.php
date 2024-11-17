@@ -7,11 +7,10 @@ include 'carousel.php'
 <?php
 $index = new index();
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-$session_idA = session_id();
 $today = date('d/m/y');
 $deliver_method = $_POST['deliver-method'];
 $method_payment = $_POST['method-payment'];
-$insert_payment = $index ->insert_payment($session_idA,$deliver_method,$method_payment,$today );
+$insert_payment = $index ->insert_payment($userid,$deliver_method,$method_payment,$today );
  // Kiểm tra kết quả của truy vấn INSERT
  if ($insert_payment) {
     echo "Payment inserted successfully.";
@@ -55,9 +54,7 @@ $insert_payment = $index ->insert_payment($session_idA,$deliver_method,$method_p
         <div class="container">
             <?php
             $today = date('d/m/y');
-            $session_id = session_id();
-            echo "Session ID: " . $session_id;
-            $show_cart = $index -> show_cart($session_id);
+            $show_cart = $index -> show_cart($userid);
             if($show_cart){
              ?>
             <div class="payment-content row">
@@ -140,10 +137,9 @@ $insert_payment = $index ->insert_payment($session_idA,$deliver_method,$method_p
                             </tr>
 
                             <?php
-                            $session_id = session_id();
                             $SL = 0;
                             $TT = 0;
-                            $show_cart = $index -> show_cartB($session_id);
+                            $show_cart = $index -> show_cartB($userid);
                             if($show_cart){
                                 while($result = $show_cart->fetch_assoc()){
                             ?>

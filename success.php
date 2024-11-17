@@ -16,15 +16,19 @@
     <?php
 include 'header.php';
 include 'carousel.php';
+$userid = $_SESSION['user_id']; // Lấy ra user_id từ phiên
+
 ?>
 
     <?php
-if (!defined('__ROOT__')) {
+ if (!defined('__ROOT__')) {
     define('__ROOT__', dirname(__FILE__));
 }
 require_once(__ROOT__ . '/class/index_class.php'); // Đường dẫn chính xác đến tệp index_class.php
 $index = new index();
-$session_idA = session_id();
+
+
+
 ?>
 
     <section class="success">
@@ -34,13 +38,13 @@ $session_idA = session_id();
         <div class="success-text">
             <?php
 
-        $show_cart = $index->show_order($session_idA);
+        $show_cart = $index->show_order($userid);
         if ($show_cart) {
             while ($result_cart = $show_cart->fetch_assoc()) {
         ?>
             <p>Chào <span style="font-size: 20px; color: #378000;"><?php echo $result_cart['customer_name'] ?></span>,
                 đơn hàng của bạn với mã <span
-                    style="font-size: 20px; color: #378000;"><?php $ma = substr($session_idA, 0, 8);
+                    style="font-size: 20px; color: #378000;"><?php $ma = substr($userid, 0, 8);
                                                                                                                                                                                                 echo $ma   ?></span>
                 đã được đặt thành công. <br>
                 Đơn hàng của bạn đã được xác nhận tự động. <br>

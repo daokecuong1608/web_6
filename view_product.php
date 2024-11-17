@@ -3,18 +3,16 @@ include 'header.php';
 include 'carousel.php';
 
 if(isset($_GET['sanpham_id']) && $_GET['sanpham_id'] != NULL ){
-$sanpham_id = $_GET['sanpham_id'];
-}else {
-// Xử lý khi không có id trong URL, ví dụ:
-header('Location: index.php');
-exit();
+    $sanpham_id = $_GET['sanpham_id'];
+} else {
+    // Xử lý khi không có id trong URL, ví dụ:
+    header('Location: index.php');
+    exit();
 }
 // Kiểm tra trạng thái đăng nhập
 $is_logged_in = isset($_SESSION['login']) && $_SESSION['login'] === true;
-
+echo $userid;
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,13 +26,9 @@ $is_logged_in = isset($_SESSION['login']) && $_SESSION['login'] === true;
     <link href="css/view_product.css" rel="stylesheet"> <!-- Liên kết tệp CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Liên kết jQuery -->
-
-
 </head>
 
 <body>
-
-
 
     <Session class="pruduct">
         <div class="container mt-5">
@@ -42,11 +36,11 @@ $is_logged_in = isset($_SESSION['login']) && $_SESSION['login'] === true;
                 <div class="col-md-6">
                     <div class="product-top">
                         <?php
-                $get_sanpham = $index->get_sanpham($sanpham_id);
-                if ($get_sanpham) {
-                    $result_sp = $get_sanpham->fetch_assoc();
-                }
-                ?>
+                        $get_sanpham = $index->get_sanpham($sanpham_id);
+                        if ($get_sanpham) {
+                            $result_sp = $get_sanpham->fetch_assoc();
+                        }
+                        ?>
                         <p><a href="index.php">Trang chủ</a></p> <span>&#8594;</span>
                         <p><?php echo $result_sp['danhmuc_ten'] ?></p><span>&#8594;</span>
                         <p><?php echo $result_sp['loaisanpham_ten'] ?></p><span>&#8594;</span>
@@ -59,10 +53,10 @@ $is_logged_in = isset($_SESSION['login']) && $_SESSION['login'] === true;
 
                 <div class="product-content row">
                     <?php
-                $get_sanpham = $index->get_sanpham($sanpham_id);
-                if ($get_sanpham) {
-                    while($result_sanpham = $get_sanpham->fetch_assoc()){
-               ?>
+                    $get_sanpham = $index->get_sanpham($sanpham_id);
+                    if ($get_sanpham) {
+                        while($result_sanpham = $get_sanpham->fetch_assoc()){
+                    ?>
                     <div class="product-content-left row">
                         <div class="product-content-left-big-img">
                             <img class="sanpham_anh" src="images/product/<?php echo $result_sanpham['sanpham_anh'] ?>"
@@ -70,22 +64,23 @@ $is_logged_in = isset($_SESSION['login']) && $_SESSION['login'] === true;
                         </div>
                         <div class="product-content-left-small-img">
                             <?php  
-                        $sanpham_id = $result_sanpham['sanpham_id'];
-                        $get_sanpham_anh = $index->get_anh($sanpham_id);
-                        if ($get_sanpham_anh) {
-                            while($result_sanpham_anh = $get_sanpham_anh->fetch_assoc()){        
-                        ?>
-
+                            $sanpham_id = $result_sanpham['sanpham_id'];
+                            $get_sanpham_anh = $index->get_anh($sanpham_id);
+                            if ($get_sanpham_anh) {
+                                while($result_sanpham_anh = $get_sanpham_anh->fetch_assoc()){        
+                            ?>
                             <img src="images/product/<?php echo $result_sanpham['sanpham_anh'] ?>" alt="">
                             <?php
+                                }
                             }
-                        }
-                        ?>
+                            ?>
                         </div>
                     </div>
                     <div class="product-content-right">
                         <div class="product-content-right-product-name">
-                            <input class="session_id" type="hidden" value="<?php echo session_id() ?>">
+
+                            <input class="user_id" type="hidden" value="<?php echo $userid; ?>">
+                            <!-- Sử dụng $_SESSION['user_id'] -->
                             <input class="sanpham_id" type="hidden" value="<?php echo $result_sanpham['sanpham_id'] ?>">
                             <h1 class="sanpham_tieude"><?php echo $result_sanpham['sanpham_tieude'] ?></h1>
                             <p><?php echo $result_sanpham['sanpham_ma'] ?></p>
@@ -112,20 +107,20 @@ $is_logged_in = isset($_SESSION['login']) && $_SESSION['login'] === true;
                             <p style="font-weight: bold"> Size: </p>
                             <div class="size">
                                 <?php
-                                 $sanpham_id = $result_sanpham['sanpham_id'];
-                            $get_size = $index->get_size($sanpham_id);
-                            if ($get_size) {
-                                while($result_size = $get_size->fetch_assoc()){
-                            ?>
+                                $sanpham_id = $result_sanpham['sanpham_id'];
+                                $get_size = $index->get_size($sanpham_id);
+                                if ($get_size) {
+                                    while($result_size = $get_size->fetch_assoc()){
+                                ?>
                                 <div class="size-item">
                                     <input class="size-item-input" value="<?php echo $result_size['sanpham_size'] ?>"
                                         name="size-item" type="radio">
                                     <span><?php echo $result_size['sanpham_size'] ?></span>
                                 </div>
                                 <?php
-                            }
-                        }
-                        ?>
+                                    }
+                                }
+                                ?>
                             </div>
 
                             <div class="quantity">
@@ -192,9 +187,9 @@ $is_logged_in = isset($_SESSION['login']) && $_SESSION['login'] === true;
                         </div>
                     </div>
                     <?php
-                }
-             }
-            ?>
+                        }
+                    }
+                    ?>
                 </div>
             </div>
     </Session>
@@ -206,12 +201,11 @@ $is_logged_in = isset($_SESSION['login']) && $_SESSION['login'] === true;
             </div>
             <div class="row justify-between">
                 <?php
-            $loaisanpham_id = $result_sp['loaisanpham_id'];
-            $get_sanphamlienquan = $index->get_sanphamlienquan($loaisanpham_id, $sanpham_id);
-            if ($get_sanphamlienquan) {
-                while ($result_sp_lienquan = $get_sanphamlienquan->fetch_assoc()) {
-
-            ?>
+                $loaisanpham_id = $result_sp['loaisanpham_id'];
+                $get_sanphamlienquan = $index->get_sanphamlienquan($loaisanpham_id, $sanpham_id);
+                if ($get_sanphamlienquan) {
+                    while ($result_sp_lienquan = $get_sanphamlienquan->fetch_assoc()) {
+                ?>
                 <div class="product-related-item">
                     <a href="view_product.php?sanpham_id=<?php echo $result_sp_lienquan['sanpham_id'] ?>"><img
                             src="images/product/<?php echo $result_sp_lienquan['sanpham_anh'] ?>" alt=""></a>
@@ -222,23 +216,19 @@ $is_logged_in = isset($_SESSION['login']) && $_SESSION['login'] === true;
                             echo $result_gia_1 ?><sup>đ</sup></p>
                 </div>
                 <?php
+                    }
                 }
-            }
-            ?>
+                ?>
             </div>
         </div>
     </section>
-
-
-
-
 
     <?php
        include 'footer.php';
     ?>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6YVFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
@@ -258,7 +248,8 @@ $is_logged_in = isset($_SESSION['login']) && $_SESSION['login'] === true;
             } else {
                 <?php if ($is_logged_in) { ?>
                 var x = $(this).parent().parent().find('.sanpham_tieude').text();
-                var se = $(this).parent().parent().find('.session_id').val();
+                var user_id =
+                    "<?php echo $userid; ?>"; // Sử dụng $_SESSION['user_id'] để quản lý phiên đăng nhập
                 var sp = $(this).parent().parent().find('.sanpham_id').val();
                 var y = $(this).parent().parent().parent().find('.sanpham_anh').attr('src');
                 var z = $(this).parent().parent().find('.sanpham_gia').val();
@@ -268,7 +259,7 @@ $is_logged_in = isset($_SESSION['login']) && $_SESSION['login'] === true;
                     url: "ajax/cart_ajax.php",
                     method: "POST",
                     data: {
-                        session_id: se,
+                        user_id: user_id,
                         sanpham_id: sp,
                         sanpham_tieude: x,
                         sanpham_anh: y,

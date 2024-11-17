@@ -1,26 +1,32 @@
 <?php
 @ob_start(); // Khởi tạo bộ đệm đầu ra
 include 'header.php';
-$session_idA = session_id();
-?>
-<?php
+$userid = $_SESSION['user_id']; // Lấy ra user_id từ phiên
+echo  $userid;
+if (!isset($_SESSION['user_id'])) {
+    // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
+    header("Location: login.php");
+    exit();
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $session_idA = session_id();
-    $loaikhach = $_POST['loaikhach'];
-    $customer_name = $_POST['customer_name'];
-    $customer_phone = $_POST['customer_phone'];
-    $customer_tinh = $_POST['customer_tinh'];
-    $customer_huyen = $_POST['customer_huyen'];
-    $customer_xa = $_POST['customer_xa'];
-    $customer_diachi = $_POST['customer_diachi'];
-    $insert_order = $index->insert_order($session_idA, $loaikhach, $customer_name, $customer_phone, $customer_tinh, $customer_huyen, $customer_xa, $customer_diachi);
-    if ($insert_order) {
-        header('Location: payment.php');
-        exit(); // Dừng thực thi mã sau khi chuyển hướng
-    } else {
-        echo "Failed to insert order.";
-    }
-} 
+$loaikhach = $_POST['loaikhach'];
+$customer_name = $_POST['customer_name'];
+$customer_phone = $_POST['customer_phone'];
+$customer_tinh = $_POST['customer_tinh'];
+$customer_huyen = $_POST['customer_huyen'];
+$customer_xa = $_POST['customer_xa'];
+$customer_diachi = $_POST['customer_diachi'];
+$insert_order = $index->insert_order($userid, $loaikhach, $customer_name, $customer_phone, $customer_tinh,
+$customer_huyen, $customer_xa, $customer_diachi);
+if ($insert_order) {
+header('Location: payment.php');
+exit(); // Dừng thực thi mã sau khi chuyển hướng
+} else {
+echo "Failed to insert order.";
+}
+}
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +68,7 @@ include 'carousel.php';
         </div>
         <div class="container">
             <?php
-            $show_cart = $index->show_cart($session_idA);
+            $show_cart = $index->show_cart($userid);
             if($show_cart){
            ?>
             <div class="delivery-content row">
@@ -152,10 +158,9 @@ include 'carousel.php';
                                 <th>Thành tiền</th>
                             </tr>
                             <?php
-                            $session_id = session_id();
                             $SL = 0;
                             $TT = 0;
-                            $show_cartB = $index->show_cartB($session_id);
+                            $show_cartB = $index->show_cartB($userid);
                             if ($show_cartB) {
                                 while ($result_cart = $show_cartB->fetch_assoc()) {
                             ?>

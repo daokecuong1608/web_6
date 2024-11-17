@@ -4,7 +4,6 @@ if (!isset($_GET['id'])) {
     echo "<meta http-equiv='refresh' content='0; url=?id=live'>";
     exit();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,8 +44,7 @@ if (!isset($_GET['id'])) {
         </div>
         <div class="container">
             <?php
-            $session_id = session_id();
-            $show_cart = $index->show_cart($session_id);
+            $show_cart = $index->show_cart($userid);
             if ($show_cart) {
             ?>
             <div class="cart-content row justify-content-center">
@@ -69,8 +67,7 @@ if (!isset($_GET['id'])) {
                                 <?php
                                 $SL = 0;
                                 $TT = 0;
-                                $session_id = session_id();
-                                $show_cart = $index->show_cart($session_id);
+                                $show_cart = $index->show_cart($userid);
                                 if ($show_cart) {
                                     while ($result = $show_cart->fetch_assoc()) {
                                 ?>

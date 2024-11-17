@@ -28,7 +28,7 @@ $total_sales_from_carta = $product->get_total_sales_from_carta();
 <body>
 
     <div class="report-container">
-        <h1>Báo cáo</h1>
+        <h1>Thống kê</h1>
         <div class="report-item">
             <h2>Số lượng sản phẩm</h2>
             <p><?php echo $product_count; ?></p>

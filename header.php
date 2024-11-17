@@ -9,27 +9,28 @@ if (isset($_COOKIE['PHPSESSID']) && session_status() == PHP_SESSION_NONE) {
     session_start(); // Khởi tạo phiên nếu chưa có phiên nào được khởi tạo
 }
 
-if(isset($_SESSION['login'])){
+if (isset($_SESSION['login'])) {
     $login = $_SESSION['login'];
     $username = $_SESSION['username'];
-    $userid = $_SESSION['userid'];
-}else{
+    $userid = $_SESSION['user_id']; // Sử dụng $_SESSION['user_id'] để quản lý phiên đăng nhập
+} else {
     $login = "";
     $username = "";
     $userid = "";
 }
-?>
 
-<?php
 if (!defined('__ROOT__')) {
     define('__ROOT__', dirname(__FILE__)); // Định nghĩa hằng số __ROOT__ nếu chưa được định nghĩa
 }
 require_once(__ROOT__ . '/class/index_class.php'); // Đường dẫn chính xác đến tệp index_class.php
 $index = new index();
-$session_id = session_id();
-echo "Session ID: " . $session_id;
-?>
 
+// if ($login) {
+//     echo "User ID: " . $userid;
+// } else {
+//     echo "User not logged in.";
+// }
+?>
 
 
 <!DOCTYPE html>
@@ -110,7 +111,7 @@ echo "Session ID: " . $session_id;
 
                 <!-- Thêm nút "Xem giỏ hàng" vào trang JSP -->
                 <!-- Nút giỏ hàng -->
-                <a href="cart.php" class="btn btn-cart">
+                <a href="cart.php" class="btn btn-cart" id="cart-button">
                     <i class="bi bi-cart"></i>
                 </a>
 
@@ -149,6 +150,15 @@ echo "Session ID: " . $session_id;
     </nav>
     <!--end header-->
 
+    <script>
+    document.getElementById('cart-button').addEventListener('click', function(event) {
+        <?php if (!isset($_SESSION['user_id'])) { ?>
+        event.preventDefault(); // Ngăn chặn hành động mặc định của liên kết
+        window.location.href = 'login.php'; // Chuyển hướng đến trang đăng nhập
+        <?php } ?>
+    });
+    </script>
+
 
     <script src="./js/header.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -157,6 +167,9 @@ echo "Session ID: " . $session_id;
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
+
+
+
 </body>
 
 </html>

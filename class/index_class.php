@@ -34,20 +34,20 @@ class index {
         return $result;
     }
     
-    public function show_carta($session_id){
-        $query = "SELECT * FROM tbl_carta WHERE session_idA = '$session_id' ORDER BY cart_id DESC";
+    public function show_carta($user_id){
+        $query = "SELECT * FROM tbl_carta WHERE user_id = '$user_id' ORDER BY cart_id DESC";
         $result = $this->db->select($query);
         return $result;
     }
 
-    public function show_payment($session_id){
-        $query = "SELECT * FROM tbl_payment WHERE session_idA = '$session_id' ORDER BY payment_id DESC LIMIT 1";
+    public function show_payment($user_id){
+        $query = "SELECT * FROM tbl_payment WHERE user_id = '$user_id' ORDER BY payment_id DESC LIMIT 1";
         $result = $this->db->select($query);
         return $result;
     }
 
-    public function show_order($session_id) {
-        $query = "SELECT * FROM tbl_order WHERE session_idA = '$session_id' ORDER BY order_id DESC LIMIT 1";
+    public function show_order($user_id) {
+        $query = "SELECT * FROM tbl_order WHERE user_id = '$user_id' ORDER BY order_id DESC LIMIT 1";
         $result = $this->db->selectdc($query);
         return $result;
     }
@@ -70,14 +70,14 @@ class index {
         return $result;
     }
 
-    public function show_cartB($session_id){
-        $query = "SELECT * FROM tbl_cart WHERE session_idA = '$session_id' ORDER BY cart_id DESC";
+    public function show_cartB($user_id){
+        $query = "SELECT * FROM tbl_cart WHERE user_id = '$user_id' ORDER BY cart_id DESC";
         $result = $this->db->selectdc($query);
         return $result;
     }
 
-    public function show_cart($session_id){
-        $query = "SELECT * FROM tbl_cart WHERE session_idA = '$session_id' ORDER BY cart_id DESC";
+    public function show_cart($user_id){
+        $query = "SELECT * FROM tbl_cart WHERE user_id = '$user_id' ORDER BY cart_id DESC";
         $result = $this->db->select($query);
         return $result;
     }
@@ -142,7 +142,7 @@ class index {
 
 
     public function insert_order(
-        $session_idA,
+        $user_id,
         $loaikhach,
         $customer_name,
         $customer_phone,
@@ -151,11 +151,11 @@ class index {
         $customer_xa,
         $customer_diachi
     ) {
-        $query = "SELECT * FROM tbl_order WHERE session_idA = '$session_idA' ORDER BY order_id DESC";
+        $query = "SELECT * FROM tbl_order WHERE user_id = '$user_id' ORDER BY order_id DESC";
         $result = $this->db->select($query);
         if ($result == null) {
-            $query = "INSERT INTO tbl_order (session_idA, loaikhach, customer_name, customer_phone, customer_tinh, customer_huyen, customer_xa, customer_diachi) VALUES 
-            ('$session_idA', '$loaikhach', '$customer_name', '$customer_phone', '$customer_tinh', '$customer_huyen', '$customer_xa', '$customer_diachi')";
+            $query = "INSERT INTO tbl_order (user_id, loaikhach, customer_name, customer_phone, customer_tinh, customer_huyen, customer_xa, customer_diachi) VALUES 
+            ('$user_id', '$loaikhach', '$customer_name', '$customer_phone', '$customer_tinh', '$customer_huyen', '$customer_xa', '$customer_diachi')";
             $result = $this->db->insert($query);
             if ($result) {
                 header('Location: payment.php');
@@ -172,21 +172,21 @@ class index {
     }
 
 
-    public function insert_cart($sanpham_anh, $session_idA, $sanpham_id, $sanpham_tieude, $sanpham_gia, $color_anh, $quantitys, $sanpham_size){
-        $query = "INSERT INTO tbl_cart (sanpham_anh,session_idA,sanpham_id,sanpham_tieude,sanpham_gia,color_anh,quantitys,sanpham_size) VALUES 
-        ('$sanpham_anh','$session_idA','$sanpham_id','$sanpham_tieude','$sanpham_gia','$color_anh','$quantitys','$sanpham_size')";
+    public function insert_cart($sanpham_anh, $user_id, $sanpham_id, $sanpham_tieude, $sanpham_gia, $color_anh, $quantitys, $sanpham_size){
+        $query = "INSERT INTO tbl_cart (sanpham_anh,user_id,sanpham_id,sanpham_tieude,sanpham_gia,color_anh,quantitys,sanpham_size) VALUES 
+        ('$sanpham_anh','$user_id','$sanpham_id','$sanpham_tieude','$sanpham_gia','$color_anh','$quantitys','$sanpham_size')";
         $result = $this->db->insert($query);
         return $result;
     }
 
 
     
-    public function insert_payment($session_idA, $deliver_method, $method_payment, $today)
+    public function insert_payment($user_id, $deliver_method, $method_payment, $today)
     {
-        $query = "SELECT * FROM tbl_payment WHERE session_idA = '$session_idA' ORDER BY payment_id DESC";
+        $query = "SELECT * FROM tbl_payment WHERE user_id = '$user_id' ORDER BY payment_id DESC";
         $result = $this->db->select($query);
         if ($result == null) {
-            $query = "SELECT * FROM tbl_cart WHERE session_idA = '$session_idA' ORDER BY cart_id DESC";
+            $query = "SELECT * FROM tbl_cart WHERE user_id = '$user_id' ORDER BY cart_id DESC";
             $resultA = $this->db->select($query);
             if ($resultA) {
                 while ($resultB = $resultA->fetch_assoc()) {
@@ -198,8 +198,8 @@ class index {
                     $color_anh = $resultB['color_anh'];
                     $quantitys = $resultB['quantitys'];
                     $sanpham_size = $resultB['sanpham_size'];
-                    $query = "INSERT INTO tbl_carta (sanpham_anh, session_idA, sanpham_id, sanpham_tieude, sanpham_gia, color_anh, quantitys, sanpham_size) VALUES 
-                    ('$sanpham_anh', '$session_idA', '$sanpham_id', '$sanpham_tieude', '$sanpham_gia', '$color_anh', '$quantitys', '$sanpham_size')";
+                    $query = "INSERT INTO tbl_carta (sanpham_anh, user_id, sanpham_id, sanpham_tieude, sanpham_gia, color_anh, quantitys, sanpham_size) VALUES 
+                    ('$sanpham_anh', '$user_id', '$sanpham_id', '$sanpham_tieude', '$sanpham_gia', '$color_anh', '$quantitys', '$sanpham_size')";
                     $resultC = $this->db->insert($query);
                     if ($resultC) {
                         $query = "DELETE FROM tbl_cart WHERE cart_id = '$cart_id'";
@@ -215,8 +215,8 @@ class index {
                 echo "Failed to select from tbl_cart: " . $this->db->error;
             }
     
-            $query = "INSERT INTO tbl_payment (session_idA, giaohang, thanhtoan, order_date) VALUES 
-            ('$session_idA', '$deliver_method', '$method_payment', '$today')";
+            $query = "INSERT INTO tbl_payment (user_id, giaohang, thanhtoan, order_date) VALUES 
+            ('$user_id', '$deliver_method', '$method_payment', '$today')";
             $result = $this->db->insert($query);
             if ($result) {
                 header('Location: success.php');
@@ -226,7 +226,7 @@ class index {
                 echo "Failed to insert into tbl_payment: " . $this->db->error;
             }
         } else {
-            $query = "SELECT * FROM tbl_cart WHERE session_idA = '$session_idA' ORDER BY cart_id DESC";
+            $query = "SELECT * FROM tbl_cart WHERE user_id = '$user_id' ORDER BY cart_id DESC";
             $resultA = $this->db->select($query);
             if ($resultA) {
                 while ($resultB = $resultA->fetch_assoc()) {
@@ -238,8 +238,8 @@ class index {
                     $color_anh = $resultB['color_anh'];
                     $quantitys = $resultB['quantitys'];
                     $sanpham_size = $resultB['sanpham_size'];
-                    $query = "INSERT INTO tbl_carta (sanpham_anh, session_idA, sanpham_id, sanpham_tieude, sanpham_gia, color_anh, quantitys, sanpham_size) VALUES 
-                    ('$sanpham_anh', '$session_idA', '$sanpham_id', '$sanpham_tieude', '$sanpham_gia', '$color_anh', '$quantitys', '$sanpham_size')";
+                    $query = "INSERT INTO tbl_carta (sanpham_anh, user_id, sanpham_id, sanpham_tieude, sanpham_gia, color_anh, quantitys, sanpham_size) VALUES 
+                    ('$sanpham_anh', '$user_id', '$sanpham_id', '$sanpham_tieude', '$sanpham_gia', '$color_anh', '$quantitys', '$sanpham_size')";
                     $resultC = $this->db->insert($query);
                     if ($resultC) {
                         $query = "DELETE FROM tbl_cart WHERE cart_id = '$cart_id'";

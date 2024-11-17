@@ -15,7 +15,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $staff_age = $_POST['staff_age'];
     $staff_email = $_POST['staff_email'];
     $staff_address = $_POST['staff_address'];
-    $update_staff = $staff -> update_staff($staff_name, $staff_age, $staff_email, $staff_address, $staff_id);
+    $password = $_POST['password'];
+    $update_staff = $staff -> update_staff($staff_name, $staff_age, $staff_email, $staff_address, $staff_id , $password);
     if($update_staff){
         echo "<script>alert('Cập nhật nhân viên thành công')</script>";
         header('Location: stafflist.php');
@@ -59,6 +60,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 <label for="staff_address">Địa chỉ</label>
                 <input value="<?php echo $result['staff_address'] ?>" type="text" name="staff_address"
                     id="staff_address" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input value="<?php echo $result['password'] ?>" type="password" name="password"
+                    id="password" class="form-control">
             </div>
             <div class="form-group">
                 <input type="submit" name="submit" value="Cập nhật nhân viên" class="btn btn-primary">
