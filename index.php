@@ -17,8 +17,8 @@ if ($conn->connect_error) {
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-   
-        <title>Trang chủ</title>
+
+    <title>Trang chủ</title>
     <link href="css/phantrang.css" rel="stylesheet"> <!-- Liên kết tệp CSS -->
 
 </head>
@@ -64,7 +64,8 @@ if ($conn->connect_error) {
                         <h5 class="card-title"><?php echo $row['sanpham_tieude'] ?></h5>
                         <p class="card-text price">Giá bán:
                             <?php echo number_format($row['sanpham_gia'], 0, ',', '.') . ' VNĐ' ?></p>
-                        <a href="mua_ngay.php?id=<?php echo $row['sanpham_id']; ?>" class="btn btn-info">Mua ngay</a>
+                        <a href="mua_ngay.php?sanpham_id=<?php echo $row['sanpham_id']; ?>" class="btn btn-info">Mua
+                            ngay</a>
                         <a href="view_product.php?sanpham_id=<?php echo $row['sanpham_id']; ?>"
                             class="btn btn-secondary">Xem
                             nhanh</a>

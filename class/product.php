@@ -128,6 +128,22 @@ public function show_orderAll(){
         return $result;
     }
 
+// Phương thức lấy sản phẩm theo ID
+    public function get_product_by_id($sanpham_id){
+        // Truy vấn SQL để lấy thông tin của sản phẩm theo sanpham_id
+        $query = "SELECT tbl_sanpham.*, tbl_danhmuc.danhmuc_ten, tbl_loaisanpham.loaisanpham_ten, tbl_color.color_ten
+                FROM tbl_sanpham
+                INNER JOIN tbl_danhmuc ON tbl_sanpham.danhmuc_id = tbl_danhmuc.danhmuc_id
+                INNER JOIN tbl_loaisanpham ON tbl_sanpham.loaisanpham_id = tbl_loaisanpham.loaisanpham_id
+                INNER JOIN tbl_color ON tbl_sanpham.color_id = tbl_color.color_id
+                WHERE tbl_sanpham.sanpham_id = '$sanpham_id'"; // Điều kiện lọc sản phẩm theo ID
+                
+        $result = $this->db->select($query); // Thực thi truy vấn và lấy kết quả
+        return $result;
+    }
+
+
+
     public function show_color(){
         $query = "SELECT * FROM tbl_color ORDER BY color_id DESC";
         $result = $this -> db ->select($query);
@@ -329,7 +345,7 @@ public function update_product($data, $file, $sanpham_id) {
     $query = "UPDATE tbl_sanpham SET 
         sanpham_tieude = '$sanpham_tieude',
         sanpham_ma = '$sanpham_ma',
-        anhmuc_id = '$danhmuc_id', 
+        danhmuc_id = '$danhmuc_id', 
         loaisanpham_id = '$loaisanpham_id', 
         color_id = '$color_id',
         sanpham_gia = '$sanpham_gia',
@@ -345,7 +361,6 @@ public function update_product($data, $file, $sanpham_id) {
         // Xóa các tệp ảnh phụ cũ liên quan đến sản phẩm
         $query = "DELETE FROM tbl_sanpham_anh WHERE sanpham_id = '$sanpham_id'";
         $this->db->delete($query);
-
         // Di chuyển các tệp ảnh phụ mới và thêm vào cơ sở dữ liệu
         foreach ($filenames as $key => $element) {
             if (!empty($element)) {
