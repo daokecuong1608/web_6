@@ -102,7 +102,7 @@ class product{
     }
 
     public function show_order_detail($order_ma){
-        $query = "SELECT * FROM tbl_carta WHERE session_idA = '$order_ma' ORDER BY cart_id DESC";
+        $query = "SELECT * FROM tbl_carta WHERE user_id = '$order_ma' ORDER BY cart_id DESC";
         $result = $this -> db ->select($query);
         return $result;
     }
@@ -110,7 +110,7 @@ class product{
 public function show_orderAll(){
     $query = "SELECT tbl_order.* , tbl_payment.* , tbl_diachi.*
               FROM tbl_order 
-              INNER JOIN tbl_payment ON tbl_order.session_idA = tbl_payment.session_idA
+              INNER JOIN tbl_payment ON tbl_order.user_id = tbl_payment.user_id
               INNER JOIN tbl_diachi ON tbl_order.customer_xa = tbl_diachi.ma_px  
               ORDER BY tbl_payment.payment_id DESC";
                 $result = $this -> db ->select($query);
@@ -201,10 +201,10 @@ public function get_all_anh(){
     return $result;
 }
 
-public function get_order_status($session_idA) {
-    $query = "SELECT status FROM tbl_payment WHERE session_idA = ?";
+public function get_order_status($user_id) {
+    $query = "SELECT status FROM tbl_payment WHERE user_id = ?";
     $stmt = $this->db->link->prepare($query);
-    $stmt->bind_param("s", $session_idA);
+    $stmt->bind_param("s", $user_id);
     $stmt->execute();
     $stmt->bind_result($status);
     $stmt->fetch();
@@ -266,18 +266,18 @@ public function delete_product_anh($sanpham_id){
 }
 
 
-    public function delete_payment($session_idA){
-        $query = "DELETE  FROM tbl_payment WHERE session_idA = '$session_idA'";
+    public function delete_payment($user_id){
+        $query = "DELETE  FROM tbl_payment WHERE user_id = '$user_id'";
         $result = $this -> db ->delete($query);
         return $result;
     }
-    public function delete_order($session_idA){
-        $query = "DELETE  FROM tbl_order WHERE session_idA = '$session_idA'";
+    public function delete_order($user_id){
+        $query = "DELETE  FROM tbl_order WHERE user_id = '$user_id'";
         $result = $this -> db ->delete($query);
         return $result;
     }
-    public function delete_cart($session_idA){
-        $query = "DELETE  FROM tbl_carta WHERE session_idA = '$session_idA'";
+    public function delete_cart($user_id){
+        $query = "DELETE  FROM tbl_carta WHERE user_id = '$user_id'";
         $result = $this -> db ->delete($query);
         return $result;
     }
@@ -366,10 +366,10 @@ public function update_product($data, $file, $sanpham_id) {
     }
 }
 
-public function update_order_status($session_idA, $new_status) {
-    $query = "UPDATE tbl_payment SET status = ? WHERE session_idA = ?";
+public function update_order_status($user_id, $new_status) {
+    $query = "UPDATE tbl_payment SET status = ? WHERE user_id = ?";
     $stmt = $this->db->link->prepare($query);
-    $stmt->bind_param("is", $new_status, $session_idA);
+    $stmt->bind_param("is", $new_status, $user_id);
     $result = $stmt->execute();
     $stmt->close();
     return $result;

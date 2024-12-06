@@ -45,7 +45,7 @@ $product = new product(); // Đảm bảo tên lớp là Product với chữ P v
                 ?>
                 <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php $ma = substr($result['session_idA'],0,8); echo $ma   ?></td>
+                    <td><?php $ma = substr($result['user_id'],0,8); echo $ma   ?></td>
                     <td> <?php echo $result['order_date']?></td>
                     <td> <?php echo $result['customer_name']?></td>
                     <td> <?php echo $result['customer_phone'] ?></td>
@@ -53,16 +53,14 @@ $product = new product(); // Đảm bảo tên lớp là Product với chữ P v
                         <?php echo $result['quan_huyen']  ?>, <?php echo $result['tinh_tp']  ?></td>
                     <td> <?php echo $result['giaohang']  ?></td>
                     <td> <?php echo $result['thanhtoan']  ?></td>
-                    <td> <a href="orderdetail.php?order_ma=<?php echo $result['session_idA'] ?>"
+                    <td> <a href="orderdetail.php?order_ma=<?php echo $result['user_id'] ?>"
                             class="btn btn-info">Xem</a></td>
                     <td>
-                        <a href="changestatus.php?session_idA=<?php echo $result['session_idA']; ?>"
-                            class="btn btn-warning">
+                        <a href="changestatus.php?user_id=<?php echo $result['user_id']; ?>" class="btn btn-warning">
                             <?php if($result['status'] == 1) { echo "Đã hoàn thành"; } else { echo "Chưa hoàn thành"; } ?>
                         </a>
                     </td>
-                    <td><a href="orderdelete.php?session_idA=<?php echo $result['session_idA'] ?>"
-                            class="btn btn-danger"
+                    <td><a href="orderdelete.php?user_id=<?php echo $result['user_id'] ?>" class="btn btn-danger"
                             onclick="return confirm('Đơn hàng sẽ bị xóa vĩnh viễn, bạn có chắc muốn tiếp tục không?');">Xóa</a>
                     </td>
                 </tr>

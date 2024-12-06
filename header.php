@@ -134,8 +134,8 @@ $index = new index();
                             Tài khoản
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="userMenu">
-                            <li><a class="dropdown-item" href="profile.php">Xem hồ sơ</a></li>
-                            <li><a class="dropdown-item" href="account_settings.php">Cài đặt tài khoản</a></li>
+                            <li><a class="dropdown-item" href="buycart.php">Xem đơn hàng đã mua</a></li>
+                            <li><a class="dropdown-item" href="./user/account_settings.php">Cài đặt tài khoản</a></li>
                             <li><a class="dropdown-item" href="./handle/logout.php">Đăng xuất</a></li>
                         </ul>
                     </li>

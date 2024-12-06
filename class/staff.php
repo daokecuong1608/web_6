@@ -25,7 +25,7 @@ public function get_staff($staff_id){
 }
 
 public function insert_staff($staff_name, $staff_age, $staff_email, $staff_address , $password){
-    $query = "INSERT INTO tbl_staff(staff_name, staff_age, staff_email, staff_address , password) VALUES('$staff_name', '$staff_phone', '$staff_email', '$staff_address' , '$password')";
+    $query = "INSERT INTO tbl_staff(staff_name, staff_age, staff_email, staff_address , password) VALUES('$staff_name', '$staff_age', '$staff_email', '$staff_address' , '$password')";
     $result = $this->db->insert($query);
     header('Location: stafflist.php');
     return $result;
@@ -65,6 +65,7 @@ public function login_staff($staff_email, $password) {
         $_SESSION['staff_login'] = true;
         $_SESSION['staff_id'] = $value['staff_id'];
         $_SESSION['staff_name'] = $value['staff_name'];
+        $_SESSION['staff_email'] = $value['staff_email']; // Lưu trữ staff_email trong phiên
         header('Location: dashboard.php'); // Chuyển hướng đến trang dashboard sau khi đăng nhập thành công
     } else {
         $msg = "Email hoặc mật khẩu không đúng!";

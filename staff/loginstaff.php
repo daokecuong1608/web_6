@@ -1,5 +1,7 @@
 <?php
-include 'header.php';
+if (!defined('__ROOT__')) {
+    define('__ROOT__', dirname(dirname(__FILE__))); // Định nghĩa hằng số __ROOT__ nếu chưa được định nghĩa
+}
 include_once(__ROOT__ . "/class/staff.php");
 
 $staff = new staff();

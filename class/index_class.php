@@ -52,6 +52,13 @@ class index {
         return $result;
     }
 
+    public function show_order_All() {
+        $query = "SELECT * FROM tbl_order ORDER BY order_id DESC";
+        $result = $this->db->selectdc($query);
+        return $result;
+    }
+
+
     public function show_diachi_px($quan_huyen_id) {
         $query = "SELECT DISTINCT tinh_tp,ma_tinh,quan_huyen,ma_qh,phuong_xa,ma_px FROM tbl_diachi WHERE ma_qh = '$quan_huyen_id' ORDER BY ma_px";
         $result = $this->db->selectdc($query);

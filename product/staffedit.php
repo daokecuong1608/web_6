@@ -3,20 +3,29 @@ include_once "../class/staff.php"; // Bao gồm tệp chứa định nghĩa củ
 
 $staff = new staff();
 
-if(isset($_GET['staff_id']) || $_GET['staff_id'] != NULL  ){
+if (isset($_GET['staff_id']) && $_GET['staff_id'] != NULL) {
     $staff_id = $_GET['staff_id'];
+    echo "<script>console.log('Staff ID: " . $staff_id . "');</script>";
+    $show_staff = $staff->get_staff($staff_id);
+    if ($show_staff) {
+        $result = $show_staff->fetch_assoc();
+    } else {
+        echo "<script>alert('Không tìm thấy nhân viên.');</script>";
+        exit();
+    }
+} else {
+    echo "<script>alert('Không có ID nhân viên.');</script>";
+    exit();
 }
-$show_staff = $staff -> show_staff($staff_id);
-if($show_staff){
-    $result = $show_staff -> fetch_assoc();
-}
+
+
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $staff_name = $_POST['staff_name'];
     $staff_age = $_POST['staff_age'];
     $staff_email = $_POST['staff_email'];
     $staff_address = $_POST['staff_address'];
     $password = $_POST['password'];
-    $update_staff = $staff -> update_staff($staff_name, $staff_age, $staff_email, $staff_address, $staff_id , $password);
+    $update_staff = $staff -> update_staff($staff_name, $staff_age, $staff_email, $staff_address , $password , $staff_id );
     if($update_staff){
         echo "<script>alert('Cập nhật nhân viên thành công')</script>";
         header('Location: stafflist.php');
@@ -63,8 +72,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input value="<?php echo $result['password'] ?>" type="password" name="password"
-                    id="password" class="form-control">
+                <input value="<?php echo $result['password'] ?>" type="password" name="password" id="password"
+                    class="form-control">
             </div>
             <div class="form-group">
                 <input type="submit" name="submit" value="Cập nhật nhân viên" class="btn btn-primary">

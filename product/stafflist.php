@@ -40,9 +40,13 @@ $show_staff = $staff->show_staff();
                         $i = 0;
                         while($result = $show_staff->fetch_assoc()){
                             $i++;
+                            // echo "<script>
+                            // console.log('Staff ID: " . $result['staff_id'] . "');
+                            // </script>";
                     ?>
 
                     <tr>
+
                         <td><?php echo $i; ?></td>
                         <td><?php echo $result['staff_name']; ?></td>
                         <td><?php echo $result['staff_age']; ?></td>
@@ -55,7 +59,6 @@ $show_staff = $staff->show_staff();
                                 class="btn btn-danger">Xóa</a>
                         </td>
                     </tr>
-
                     <?php
                         }
                     }

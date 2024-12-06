@@ -51,7 +51,7 @@ if (isset($_GET['order_ma']) || $_GET['order_ma'] != NULL) {
                     ?>
                     <tr>
                         <td><?php echo $i ?></td>
-                        <td>Ivy_<?php $ma = substr($result['session_idA'], 0, 8);
+                        <td>Ivy_<?php $ma = substr($result['user_id'], 0, 8);
                                     echo $ma ?></td>
                         <td><?php echo $result['sanpham_tieude'] ?></td>
                         <td><img style="width:50px" src="../<?php echo $result['sanpham_anh'] ?>" alt=""></td>

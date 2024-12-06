@@ -7,7 +7,6 @@ if (!isset($_SESSION['staff_login']) || $_SESSION['staff_login'] !== true) {
     exit();
 }
 
-include 'header.php';
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +36,13 @@ include 'header.php';
                         <p><strong>Email:</strong> <?php echo $_SESSION['staff_email']; ?></p>
                         <!-- Thêm các thông tin khác của nhân viên nếu cần -->
                     </div>
+                </div>
+                <div class="mt-3">
+                    <a href="productlist.php" class="btn btn-primary">Xem danh sách sản phẩm</a>
+                    <a href="customer.php" class="btn btn-primary">Danh sách khách hàng</a>
+                    <a href="report.php" class="btn btn-primary">Xem báo cáo thống kê</a>
+                    <a href="categorylist.php" class="btn btn-primary">Xem danh mục</a>
+                    <a href="brandlist.php" class="btn btn-primary">Xem thể loại</a>
                 </div>
                 <a href="logout.php" class="btn btn-danger mt-3">Đăng xuất</a>
             </div>

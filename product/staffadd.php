@@ -1,20 +1,24 @@
 <?php
-include_once "../class/staff.php"; // Bao gồm tệp chứa định nghĩa của lớp product
-$staff = new staff();
+include_once "../class/staff.php"; // Bao gồm tệp chứa định nghĩa của lớp staff
+$staff = new Staff();
 
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
     $staff_name = $_POST['staff_name'];
     $staff_age = $_POST['staff_age'];
     $staff_email = $_POST['staff_email'];
     $staff_address = $_POST['staff_address'];
-    $insert_staff = $staff->insert_staff($staff_name, $staff_age, $staff_email, $staff_address);
-    if($insert_staff){
+    $password = $_POST['password'];
+
+    // Debugging statement
+    echo "<script>console.log('Staff Age: " . $staff_age . "');</script>";
+
+    $insert_staff = $staff->insert_staff($staff_name, $staff_age, $staff_email, $staff_address, $password);
+    if ($insert_staff) {
         echo "<script>alert('Thêm nhân viên thành công')</script>";
-    }else{
+    } else {
         echo "<script>alert('Thêm nhân viên thất bại')</script>";
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +42,7 @@ if(isset($_POST['submit'])){
             </div>
             <div class="form-group">
                 <label for="staff_age">Tuổi</label>
-                <input type="text" name="staff_age" id="staff_age" class="form-control">
+                <input type="number" name="staff_age" id="staff_age" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="staff_email">Email</label>
