@@ -24,7 +24,7 @@ public function show_brand(){
     $query = "SELECT tbl_loaisanpham.* , tbl_danhmuc.danhmuc_ten
     FROM tbl_loaisanpham
     INNER JOIN tbl_danhmuc ON tbl_loaisanpham.danhmuc_id = tbl_danhmuc.danhmuc_id
-    ORDER BY tbl_loaisanpham.loaisanpham_id DESC";
+    ORDER BY tbl_loaisanpham.loaisanpham_id DESC";//giảm dần
     $result = $this -> db ->select($query);
     return $result;
 }

@@ -52,6 +52,33 @@ class index {
         return $result;
     }
 
+
+    public function show_order_with_address($user_id) {
+        $query = "
+            SELECT 
+                o.*,
+                d.tinh_tp, 
+                d.quan_huyen, 
+                d.phuong_xa 
+            FROM 
+                tbl_order AS o
+            LEFT JOIN 
+                tbl_diachi AS d 
+            ON 
+                o.customer_tinh = d.ma_tinh 
+                AND o.customer_huyen = d.ma_qh 
+                AND o.customer_xa = d.ma_px
+            WHERE 
+                o.user_id = '$user_id'
+            ORDER BY 
+                o.order_id DESC 
+            LIMIT 1
+        ";
+        $result = $this->db->selectdc($query);
+        return $result;
+    }
+    
+
     public function show_order_All() {
         $query = "SELECT * FROM tbl_order ORDER BY order_id DESC";
         $result = $this->db->selectdc($query);

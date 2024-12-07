@@ -30,15 +30,15 @@ $userid = $_SESSION['user_id']; // Lấy ra user_id từ phiên
                     <p><span style="font-weight: bold; color:red">Thông tin giao hàng</span></p>
                     <br>
                     <?php
-                    $show_order = $index->show_order($userid);
+                    $show_order = $index->show_order_with_address($userid);
                     if ($show_order) {
                         while ($result = $show_order->fetch_assoc()) {
                     ?>
                     <p><span style="font-weight: bold;">Họ và tên</span>: <?php echo $result['customer_name']  ?></p>
                     <p><span style="font-weight: bold;">Số ĐT</span>: <?php echo $result['customer_phone']  ?></p>
                     <p><span style="font-weight: bold;">Địa chỉ</span>: <?php echo $result['customer_diachi']  ?>,
-                        <?php echo $result['customer_xa']  ?>, <?php echo $result['customer_huyen']  ?>,
-                        <?php echo $result['customer_tinh']  ?></p>
+                        <?php echo $result['phuong_xa']  ?>, <?php echo $result['quan_huyen']  ?>,
+                        <?php echo $result['tinh_tp']  ?></p>
                     <?php
                         }
                     }

@@ -9,24 +9,37 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-$loaikhach = $_POST['loaikhach'];
-$customer_name = $_POST['customer_name'];
-$customer_phone = $_POST['customer_phone'];
-$customer_tinh = $_POST['customer_tinh'];
-$customer_huyen = $_POST['customer_huyen'];
-$customer_xa = $_POST['customer_xa'];
-$customer_diachi = $_POST['customer_diachi'];
-$insert_order = $index->insert_order($userid, $loaikhach, $customer_name, $customer_phone, $customer_tinh,
-$customer_huyen, $customer_xa, $customer_diachi);
-if ($insert_order) {
-header('Location: payment.php');
-exit(); // Dừng thực thi mã sau khi chuyển hướng
-} else {
-echo "Failed to insert order.";
+    $loaikhach = $_POST['loaikhach'];
+    $customer_name = trim($_POST['customer_name']);
+    $customer_phone = trim($_POST['customer_phone']);
+    $customer_tinh = $_POST['customer_tinh'];
+    $customer_huyen = $_POST['customer_huyen'];
+    $customer_xa = $_POST['customer_xa'];
+    $customer_diachi = trim($_POST['customer_diachi']);
+
+    $errors = [];
+    if (strlen($customer_name) > 50 || preg_match('/^\s/', $customer_name)) {
+        $errors[] = "Tên khách hàng không được quá 50 ký tự và không được có khoảng trắng đầu câu.";
+    }
+    if (!preg_match('/^0\d{9}$/', $customer_phone)) {
+        $errors[] = "Số điện thoại phải gồm 10 số và bắt đầu bằng số 0.";
+    }
+    if (strlen($customer_diachi) > 50) {
+        $errors[] = "Địa chỉ không được vượt quá 50 ký tự.";
+    }
+
+    if (empty($errors)) {
+        $insert_order = $index->insert_order($userid, $loaikhach, $customer_name, $customer_phone, $customer_tinh, $customer_huyen, $customer_xa, $customer_diachi);
+        if ($insert_order) {
+            header('Location: payment.php');
+            exit(); // Dừng thực thi mã sau khi chuyển hướng
+        } else {
+            echo "Failed to insert order.";
+        }
+    }
 }
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -49,8 +62,17 @@ echo "Failed to insert order.";
     <?php
 include 'carousel.php';
 ?>
-
+    <?php if (!empty($errors)): ?>
+    <div class="alert alert-danger">
+        <ul>
+            <?php foreach ($errors as $error): ?>
+            <li><?php echo $error; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?php endif; ?>
     <section class="delivery">
+
         <div class="container">
             <div class="delivery-top-wap">
                 <div class="delivery-top">

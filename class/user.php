@@ -94,7 +94,7 @@ class user{
         $query = "SELECT password FROM users WHERE id = ?";
         $stmt = $this->db->link->prepare($query);
         if ($stmt === false) {
-            die("Database error: " . $this->db->link->error);
+            return "Database error: Failed to prepare query.";
         }
         $stmt->bind_param("i", $user_id);
         $stmt->execute();
@@ -104,28 +104,35 @@ class user{
             return "User not found!";
         }
         $stmt->close();
-
-        // So sánh mật khẩu hiện tại với mật khẩu từ cơ sở dữ liệu
+    
+        // So sánh mật khẩu hiện tại với mật khẩu hash trong cơ sở dữ liệu
         if (!password_verify($current_password, $db_password)) {
             return "Current password is incorrect!";
         }
-
-        // Hash mật khẩu mới trước khi lưu vào cơ sở dữ liệu
-        $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
-
+    
+        // // Hash mật khẩu mới trước khi lưu vào cơ sở dữ liệu
+        // $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
+    
         // Cập nhật mật khẩu mới
         $query = "UPDATE users SET password = ? WHERE id = ?";
         $stmt = $this->db->link->prepare($query);
         if ($stmt === false) {
-            die("Database error: " . $this->db->link->error);
+            return "Database error: Failed to prepare update query.";
         }
-        $stmt->bind_param("si", $hashed_password, $user_id);
+        $stmt->bind_param("si", $new_password, $user_id);
         $result = $stmt->execute();
+        if ($stmt->error) {
+            $error = $stmt->error;
+        }
         $stmt->close();
-
+    
         // Trả về kết quả
+        if (isset($error)) {
+            return "Failed to update password: $error";
+        }
         return $result ? "Password updated successfully!" : "Failed to update password!";
     }
+    
     
     public function delete_account($user_id) {
         // Xóa người dùng theo ID
