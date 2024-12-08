@@ -1,4 +1,6 @@
 /* Tùy chỉnh các class CSS cho header */
+
+
 .navbar {
     background-color: #f8f9fa;
     /* Màu nền của navbar */
@@ -10,6 +12,10 @@
     /* Khoảng cách padding dưới */
     padding-left    : 1rem;
     /* Khoảng cách padding trái */
+    border-radius   : 15px;
+    /* Bo tròn thanh navbar nếu bạn muốn bo tròn cả header */
+    box-shadow      : 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Thêm hiệu ứng bóng đổ cho thanh header */
 }
 
 .navbar-brand img {
@@ -17,11 +23,10 @@
     /* Chiều cao của logo */
 }
 
+/* Tùy chỉnh màu chữ và các liên kết */
 .nav-link {
     color: #292727;
-    /* Màu chữ của các liên kết */
 }
-
 
 /* header.css */
 
@@ -34,7 +39,8 @@
     box-shadow      : 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index         : 1000;
     margin-top      : 0;
-    border-radius   : 0;
+    border-radius   : 10px;
+    /* Bo tròn menu thả xuống */
     border          : 1px solid #ddd;
 }
 
@@ -43,13 +49,11 @@
     display: block;
 }
 
-/* Đặt kiểu dáng cho các mục trong menu thả xuống */
+/* Các mục trong menu thả xuống */
 .navbar-nav .dropdown-menu .dropdown-item {
     padding        : 10px 20px;
     color          : #504f4f;
     text-decoration: none;
-    display        : block;
-    white-space    : nowrap;
 }
 
 /* Thay đổi màu nền và màu chữ khi di chuột vào các mục trong menu thả xuống */
@@ -63,27 +67,25 @@
     position: relative;
 }
 
-/* Đặt kiểu dáng cho các liên kết trong danh mục */
+/* Các liên kết trong navbar */
 .navbar-nav .nav-link {
     padding        : 10px 20px;
     color          : #717171;
     text-decoration: none;
-    display        : block;
-    white-space    : nowrap;
 }
 
-/* Thay đổi màu nền và màu chữ khi di chuột vào các liên kết trong danh mục */
+/* Hiệu ứng hover của các liên kết */
 .navbar-nav .nav-link:hover {
     background-color: #f8f9fa;
     color           : #007bff;
 }
 
 
-
 .form-control {
     margin-right: 1rem;
     /* Tăng khoảng cách bên phải của ô tìm kiếm */
 }
+
 
 .btn-cart {
     border          : 1px solid #000;
@@ -195,4 +197,110 @@
 .btn-outline-success:hover i {
     transform: scale(1.2);
     /* Tăng kích thước biểu tượng khi di chuột */
+}
+
+/* Điều chỉnh navbar để căn chỉnh các phần tử trong thanh điều hướng */
+.navbar-nav {
+    display        : flex;
+    flex-wrap      : wrap;
+    /* Cho phép các phần tử trong navbar xuống dòng khi không đủ không gian */
+    align-items    : center;
+    justify-content: flex-start;
+    /* Căn chỉnh các mục về phía bên trái */
+}
+
+/* Đảm bảo rằng menu thả xuống không tràn ra ngoài */
+.navbar-nav .nav-item {
+    position: relative;
+    padding : 5px 10px;
+}
+
+.navbar-nav .dropdown-menu {
+    display         : none;
+    position        : absolute;
+    background-color: #cdc4c4;
+    box-shadow      : 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index         : 1000;
+    margin-top      : 0;
+    border-radius   : 10px;
+    border          : 1px solid #ddd;
+    width           : 200px;
+    /* Thiết lập độ rộng cố định cho dropdown */
+}
+
+/* Hiển thị menu khi hover */
+.navbar-nav .nav-item:hover .dropdown-menu {
+    display: block;
+}
+
+/* Đảm bảo các item trong dropdown không bị tràn */
+.navbar-nav .dropdown-menu .dropdown-item {
+    padding        : 10px;
+    color          : #504f4f;
+    text-decoration: none;
+    white-space    : nowrap;
+    /* Đảm bảo không bị xuống dòng */
+}
+
+/* Hiệu ứng hover cho các item trong dropdown */
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color           : #007bff;
+}
+
+/* Điều chỉnh cho form tìm kiếm */
+.form-control {
+    margin-right: 1rem;
+    flex        : 1;
+    /* Cho phép ô tìm kiếm chiếm hết không gian còn lại */
+}
+
+/* Căn chỉnh nút giỏ hàng và login */
+.btn-cart,
+.btn-login {
+    margin-right   : 10px;
+    padding        : 10px;
+    border-radius  : 5px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+
+    /* Điều chỉnh cho các màn hình nhỏ */
+    .navbar-nav {
+        display: block;
+        width  : 100%;
+    }
+
+    .navbar-nav .nav-item {
+        width     : 100%;
+        text-align: center;
+        padding   : 10px 0;
+    }
+
+    .navbar-nav .dropdown-menu {
+        width        : 100%;
+        position     : relative;
+        box-shadow   : none;
+        border-radius: 0;
+    }
+
+    .navbar-nav .nav-item:hover .dropdown-menu {
+        display: block;
+    }
+
+    /* Thu nhỏ ô tìm kiếm cho phù hợp */
+    .form-control {
+        width       : 100%;
+        margin-right: 0;
+    }
+
+    .btn-cart,
+    .btn-login {
+        margin-right   : 0;
+        width          : 100%;
+        justify-content: center;
+    }
 }

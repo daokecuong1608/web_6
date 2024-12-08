@@ -13,6 +13,8 @@ if (isset($_SESSION['login'])) {
     $login = $_SESSION['login'];
     $username = $_SESSION['username'];
     $userid = $_SESSION['user_id']; // Sử dụng $_SESSION['user_id'] để quản lý phiên đăng nhập
+    $role = $_SESSION['role']; // lấy quyền người dùng từ session
+
 } else {
     $login = "";
     $username = "";
@@ -136,6 +138,14 @@ $index = new index();
                         <ul class="dropdown-menu" aria-labelledby="userMenu">
                             <li><a class="dropdown-item" href="buycart.php">Xem đơn hàng đã mua</a></li>
                             <li><a class="dropdown-item" href="./user/account_settings.php">Cài đặt tài khoản</a></li>
+                            <?php
+                            // Kiểm tra xem người dùng có phải là admin không
+                            if (isset($role) && $role === "admin") {
+                            ?>
+                            <li><a class="dropdown-item" href="./admin/admin_dashboard.php">Quản lý hệ thống</a></li>
+                            <?php
+                            }
+                            ?>
                             <li><a class="dropdown-item" href="./handle/logout.php">Đăng xuất</a></li>
                         </ul>
                     </li>

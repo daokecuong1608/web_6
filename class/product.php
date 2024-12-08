@@ -131,7 +131,7 @@ public function show_orderAll(){
 // Phương thức lấy sản phẩm theo ID
     public function get_product_by_id($sanpham_id){
         // Truy vấn SQL để lấy thông tin của sản phẩm theo sanpham_id
-        $query = "SELECT tbl_sanpham.*, tbl_danhmuc.danhmuc_ten, tbl_loaisanpham.loaisanpham_ten, tbl_color.color_ten
+        $query = "SELECT tbl_sanpham.*, tbl_danhmuc.danhmuc_ten, tbl_loaisanpham.loaisanpham_ten, tbl_color.color_anh
                 FROM tbl_sanpham
                 INNER JOIN tbl_danhmuc ON tbl_sanpham.danhmuc_id = tbl_danhmuc.danhmuc_id
                 INNER JOIN tbl_loaisanpham ON tbl_sanpham.loaisanpham_id = tbl_loaisanpham.loaisanpham_id
@@ -409,6 +409,16 @@ public function get_total_sales_from_carta() {
     $row = $result->fetch_assoc();
     return $row['total_sales'];
 }
+
+
+public function insert_cart($sanpham_id, $user_id, $sanpham_tieude, $sanpham_gia, $color_anh, $quantitys, $sanpham_size, $sanpham_anh){
+    $query = "INSERT INTO tbl_cart (sanpham_id, user_id, sanpham_tieude, sanpham_gia, color_anh, quantitys, sanpham_size, sanpham_anh, status) 
+              VALUES ('$sanpham_id', '$user_id', '$sanpham_tieude', '$sanpham_gia', '$color_anh', '$quantitys', '$sanpham_size', '$sanpham_anh', 'CHON')";
+    $result = $this->db->insert($query);
+    return $result;
+}
+
+
 
 }
 ?>
