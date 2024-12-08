@@ -31,6 +31,8 @@ if (isset($_GET['sanpham_id']) && !empty($_GET['sanpham_id'])) {
         $sanpham_size = 'M'; // Bạn có thể thêm tùy chọn size nếu cần
         $quantity = 1; // Mặc định là mua 1 sản phẩm
 
+
+        
         // Kiểm tra sản phẩm đã tồn tại trong giỏ hàng chưa
         $checkQuery = "SELECT * FROM tbl_cart WHERE user_id = '$user_id' AND sanpham_id = '$sanpham_id' AND sanpham_size = '$sanpham_size'";
         echo "<pre>Check Query: $checkQuery</pre>"; // Log câu truy vấn

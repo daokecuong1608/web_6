@@ -104,11 +104,14 @@ class index {
         return $result;
     }
 
-    public function show_cartB($user_id){
-        $query = "SELECT * FROM tbl_cart WHERE user_id = '$user_id' ORDER BY cart_id DESC";
-        $result = $this->db->selectdc($query);
-        return $result;
+
+
+   public function show_cartB($user_id) {
+    $query = "SELECT * FROM tbl_cart WHERE user_id = '$user_id' AND status = 'CHỌN' ORDER BY cart_id DESC";
+    $result = $this->db->selectdc($query);
+    return $result;
     }
+
 
     public function show_cart($user_id){
         $query = "SELECT * FROM tbl_cart WHERE user_id = '$user_id' ORDER BY cart_id DESC";
@@ -214,15 +217,20 @@ class index {
     }
 
 
-    
     public function insert_payment($user_id, $deliver_method, $method_payment, $today)
     {
+        // Kiểm tra nếu đã có đơn hàng trước đó
         $query = "SELECT * FROM tbl_payment WHERE user_id = '$user_id' ORDER BY payment_id DESC";
         $result = $this->db->select($query);
+        
+        // Nếu chưa có đơn hàng trước đó
         if ($result == null) {
-            $query = "SELECT * FROM tbl_cart WHERE user_id = '$user_id' ORDER BY cart_id DESC";
+            // Lấy các sản phẩm có trạng thái là 'CHON' trong giỏ hàng
+            $query = "SELECT * FROM tbl_cart WHERE user_id = '$user_id' AND status = 'CHON' ORDER BY cart_id DESC";
             $resultA = $this->db->select($query);
+            
             if ($resultA) {
+                // Lặp qua các sản phẩm đã chọn
                 while ($resultB = $resultA->fetch_assoc()) {
                     $cart_id = $resultB['cart_id'];
                     $sanpham_anh = $resultB['sanpham_anh'];
@@ -232,36 +240,47 @@ class index {
                     $color_anh = $resultB['color_anh'];
                     $quantitys = $resultB['quantitys'];
                     $sanpham_size = $resultB['sanpham_size'];
-                    $query = "INSERT INTO tbl_carta (sanpham_anh, user_id, sanpham_id, sanpham_tieude, sanpham_gia, color_anh, quantitys, sanpham_size) VALUES 
-                    ('$sanpham_anh', '$user_id', '$sanpham_id', '$sanpham_tieude', '$sanpham_gia', '$color_anh', '$quantitys', '$sanpham_size')";
+    
+                    // Chèn thông tin sản phẩm vào bảng tbl_carta
+                    $query = "INSERT INTO tbl_carta (sanpham_anh, user_id, sanpham_id, sanpham_tieude, sanpham_gia, color_anh, quantitys, sanpham_size, status) 
+                            VALUES ('$sanpham_anh', '$user_id', '$sanpham_id', '$sanpham_tieude', '$sanpham_gia', '$color_anh', '$quantitys', '$sanpham_size', 'CHUA_NHAN')";
                     $resultC = $this->db->insert($query);
+    
+                    // Nếu insert thành công, xóa sản phẩm khỏi giỏ hàng
                     if ($resultC) {
-                        $query = "DELETE FROM tbl_cart WHERE cart_id = '$cart_id'";
+                        // Xóa các sản phẩm đã chọn từ giỏ hàng
+                        $query = "DELETE FROM tbl_cart WHERE cart_id = '$cart_id' AND status = 'CHON'";
                         $resultD = $this->db->delete($query);
+    
+                        // Xóa số lượng sản phẩm trong session
                         Session::set('SL', null);
                     } else {
-                        // Thêm thông báo gỡ lỗi nếu truy vấn INSERT thất bại
+                        // Thêm thông báo lỗi nếu truy vấn insert thất bại
                         echo "Failed to insert into tbl_carta: " . $this->db->error;
                     }
                 }
             } else {
-                // Thêm thông báo gỡ lỗi nếu truy vấn SELECT thất bại
+                // Thêm thông báo lỗi nếu truy vấn select thất bại
                 echo "Failed to select from tbl_cart: " . $this->db->error;
             }
     
-            $query = "INSERT INTO tbl_payment (user_id, giaohang, thanhtoan, order_date) VALUES 
-            ('$user_id', '$deliver_method', '$method_payment', '$today')";
+            // Thêm thông tin thanh toán vào bảng tbl_payment
+            $query = "INSERT INTO tbl_payment (user_id, giaohang, thanhtoan, order_date) VALUES ('$user_id', '$deliver_method', '$method_payment', '$today')";
             $result = $this->db->insert($query);
+    
+            // Nếu insert thành công, chuyển hướng đến trang success
             if ($result) {
                 header('Location: success.php');
                 exit(); // Dừng thực thi mã sau khi chuyển hướng
             } else {
-                // Thêm thông báo gỡ lỗi nếu truy vấn INSERT thất bại
+                // Thêm thông báo lỗi nếu truy vấn insert thất bại
                 echo "Failed to insert into tbl_payment: " . $this->db->error;
             }
         } else {
-            $query = "SELECT * FROM tbl_cart WHERE user_id = '$user_id' ORDER BY cart_id DESC";
+            // Nếu đã có đơn hàng trước đó, tiếp tục xử lý giỏ hàng và thanh toán
+            $query = "SELECT * FROM tbl_cart WHERE user_id = '$user_id' AND status = 'CHON' ORDER BY cart_id DESC";
             $resultA = $this->db->select($query);
+    
             if ($resultA) {
                 while ($resultB = $resultA->fetch_assoc()) {
                     $cart_id = $resultB['cart_id'];
@@ -272,25 +291,71 @@ class index {
                     $color_anh = $resultB['color_anh'];
                     $quantitys = $resultB['quantitys'];
                     $sanpham_size = $resultB['sanpham_size'];
-                    $query = "INSERT INTO tbl_carta (sanpham_anh, user_id, sanpham_id, sanpham_tieude, sanpham_gia, color_anh, quantitys, sanpham_size) VALUES 
-                    ('$sanpham_anh', '$user_id', '$sanpham_id', '$sanpham_tieude', '$sanpham_gia', '$color_anh', '$quantitys', '$sanpham_size')";
+    
+                    // Chèn thông tin sản phẩm vào bảng tbl_carta với trạng thái 'CHUA_NHAN'
+                    $query = "INSERT INTO tbl_carta (sanpham_anh, user_id, sanpham_id, sanpham_tieude, sanpham_gia, color_anh, quantitys, sanpham_size, status) 
+                            VALUES ('$sanpham_anh', '$user_id', '$sanpham_id', '$sanpham_tieude', '$sanpham_gia', '$color_anh', '$quantitys', '$sanpham_size', 'CHUA_NHAN')";
                     $resultC = $this->db->insert($query);
+    
+                    // Nếu insert thành công, xóa sản phẩm khỏi giỏ hàng
                     if ($resultC) {
-                        $query = "DELETE FROM tbl_cart WHERE cart_id = '$cart_id'";
+                        // Xóa sản phẩm khỏi giỏ hàng
+                        $query = "DELETE FROM tbl_cart WHERE cart_id = '$cart_id' AND status = 'CHON'";
                         $resultD = $this->db->delete($query);
+    
+                        // Cập nhật số lượng sản phẩm trong session
                         Session::set('SL', null);
                     } else {
-                        // Thêm thông báo gỡ lỗi nếu truy vấn INSERT thất bại
+                        // Thêm thông báo lỗi nếu truy vấn insert thất bại
                         echo "Failed to insert into tbl_carta: " . $this->db->error;
                     }
                 }
             } else {
-                // Thêm thông báo gỡ lỗi nếu truy vấn SELECT thất bại
+                // Thêm thông báo lỗi nếu truy vấn select thất bại
                 echo "Failed to select from tbl_cart: " . $this->db->error;
             }
+    
+            // Chuyển hướng đến trang thành công sau khi xử lý thanh toán
             header('Location: success.php');
             exit(); // Dừng thực thi mã sau khi chuyển hướng
         }
     }
+    
+
+    public function updateCartStatus($cart_id, $status) {
+        // Kiểm tra giá trị của cart_id và status để bảo vệ dữ liệu
+        if(empty($cart_id) || empty($status)) {
+            return "Cart ID hoặc trạng thái không hợp lệ!";
+        }
+        // Truy vấn SQL để cập nhật trạng thái
+        $query = "UPDATE tbl_cart SET status = '$status' WHERE cart_id = '$cart_id'";
+        // Thực hiện truy vấn
+        $result = $this->db->update($query); // Gọi phương thức update từ class Database
+        // Kiểm tra kết quả thực hiện truy vấn
+        if ($result) {
+            return "Cập nhật trạng thái thành công!";
+        } else {
+            // Nếu có lỗi trong quá trình thực hiện
+            return "Lỗi khi cập nhật trạng thái!";
+        }
+    }
+    public function updateCartStatusCarta($cart_id, $status) {
+        // Kiểm tra giá trị của cart_id và status để bảo vệ dữ liệu
+        if(empty($cart_id) || empty($status)) {
+            return "Cart ID hoặc trạng thái không hợp lệ!";
+        }
+        // Truy vấn SQL để cập nhật trạng thái
+        $query = "UPDATE tbl_carta SET status = '$status' WHERE cart_id = '$cart_id'";
+        // Thực hiện truy vấn
+        $result = $this->db->update($query); // Gọi phương thức update từ class Database
+        // Kiểm tra kết quả thực hiện truy vấn
+        if ($result) {
+            return "Cập nhật trạng thái thành công!";
+        } else {
+            // Nếu có lỗi trong quá trình thực hiện
+            return "Lỗi khi cập nhật trạng thái!";
+        }
+    }
+
 }
 ?>

@@ -64,3 +64,62 @@ p {
     text-align: center;
     color     : #666666;
 }
+
+/* Cải thiện giao diện của nút thay đổi trạng thái */
+.btn-primary {
+    display         : inline-block;
+    padding         : 10px 20px;
+    font-size       : 14px;
+    color           : #fff;
+    background-color: #007bff;
+    border          : none;
+    border-radius   : 4px;
+    text-align      : center;
+    text-decoration : none;
+    cursor          : pointer;
+    transition      : background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    /* Màu nền khi hover */
+    transform       : scale(1.05);
+    /* Phóng to nhẹ khi hover */
+}
+
+.btn-primary:active {
+    background-color: #003f7f;
+    /* Màu nền khi nút được nhấn */
+    transform       : scale(0.98);
+    /* Nhấn nút sẽ làm nhỏ đi một chút */
+}
+
+/* Tạo hiệu ứng khi nút được tập trung */
+.btn-primary:focus {
+    outline   : none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.75);
+    /* Tạo viền sáng khi được focus */
+}
+
+/* Cải thiện bảng cho dễ nhìn */
+.table td button {
+    margin       : 0;
+    padding      : 6px 12px;
+    /* Điều chỉnh khoảng cách trong nút */
+    font-size    : 12px;
+    /* Giảm kích thước chữ */
+    border-radius: 5px;
+}
+
+.table td button {
+    text-align      : center;
+    color           : white;
+    background-color: #28a745;
+    /* Xanh lá cho nút trạng thái */
+    transition      : background-color 0.3s ease, transform 0.2s ease;
+}
+
+.table td button:hover {
+    background-color: #218838;
+    /* Khi hover, màu thay đổi thành màu tối hơn */
+}

@@ -31,18 +31,20 @@ if ($conn->connect_error) {
     ?>
 
     <?php  
+    //Xác định trang
     if(isset($_GET['trang'] )){
         $page = $_GET['trang'];
     }else{
         $page= 1;  
     }
+    //Xác định vị trí bắt đầu
     if($page == '' || $page == 1){
         $begin = 0;
 
     }else{
             $begin = ($page * 8) - 8;
         }
-        
+        //truy vấn 
     $sql = "SELECT * FROM tbl_sanpham, tbl_loaisanpham 
             WHERE tbl_sanpham.loaisanpham_id = tbl_loaisanpham.loaisanpham_id 
             ORDER BY sanpham_id DESC 
@@ -63,7 +65,7 @@ if ($conn->connect_error) {
                     <div class="card-body text-center">
                         <h5 class="card-title"><?php echo $row['sanpham_tieude'] ?></h5>
                         <p class="card-text price">Giá bán:
-                            <?php echo number_format($row['sanpham_gia'], 0, ',', '.') . ' VNĐ' ?></p>
+                            <?php echo number_format($row[' '], 0, ',', '.') . ' VNĐ' ?></p>
                         <a href="mua_ngay.php?sanpham_id=<?php echo $row['sanpham_id']; ?>" class="btn btn-info">Mua
                             ngay</a>
                         <a href="view_product.php?sanpham_id=<?php echo $row['sanpham_id']; ?>"
@@ -88,6 +90,7 @@ if ($conn->connect_error) {
         <ul class="pagination">
             <?php
                  if($page > 1){
+                    //?trang là tham số truyền qua URL
                 ?>
             <li class="page-item">
                 <a class="page-link" href="?trang=<?php echo $page-1; ?>">Previous</a>

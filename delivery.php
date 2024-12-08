@@ -2,7 +2,7 @@
 @ob_start(); // Khởi tạo bộ đệm đầu ra
 include 'header.php';
 $userid = $_SESSION['user_id']; // Lấy ra user_id từ phiên
-echo  $userid;
+
 if (!isset($_SESSION['user_id'])) {
     // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
     header("Location: login.php");
@@ -54,14 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="css/delivery.css" rel="stylesheet"> <!-- Liên kết tệp CSS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Liên kết jQuery -->
-
 </head>
 
 <body>
 
-    <?php
-include 'carousel.php';
-?>
+    <?php include 'carousel.php'; ?>
+
     <?php if (!empty($errors)): ?>
     <div class="alert alert-danger">
         <ul>
@@ -71,8 +69,8 @@ include 'carousel.php';
         </ul>
     </div>
     <?php endif; ?>
-    <section class="delivery">
 
+    <section class="delivery">
         <div class="container">
             <div class="delivery-top-wap">
                 <div class="delivery-top">
@@ -88,11 +86,14 @@ include 'carousel.php';
                 </div>
             </div>
         </div>
+
         <div class="container">
             <?php
-            $show_cart = $index->show_cart($userid);
-            if($show_cart){
-           ?>
+            // Fetch cart items based on the 'status = 'CHỌN''
+            $show_cart = $index->show_cartB($userid);
+            if ($show_cart):
+                $total_amount = 0; // Initialize total amount to 0
+            ?>
             <div class="delivery-content row">
                 <div class="col-md-6">
                     <div class="delivery-content-left">
@@ -165,7 +166,6 @@ include 'carousel.php';
                                 <a href="cart.php" class="btn btn-secondary">Quay lại giỏ hàng</a>
                                 <button type="submit" class="btn btn-primary">Thanh toán</button>
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -180,62 +180,44 @@ include 'carousel.php';
                                 <th>Thành tiền</th>
                             </tr>
                             <?php
-                            $SL = 0;
-                            $TT = 0;
-                            $show_cartB = $index->show_cartB($userid);
-                            if ($show_cartB) {
-                                while ($result_cart = $show_cartB->fetch_assoc()) {
+                            while ($result_cart = $show_cart->fetch_assoc()):
+                                $product_price = $result_cart['sanpham_gia'];
+                                $product_quantity = $result_cart['quantitys'];
+                                $total_item_price = $product_price * $product_quantity;
+                                $total_amount += $total_item_price; // Accumulate the total amount
                             ?>
                             <tr>
                                 <td><?php echo $result_cart['sanpham_tieude'] ?></td>
-                                <td><?php $a = number_format($result_cart['sanpham_gia']);
-                                            echo $a  ?></td>
-                                <td><?php echo $result_cart['quantitys'] ?></td>
-                                <td>
-                                    <p><?php $a = $result_cart['sanpham_gia'] * $result_cart['quantitys'];
-                                                $b = number_format($a);
-                                                echo $b ?><sup>đ</sup></p>
-                                </td>
+                                <td><?php echo number_format($product_price); ?> đ</td>
+                                <td><?php echo $product_quantity; ?></td>
+                                <td><?php echo number_format($total_item_price); ?><sup>đ</sup></td>
                             </tr>
-                            <?php
-                                }
-                            }
-                            ?>
+                            <?php endwhile; ?>
                             <tr style="border-top: 2px solid red">
-                                <td style="font-weight: bold;border-top: 2px solid #dddddd" colspan="3">Tổng</td>
-                                <td style="font-weight: bold;border-top: 2px solid #dddddd">
-                                    <p><?php if (Session::get('TT')) {
-                                            echo Session::get('TT');
-                                        } ?><sup>đ</sup></p>
+                                <td colspan="3" style="font-weight: bold; border-top: 2px solid #dddddd">Tổng</td>
+                                <td style="font-weight: bold; border-top: 2px solid #dddddd">
+                                    <p><?php echo number_format($total_amount); ?><sup>đ</sup></p>
                                 </td>
                             </tr>
-
                             <tr>
-                                <td style="font-weight: bold;" colspan="3">Tổng tiền hàng</td>
+                                <td colspan="3" style="font-weight: bold;">Tổng tiền hàng</td>
                                 <td style="font-weight: bold;">
-                                    <p><?php if (Session::get('TT')) {
-                                            echo Session::get('TT');
-                                        } ?><sup>đ</sup></p>
+                                    <p><?php echo number_format($total_amount); ?><sup>đ</sup></p>
                                 </td>
                             </tr>
                         </table>
-
                     </div>
                 </div>
             </div>
-            <?php
-            } else {
-                echo "Bạn vẫn chưa thêm sản phẩm nào vào giỏ hàng, Vui lòng chọn sản phẩm nhé!";
-            }
-            ?>
+            <?php else: ?>
+            <p>Bạn vẫn chưa thêm sản phẩm nào vào giỏ hàng, vui lòng chọn sản phẩm nhé!</p>
+            <?php endif; ?>
         </div>
     </section>
 
-    <?php
-include 'footer.php';
-?>
+    <?php include 'footer.php'; ?>
 
-    <script src=" https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
@@ -243,29 +225,22 @@ include 'footer.php';
     </script>
 
     <script>
-    //lấy dữ liệu theo id
     $(document).ready(function() {
         $("#tinh_tp").change(function() {
-            var x = $(this).val()
-            //gọi đến file ajax/deliveryqh_ajax.php
+            var x = $(this).val();
             $.get("ajax/deliveryqh_ajax.php", {
                 tinh_id: x
             }, function(data) {
-                //hiển thị dữ liệu lấy được vào thẻ select có id là quan_huyen
                 $("#quan_huyen").html(data);
             })
-
         })
         $("#quan_huyen").change(function() {
-            // alert($(this).val())
-            var x = $(this).val()
-            // alert (x)
+            var x = $(this).val();
             $.get("ajax/deliverypx_ajax.php", {
                 quan_huyen_id: x
             }, function(data) {
                 $("#phuong_xa").html(data);
             })
-
         })
     })
     </script>

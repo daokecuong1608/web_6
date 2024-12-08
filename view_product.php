@@ -276,7 +276,7 @@ echo $userid;
                         console.error(xhr.responseText); // Kiểm tra lỗi nếu có
                     }
                 });
-                <?php } else { ?>
+                <?php } else { ?>      
                 $(location).attr('href', 'login.php');
                 <?php } ?>
             }

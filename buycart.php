@@ -5,8 +5,7 @@ define('__ROOT__', dirname(__FILE__));
 require_once(__ROOT__ . '/class/index_class.php');
 require_once(__ROOT__ . '/lib/database.php');
 
-
-// Check if the user is logged in
+// Kiểm tra nếu người dùng đã đăng nhập
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
@@ -41,6 +40,8 @@ $cart_items = $index->show_carta($user_id);
                     <th>Kích thước</th>
                     <th>Số lượng</th>
                     <th>Giá</th>
+                    <th>Trạng thái</th> <!-- Cột trạng thái -->
+                    <th>Hành động</th> <!-- Cột nút thay đổi trạng thái -->
                 </tr>
             </thead>
             <tbody>
@@ -55,6 +56,13 @@ $cart_items = $index->show_carta($user_id);
                     <td><?php echo htmlspecialchars($item['sanpham_size']); ?></td>
                     <td><?php echo htmlspecialchars($item['quantitys']); ?></td>
                     <td><?php echo htmlspecialchars($item['sanpham_gia']); ?></td>
+                    <td id="status-<?php echo $item['cart_id']; ?>"><?php echo htmlspecialchars($item['status']); ?>
+                    </td> <!-- Hiển thị trạng thái -->
+                    <td>
+                        <button class="btn btn-primary" onclick="changeStatus(<?php echo $item['cart_id']; ?>)">
+                            Thay đổi
+                        </button>
+                    </td>
                 </tr>
                 <?php endwhile; ?>
             </tbody>
@@ -64,6 +72,36 @@ $cart_items = $index->show_carta($user_id);
         <?php endif; ?>
         <a href="/web_quan_ao/index.php" class="btn btn-primary">Quay lại trang chủ</a>
     </div>
+
+    <script>
+    // Hàm thay đổi trạng thái khi nút được nhấn
+    function changeStatus(cartId) {
+        const statusCell = document.getElementById('status-' + cartId);
+        const currentStatus = statusCell.innerText.trim();
+
+        // Đặt trạng thái mới dựa trên trạng thái hiện tại
+        let newStatus = (currentStatus === 'CHUA_NHAN') ? 'DA_NHAN' : 'CHUA_NHAN';
+
+        // Cập nhật trạng thái trên giao diện
+        statusCell.innerText = newStatus;
+
+        // Gửi yêu cầu AJAX để cập nhật trạng thái vào cơ sở dữ liệu
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/update_statusa.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                console.log("Cập nhật trạng thái thành công:", xhr.responseText);
+            } else {
+                console.error("Lỗi khi gửi yêu cầu AJAX:", xhr.responseText);
+            }
+        };
+
+        const data = `cart_id=${cartId}&status=${newStatus}`;
+        xhr.send(data);
+    }
+    </script>
 </body>
 
 </html>
