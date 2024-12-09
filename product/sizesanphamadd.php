@@ -1,4 +1,18 @@
 <?php
+
+session_start(); 
+
+// Kiểm tra xem người dùng đã đăng nhập chưa
+if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
+    header("Location: /web_quan_ao/login.php");  
+      exit();
+}
+
+if ($_SESSION['role'] !== 'admin') {
+    header("Location: /web_quan_ao/index.php");  
+    exit();
+}
+
 include_once "../class/product.php"; // Bao gồm tệp chứa định nghĩa của lớp product
 
 $product = new product();

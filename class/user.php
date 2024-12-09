@@ -18,6 +18,9 @@ class user{
         $this->db = new Database();
     }
 
+
+
+    
     public function check_login($email, $password) {
         $query = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
         $result = $this->db->select($query);
@@ -51,6 +54,13 @@ class user{
             $result = $this->db->select($query);
             return $result;
         }
+
+        public function isEmailExists(){
+            $query = "SELECT email FROM users WHERE email = ?";
+            $result = $this->db->select($query);
+            return $result;
+        }
+
         public function delete_user($userid) {
             $query = "DELETE FROM users WHERE id = ?";
             $stmt = $this->db->link->prepare($query);

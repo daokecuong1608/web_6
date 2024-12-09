@@ -1,10 +1,19 @@
 <?php
+session_start(); // Khởi tạo session
+// Kiểm tra xem người dùng đã đăng nhập chưa
+if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
+    header("Location: /web_quan_ao/login.php");  
+      exit();
+}
+// Kiểm tra xem người dùng có phải là admin không
+if ($_SESSION['role'] !== 'admin') {
+    header("Location: /web_quan_ao/index.php");  
+    exit();
+}
 require_once "../class/brand.php"; 
 require_once "../class/product.php";
-
 $brand = new brand(); 
 $product = new product(); 
-
 if (isset($_GET['loaisanpham_id']) && $_GET['loaisanpham_id'] != NULL) {
     $loaisanpham_id = $_GET['loaisanpham_id'];
 }
@@ -12,7 +21,6 @@ $get_brand = $brand->get_brand($loaisanpham_id);
 if ($get_brand) {
     $resul = $get_brand->fetch_assoc();
 }
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $loaisanpham_ten = $_POST['loaisanpham_ten'];
     $danhmuc_id = $_POST['danhmuc_id'];

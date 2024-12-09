@@ -1,4 +1,19 @@
 <?php
+
+session_start(); 
+
+// Kiểm tra xem người dùng đã đăng nhập chưa
+if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
+    header("Location: /web_quan_ao/login.php");  
+      exit();
+}
+
+// Kiểm tra xem người dùng có phải là admin không
+if ($_SESSION['role'] !== 'admin') {
+    header("Location: /web_quan_ao/index.php");  
+    exit();
+}
+
 include_once "../class/brand.php"; // Bao gồm tệp chứa định nghĩa của lớp product
 
 $brand = new Brand(); // Đảm bảo tên lớp là Brand với chữ B viết hoa
@@ -46,7 +61,8 @@ $show_color = $brand->show_color();
                     <td><?php echo $i ?></td>
                     <td><?php echo $result['color_id'] ?></td>
                     <td><?php echo $result['color_ten'] ?></td>
-                    <td><img style="width: 50px; height: 50px" src="../<?php echo $result['color_anh'] ?>" alt=""></td>
+                    <td><img style="width: 50px; height: 50px" src="../<?php echo $result['color_anh'] ?>"
+                            alt="<?php echo $result['color_ten'] ?>"></td>
                     <td>
                         <a href="coloredit.php?color_id=<?php echo $result['color_id'] ?>" class="btn btn-edit">Sửa</a>
                         <a href="colordelete.php?color_id=<?php echo $result['color_id'] ?>"

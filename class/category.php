@@ -11,7 +11,7 @@ public function __construct()
     $this->db = new Database();
 }
 
-public function show_category(){
+public function show_category(){//DESC sx giảm dần của id 
     $query = "SELECT * FROM tbl_danhmuc ORDER BY danhmuc_id DESC";
     $result = $this->db->select($query);
     return $result;

@@ -1,4 +1,18 @@
 <?php
+session_start(); 
+
+// Kiểm tra xem người dùng đã đăng nhập chưa
+if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
+    header("Location: /web_quan_ao/login.php");  
+      exit();
+}
+
+// Kiểm tra xem người dùng có phải là admin không
+if ($_SESSION['role'] !== 'admin') {
+    header("Location: /web_quan_ao/index.php");  
+    exit();
+}
+
 include_once "../class/brand.php"; // Bao gồm tệp chứa định nghĩa của lớp product
 $brand = new Brand(); // Đảm bảo tên lớp là Brand với chữ B viết hoa
 
@@ -35,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $color_anh = substr(md5(time()), 0, 10) . '.' . $file_ext;
                 $upload_dir = realpath(__DIR__ . '/../images/color') . DIRECTORY_SEPARATOR;
                 $upload_image = $upload_dir . $color_anh;
-
+              
                 // Kiểm tra và tạo thư mục nếu chưa tồn tại
                 if (!is_dir($upload_dir)) {
                     mkdir($upload_dir, 0755, true);
@@ -85,13 +99,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="up-color-content-right">
         <h2>Cập nhật màu sắc</h2>
         <div class="subcartegory-add-content">
+
             <form action="" method="POST" enctype="multipart/form-data">
                 <label for="">Tên màu sắc<span style="color: red;">*</span></label> <br>
                 <input value="<?php echo $result['color_ten'] ?>" class="subcartegory-input" type="text"
                     name="color_ten"> <br>
                 <label for="">Ảnh đại diện<span style="color: red;">*</span></label> <br>
                 <img style="width: 100px; height: 100px" src="../<?php echo $result['color_anh'] ?>" alt="">
+              
                 <input type="file" name="color_anh"> <br>
+              
                 <button class="admin-btn" type="submit">Gửi</button>
                 <a href="colorlist.php" class="admin-btn">Quay lại</a>
 

@@ -35,6 +35,7 @@ public function get_color($color_id){
     $result = $this -> db ->select($query);
     return $result;
 }
+
 public function get_brand($loaisanpham_id){
     $query = "SELECT * FROM tbl_loaisanpham WHERE loaisanpham_id = '$loaisanpham_id'";
     $result = $this -> db ->select($query);
