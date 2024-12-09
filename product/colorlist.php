@@ -64,9 +64,10 @@ $show_color = $brand->show_color();
                     <td><img style="width: 50px; height: 50px" src="../<?php echo $result['color_anh'] ?>"
                             alt="<?php echo $result['color_ten'] ?>"></td>
                     <td>
-                        <a href="coloredit.php?color_id=<?php echo $result['color_id'] ?>" class="btn btn-edit">Sửa</a>
-                        <a href="colordelete.php?color_id=<?php echo $result['color_id'] ?>"
-                            class="btn btn-danger">Xóa</a>
+                        <a href="coloredit.php?color_id=<?php echo $result['color_id'] ?>"
+                            class="btn btn-warning">Sửa</a>
+                        <a href="colordelete.php?color_id=<?php echo $result['color_id'] ?>" class="btn btn-danger"
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa màu sản phẩm này không?');">Xóa</a>
                     </td>
                 </tr>
                 <?php

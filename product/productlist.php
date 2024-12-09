@@ -92,7 +92,8 @@ $product = new product(); // Đảm bảo tên lớp là Product với chữ P v
                         <a href="productedit.php?sanpham_id=<?php echo $result['sanpham_id']; ?>"
                             class="btn btn-edit">Sửa</a>
                         <a href="productdelete.php?sanpham_id=<?php echo $result['sanpham_id']; ?>"
-                            class="btn btn-delete">Xóa</a>
+                            class="btn btn-delete"
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?');">Xóa</a>
                     </td>
                 </tr>
                 <?php

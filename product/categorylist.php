@@ -63,7 +63,8 @@ $show_category = $category->show_category();
                         <a href="categoryedit.php?danhmuc_id=<?php echo $result['danhmuc_id'] ?>"
                             class="btn btn-edit">Sửa</a>
                         <a href="categorydelete.php?danhmuc_id=<?php echo $result['danhmuc_id'] ?>"
-                            class="btn btn-delete">Xóa</a>
+                            class="btn btn-delete"
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục sản phẩm này không?');">Xóa</a>
                     </td>
                 </tr>
                 <?php

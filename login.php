@@ -1,12 +1,16 @@
 <?php
-
+session_start(); 
+if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
+    header("Location: index.php");
+    exit();
+}
 // // Define root path
 define('__ROOT__', dirname(__FILE__));
 require_once(__ROOT__ . '/class/user.php');
 // // Kiểm tra đường dẫn
 // echo 'User class path: ' . realpath(__ROOT__ . '/class/user.php') . '<br>';
-
 Session::init();
+
 $user = new user();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {

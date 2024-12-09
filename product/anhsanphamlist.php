@@ -54,7 +54,9 @@ $get_anh = $product->get_anh($sanpham_id);
                             src="../images/product/<?php echo $result['sanpham_anh'] ?>" alt="">
                     </td>
                     <td><a href="anhsanphamdelete.php?sanpham_anh_id=<?php echo $result['sanpham_anh_id'] ?>"
-                            class="btn btn-danger">Xóa</a></td>
+                            class="btn btn-danger"
+                             onclick="return confirm('Bạn có chắc chắn muốn xóa ảnh sản phẩm này không?');"
+                            >Xóa</a></td>
                 </tr>
                 <?php
                     }

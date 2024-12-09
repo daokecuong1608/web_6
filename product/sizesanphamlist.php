@@ -52,7 +52,8 @@ $get_size = $product->get_size($sanpham_id);
                     <td><?php echo $result['sanpham_ma'] ?></td>
                     <td><?php echo $result['sanpham_size'] ?></td>
                     <td><a href="sizesanphamdelete.php?sanpham_size_id=<?php echo $result['sanpham_size_id'] ?>"
-                            class="btn btn-danger">Xóa</a></td>
+                            class="btn btn-danger"
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa size sản phẩm này không?');">Xóa</a></td>
                 </tr>
                 <?php
                     }

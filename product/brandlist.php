@@ -61,7 +61,8 @@ $show_brand = $brand->show_brand();
                         <a href="brandedit.php?loaisanpham_id=<?php echo $result['loaisanpham_id'] ?>"
                             class="btn btn-edit">Sửa</a>
                         <a href="branddelete.php?loaisanpham_id=<?php echo $result['loaisanpham_id'] ?>"
-                            class="btn btn-delete">Xóa</a>
+                            class="btn btn-delete"
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa thể loại sản phẩm này không?');">Xóa</a>
                     </td>
                 </tr>
                 <?php

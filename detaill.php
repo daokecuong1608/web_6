@@ -148,7 +148,7 @@ if (!isset($_SESSION['user_id'])) {
             </div>
             <br>
             <p style="text-align: center;">Mọi thắc mắc quý khách vui lòng liên hệ hotline <span
-                    style="font-size: 20px; color: red;">0973 999 949 </span> hoặc chat với kênh hỗ trợ trên website để
+                    style="font-size: 20px; color: red;">0964732982 </span> hoặc chat với kênh hỗ trợ trên website để
                 được hỗ trợ nhanh nhất.</p>
         </div>
     </section>

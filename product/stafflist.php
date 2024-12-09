@@ -69,8 +69,8 @@ $show_staff = $staff->show_staff();
                         <td>
                             <a href="staffedit.php?staff_id=<?php echo $result['staff_id']; ?>"
                                 class="btn btn-info">Sửa</a>
-                            <a href="staffdelete.php?staff_id=<?php echo $result['staff_id']; ?>"
-                                class="btn btn-danger">Xóa</a>
+                            <a href="staffdelete.php?staff_id=<?php echo $result['staff_id']; ?>" class="btn btn-danger"
+                                onclick="return confirm('Bạn có chắc chắn muốn xóa nhân viên này không?');">Xóa</a>
                         </td>
                     </tr>
                     <?php

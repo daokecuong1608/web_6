@@ -63,7 +63,8 @@ $get_all_anh = $product->get_all_anh();
                             src="../images/product/<?php echo $result['sanpham_anh'] ?>" alt="">
                     </td>
                     <td><a href="anhsanphamdeletes.php?sanpham_anh_id=<?php echo $result['sanpham_anh_id'] ?>"
-                            class="btn btn-danger">Xóa</a></td>
+                            class="btn btn-danger"
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa ảnh sản phẩm này không?');">Xóa</a></td>
                     </td>
                 </tr>
                 <?php
