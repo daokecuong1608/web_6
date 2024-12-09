@@ -8,7 +8,6 @@ error_reporting(E_ALL);
 if (isset($_COOKIE['PHPSESSID']) && session_status() == PHP_SESSION_NONE) {
     session_start(); // Khởi tạo phiên nếu chưa có phiên nào được khởi tạo
 }
-
 if (isset($_SESSION['login'])) {
     $login = $_SESSION['login'];
     $username = $_SESSION['username'];
@@ -20,21 +19,12 @@ if (isset($_SESSION['login'])) {
     $username = "";
     $userid = "";
 }
-
 if (!defined('__ROOT__')) {
     define('__ROOT__', dirname(__FILE__)); // Định nghĩa hằng số __ROOT__ nếu chưa được định nghĩa
 }
 require_once(__ROOT__ . '/class/index_class.php'); // Đường dẫn chính xác đến tệp index_class.php
 $index = new index();
-
-// if ($login) {
-//     echo "User ID: " . $userid;
-// } else {
-//     echo "User not logged in.";
-// }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,15 +32,11 @@ $index = new index();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Header</title>
-
     <link href="css/header.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-
-
 </head>
 
 <body>
-
     <!-- start header-->
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
@@ -129,7 +115,6 @@ $index = new index();
                 <span class="navbar-text">
                     <b> <?php echo htmlspecialchars($username); ?>!</b>
                 </span>
-
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" aria-expanded="false">

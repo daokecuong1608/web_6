@@ -1,3 +1,17 @@
+<?php
+// Start the session
+session_start();
+
+// Check if the user is logged in and has the 'admin' role
+if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['role'] !== 'admin') {
+    // Redirect the user to the login page if not logged in or not an admin
+    header("Location: /web_quan_ao/login.php");
+    exit();
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 

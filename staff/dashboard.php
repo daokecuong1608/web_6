@@ -18,7 +18,7 @@ if (!isset($_SESSION['staff_login']) || $_SESSION['staff_login'] !== true) {
     <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="css/dashboard.css" rel="stylesheet"> <!-- Liên kết tệp CSS -->
+    <link href="css/dashboard.css" rel="stylesheet">
 </head>
 
 <body>
@@ -39,12 +39,13 @@ if (!isset($_SESSION['staff_login']) || $_SESSION['staff_login'] !== true) {
                 </div>
                 <div class="mt-3">
                     <a href="productlist.php" class="btn btn-primary">Xem danh sách sản phẩm</a>
-                    <a href="customer.php" class="btn btn-primary">Danh sách khách hàng</a>
                     <a href="report.php" class="btn btn-primary">Xem báo cáo thống kê</a>
                     <a href="categorylist.php" class="btn btn-primary">Xem danh mục</a>
                     <a href="brandlist.php" class="btn btn-primary">Xem thể loại</a>
+                    <a href="colorlist.php" class="btn btn-primary">Xem màu </a>
+
                 </div>
-                <a href="logout.php" class="btn btn-danger mt-3">Đăng xuất</a>
+                <a href="logoutstaff.php" class="btn btn-danger mt-3">Đăng xuất</a>
             </div>
         </div>
     </div>

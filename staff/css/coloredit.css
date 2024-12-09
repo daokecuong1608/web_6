@@ -1,0 +1,110 @@
+/* colorlist.css */
+
+body {
+    font-family     : Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin          : 0;
+    padding         : 20px;
+}
+
+.button-container {
+    display        : flex;
+    justify-content: space-between;
+    margin-bottom  : 20px;
+}
+
+.col-content-right {
+    width           : 80%;
+    /* Chiều rộng của form chiếm khoảng 80% màn hình */
+    padding         : 20px;
+    background-color: #fff;
+    box-shadow      : 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius   : 8px;
+    margin          : 20px auto 0;
+    /* Căn giữa form theo chiều ngang và cách header 20px */
+}
+
+.table-content table {
+    width          : 100%;
+    /* Đảm bảo bảng chiếm toàn bộ chiều rộng của form */
+    border-collapse: collapse;
+    /* Loại bỏ khoảng cách giữa các ô trong bảng */
+}
+
+.table-content th,
+.table-content td {
+    border        : 1px solid #ddd;
+    /* Thêm viền cho các ô trong bảng */
+    padding       : 8px;
+    /* Thêm khoảng cách bên trong cho các ô trong bảng */
+    text-align    : center;
+    /* Căn chỉnh văn bản trong các ô của bảng vào giữa */
+    vertical-align: middle;
+    /* Căn chỉnh các phần tử theo chiều dọc vào giữa */
+}
+
+.table-content th {
+    background-color: #f2f2f2;
+    /* Đặt màu nền cho các ô tiêu đề của bảng */
+}
+
+.table-content tr:nth-child(even) {
+    background-color: #f9f9f9;
+    /* Đặt màu nền cho các hàng chẵn của bảng */
+}
+
+.table-content tr:hover {
+    background-color: #f1f1f1;
+    /* Đặt màu nền cho các hàng khi di chuột qua */
+}
+
+h2 {
+    text-align   : center;
+    /* Căn chỉnh tiêu đề sang giữa */
+    margin-bottom: 20px;
+    /* Thêm khoảng cách dưới cho tiêu đề */
+}
+
+.btn {
+    padding         : 10px 20px;
+    /* Thêm khoảng cách bên trong cho nút */
+    background-color: #007bff;
+    /* Đặt màu nền cho nút là màu xanh dương */
+    color           : #fff;
+    /* Đặt màu chữ cho nút là màu trắng */
+    text-decoration : none;
+    /* Loại bỏ gạch chân của liên kết */
+    border-radius   : 5px;
+    /* Thêm bo tròn các góc của nút */
+    display         : inline-block;
+    /* Hiển thị nút dưới dạng khối nội tuyến */
+    text-align      : center;
+    /* Căn chỉnh văn bản trong nút sang giữa */
+    transition      : background-color 0.3s ease;
+    /* Thêm hiệu ứng chuyển đổi màu nền */
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    /* Thay đổi màu nền của nút khi di chuột qua */
+}
+
+.btn-primary {
+    background-color: #28a745;
+    /* Đặt màu nền cho nút thêm mới là màu xanh lá cây */
+}
+
+.btn-primary:hover {
+    background-color: #218838;
+    /* Thay đổi màu nền của nút thêm mới khi di chuột qua */
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    /* Đặt màu nền cho nút xóa là màu đỏ */
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    /* Thay đổi màu nền của nút xóa khi di chuột qua */
+}

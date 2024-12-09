@@ -1,3 +1,14 @@
+<?php
+session_start();
+$userid = $_SESSION['user_id'] ?? 0; // Lấy ID người dùng từ session
+if ($userid == 0) {
+    echo "Vui lòng đăng nhập để xem giỏ hàng.Chuyển hướng về trang đăng nhập sau 3s...";
+    header("refresh:3;url=login.php");
+
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,18 +30,13 @@ include 'carousel.php';
 $userid = $_SESSION['user_id']; // Lấy ra user_id từ phiên
 
 ?>
-
     <?php
  if (!defined('__ROOT__')) {
     define('__ROOT__', dirname(__FILE__));
 }
 require_once(__ROOT__ . '/class/index_class.php'); // Đường dẫn chính xác đến tệp index_class.php
 $index = new index();
-
-
-
 ?>
-
     <section class="success">
         <div class="success-top">
             <p>ĐẶT HÀNG THÀNH CÔNG</p>

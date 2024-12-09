@@ -1,0 +1,68 @@
+/* General page setup */
+body {
+    font-family     : Arial, sans-serif;
+    background-color: #f4f4f9;
+    color           : #333;
+    margin          : 0;
+    padding         : 0;
+}
+
+/* Centering the form content */
+.add-cate-content-right {
+    max-width       : 600px;
+    margin          : 50px auto;
+    padding         : 20px;
+    background-color: #fff;
+    box-shadow      : 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius   : 8px;
+}
+
+/* Form title */
+h2 {
+    text-align   : center;
+    color        : #333;
+    margin-bottom: 20px;
+}
+
+/* Styling the form */
+.cate-content form {
+    display       : flex;
+    flex-direction: column;
+}
+
+/* Input label */
+label {
+    font-size    : 14px;
+    margin-bottom: 5px;
+    font-weight  : bold;
+}
+
+/* Input field */
+input[type="text"] {
+    padding      : 10px;
+    margin-bottom: 20px;
+    border       : 1px solid #ddd;
+    border-radius: 5px;
+    font-size    : 14px;
+}
+
+/* Submit button */
+.admin-btn {
+    padding         : 10px 20px;
+    background-color: #007bff;
+    color           : #fff;
+    font-size       : 16px;
+    border          : none;
+    border-radius   : 5px;
+    cursor          : pointer;
+    transition      : background-color 0.3s ease;
+}
+
+.admin-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Error/Success message styling */
+span {
+    color: red;
+}

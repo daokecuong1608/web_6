@@ -11,7 +11,7 @@ $show_category = $category->show_category();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sách danh mục </title>
-    <link href="css/categorylist.css" rel="stylesheet"> <!-- Liên kết tệp CSS -->
+    <link href="css/categorylist.css" rel="stylesheet">
 </head>
 
 <body>

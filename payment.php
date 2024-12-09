@@ -4,6 +4,14 @@ include 'carousel.php'; // Path to your carousel.php
 ?>
 
 <?php
+$userid = $_SESSION['user_id']; // Lấy ra user_id từ phiên
+
+if (!isset($_SESSION['user_id'])) {
+    // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
+    header("Location: login.php");
+    exit();
+}
+
 $index = new index(); // Instantiate the index class
 
 // Handle POST requests for payment submission

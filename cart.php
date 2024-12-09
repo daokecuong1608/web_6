@@ -9,7 +9,8 @@ if (!isset($_GET['id'])) {
 session_start();
 $userid = $_SESSION['user_id'] ?? 0; // Lấy ID người dùng từ session
 if ($userid == 0) {
-    echo "Vui lòng đăng nhập để xem giỏ hàng.";
+    echo "Vui lòng đăng nhập để xem giỏ hàng.Chuyển hướng về trang đăng nhập sau 3s...";
+    header("refresh:5;url=login.php");
     exit();
 }
 ?>

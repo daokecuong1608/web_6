@@ -3,6 +3,11 @@ include 'header.php';
 include 'carousel.php';
 $userid = $_SESSION['user_id']; // Lấy ra user_id từ phiên
 
+if (!isset($_SESSION['user_id'])) {
+    // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
+    header("Location: login.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,0 +1,76 @@
+/* General Page Styling */
+body {
+    font-family     : Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin          : 0;
+    padding         : 0;
+}
+
+/* Container for the report */
+.report-container {
+    width           : 80%;
+    margin          : 20px auto;
+    padding         : 20px;
+    background-color: #ffffff;
+    box-shadow      : 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius   : 8px;
+}
+
+/* Heading */
+h1 {
+    color        : #333;
+    font-size    : 28px;
+    margin-bottom: 30px;
+    text-align   : center;
+}
+
+/* Styling each report item */
+.report-item {
+    margin-bottom   : 20px;
+    padding         : 15px;
+    background-color: #f1f1f1;
+    border-radius   : 5px;
+    box-shadow      : 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.report-item h2 {
+    color      : #007bff;
+    font-size  : 20px;
+    margin     : 0;
+    font-weight: normal;
+}
+
+.report-item p {
+    font-size : 18px;
+    color     : #555;
+    margin-top: 10px;
+}
+
+/* Center the button */
+.btn-center {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Button styling */
+.btn {
+    padding         : 10px 20px;
+    color           : white;
+    background-color: #007bff;
+    text-decoration : none;
+    border-radius   : 5px;
+    font-size       : 16px;
+    transition      : background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}

@@ -1,0 +1,117 @@
+/* General Page Styling */
+body {
+    font-family     : Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin          : 0;
+    padding         : 0;
+}
+
+/* Container for the brand list */
+.lis-tl-content-right {
+    width           : 80%;
+    margin          : 30px auto;
+    padding         : 20px;
+    background-color: #ffffff;
+    border-radius   : 8px;
+    box-shadow      : 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+h2 {
+    color        : #333;
+    font-size    : 24px;
+    margin-bottom: 20px;
+    text-align   : center;
+}
+
+/* Button Container */
+.button-container {
+    display        : flex;
+    justify-content: space-between;
+    margin-bottom  : 20px;
+}
+
+/* Back Button */
+.back-button .btn {
+    background-color: #6c757d;
+    color           : white;
+    padding         : 10px 20px;
+    border-radius   : 5px;
+    text-decoration : none;
+    font-size       : 16px;
+    transition      : background-color 0.3s ease;
+}
+
+.back-button .btn:hover {
+    background-color: #5a6268;
+}
+
+/* Add Button */
+.add-button .btn {
+    background-color: #007bff;
+    color           : white;
+    padding         : 10px 20px;
+    border-radius   : 5px;
+    text-decoration : none;
+    font-size       : 16px;
+    transition      : background-color 0.3s ease;
+}
+
+.add-button .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Table Styling */
+.tl-table-content table {
+    width          : 100%;
+    border-collapse: collapse;
+    margin-top     : 20px;
+}
+
+.tl-table-content th,
+.tl-table-content td {
+    padding   : 12px;
+    text-align: left;
+    border    : 1px solid #dee2e6;
+}
+
+.tl-table-content th {
+    background-color: #f1f1f1;
+    color           : #333;
+}
+
+.tl-table-content td {
+    background-color: #ffffff;
+}
+
+.tl-table-content tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Customize Action Buttons */
+.btn-edit,
+.btn-delete {
+    padding        : 5px 10px;
+    margin-right   : 5px;
+    border-radius  : 5px;
+    text-decoration: none;
+    font-size      : 14px;
+}
+
+.btn-edit {
+    background-color: #ffc107;
+    color           : white;
+}
+
+.btn-edit:hover {
+    background-color: #e0a800;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color           : white;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
