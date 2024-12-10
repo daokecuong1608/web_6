@@ -31,6 +31,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
     $update_product = $product -> update_product($_POST, $_FILES , $sanpham_id);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,6 +64,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
 
 
                 <label for="">Chọn danh mục<span style="color: red;">*</span></label> <br>
+
                 <select required="required" name="danhmuc_id" id="danhmuc_id">
                     <option value="">--Chọn--</option>
                     <?php
@@ -73,6 +75,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                     <option <?php if($result_danhmuc['danhmuc_id']== $result['danhmuc_id']) {echo "selected";} ?>
                         value="<?php echo $result_danhmuc['danhmuc_id'] ?>"><?php echo $result_danhmuc['danhmuc_ten'] ?>
                     </option>
+
+
                     <?php
                         }}
                         ?>

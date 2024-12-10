@@ -85,7 +85,9 @@ if (!isset($_SESSION['user_id'])) {
 
                             ?>
                             <tr class="product-row">
-                                <td class="product-image"><img src="<?php echo $result['sanpham_anh'] ?>" alt=""></td>
+                                <td class="product-image"><img src="images/product/<?php echo $result['sanpham_anh'] ?>"
+                                        alt="">
+                                </td>
                                 <td class="product-title"><?php echo $result['sanpham_tieude'] ?></td>
                                 <td class="product-color"><img src="<?php echo $result['color_anh'] ?>" alt=""></td>
                                 <td class="product-size"><?php echo $result['sanpham_size'] ?></td>

@@ -42,6 +42,7 @@ class product{
     $sanpham_chitiet = $data['sanpham_chitiet'];
     $sanpham_baoquan = $data['sanpham_baoquan'];
 
+    
     // Lấy thông tin về tệp ảnh chính và các tệp ảnh phụ được tải lên
     $file_name = $file['sanpham_anh']['name'];
     $file_size = $file['sanpham_anh']['size'];
@@ -100,6 +101,9 @@ class product{
     header('Location:productlist.php');
     return $result;
     }
+
+
+
 
     public function show_order_detail($order_ma){
         $query = "SELECT * FROM tbl_carta WHERE user_id = '$order_ma' ORDER BY cart_id DESC";
@@ -190,14 +194,15 @@ public function show_orderAll(){
         return $result;
     }
 
-public function get_anh($sanpham_id){
-    $query = "SELECT tbl_sanpham_anh.* , tbl_sanpham.sanpham_ma
-    FROM tbl_sanpham_anh INNER JOIN tbl_sanpham ON tbl_sanpham_anh.sanpham_id = tbl_sanpham.sanpham_id
-    WHERE tbl_sanpham_anh.sanpham_id = $sanpham_id
-    ORDER BY tbl_sanpham_anh.sanpham_anh_id DESC  ";
-    $result = $this -> db ->select($query);
-    return $result;
-}
+    public function get_anh($sanpham_id){
+        $query = "SELECT tbl_sanpham_anh.* , tbl_sanpham.sanpham_ma
+        FROM tbl_sanpham_anh 
+        INNER JOIN tbl_sanpham ON tbl_sanpham_anh.sanpham_id = tbl_sanpham.sanpham_id
+        WHERE tbl_sanpham_anh.sanpham_id = $sanpham_id
+        ORDER BY tbl_sanpham_anh.sanpham_anh_id DESC  ";
+        $result = $this -> db ->select($query);
+        return $result;
+    }
 
 public function get_all_size(){
     $query = "SELECT  tbl_sanpham_size.*,tbl_sanpham.sanpham_ma
@@ -317,7 +322,7 @@ public function update_product($data, $file, $sanpham_id) {
     $filetmps = $_FILES['sanpham_anhs']['tmp_name'];
 
     // Tách đuôi file
-    $div = explode('.', $file_name);
+    $div = explode('.', $file_name); 
     $file_ext = strtolower(end($div));
     // Sử dụng chuỗi hàm băm MD5 để tạo tên file mới để tránh trùng lặp
     $sanpham_anh = substr(md5(time()), 0, 10) . '.' . $file_ext;
