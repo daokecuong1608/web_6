@@ -430,6 +430,29 @@ public function insert_cart($sanpham_id, $user_id, $sanpham_tieude, $sanpham_gia
     return $result;
 }
 
+public function check_product_name($sanpham_tieude) {
+    // Truy vấn để kiểm tra xem tên sản phẩm đã tồn tại trong bảng tbl_sanpham hay chưa
+    $query = "SELECT * FROM tbl_sanpham WHERE sanpham_tieude = '$sanpham_tieude'";
+    $result = $this->db->select($query);
+    
+    // Nếu có kết quả thì tên sản phẩm đã tồn tại
+    if ($result && $result->num_rows > 0) {
+        return true;
+    }
+    
+    // Nếu không có kết quả, nghĩa là tên sản phẩm chưa tồn tại
+    return false;
+}
+
+public function check_product_code($maSanPham) {
+    $query = "SELECT * FROM tbl_sanpham WHERE sanpham_ma = '$maSanPham'"; // Thực hiện truy vấn kiểm tra
+    $result = $this->db->select($query); // Giả sử $this->db là kết nối cơ sở dữ liệu
+
+    if ($result->num_rows > 0) {
+        return true; // Nếu có sản phẩm với mã này
+    }
+    return false; // Nếu không có sản phẩm nào
+}
 
 
 }
