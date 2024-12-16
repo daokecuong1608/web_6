@@ -32,6 +32,7 @@ class product{
     }
 
 
+
     public function insert_product($data , $file){
     $sanpham_tieude = $data['sanpham_tieude'];
     $sanpham_ma = $data['sanpham_ma'];
@@ -41,6 +42,7 @@ class product{
     $sanpham_gia = $data['sanpham_gia'];
     $sanpham_chitiet = $data['sanpham_chitiet'];
     $sanpham_baoquan = $data['sanpham_baoquan'];
+    $sanpham_soluong = $data['sanpham_soluong'];
 
     
     // Lấy thông tin về tệp ảnh chính và các tệp ảnh phụ được tải lên
@@ -74,9 +76,9 @@ class product{
             return false;
         }
     }
-      $query = "INSERT INTO tbl_sanpham (sanpham_tieude,sanpham_ma,danhmuc_id,loaisanpham_id,color_id,sanpham_gia,sanpham_chitiet,sanpham_baoquan,sanpham_anh) 
+      $query = "INSERT INTO tbl_sanpham (sanpham_tieude,sanpham_ma,danhmuc_id,loaisanpham_id,color_id,sanpham_gia,sanpham_chitiet,sanpham_baoquan,sanpham_anh,sanpham_soluong) 
             VALUES 
-          ('$sanpham_tieude','$sanpham_ma','$danhmuc_id','$loaisanpham_id','$color_id','$sanpham_gia','$sanpham_chitiet','$sanpham_baoquan','$sanpham_anh')";
+          ('$sanpham_tieude','$sanpham_ma','$danhmuc_id','$loaisanpham_id','$color_id','$sanpham_gia','$sanpham_chitiet','$sanpham_baoquan','$sanpham_anh' , '$sanpham_soluong')";
           $result = $this ->db ->insert($query);
     //Thêm các tệp ảnh phụ và kích thước sản phẩm vào cơ sở dữ liệu
     if($result){
@@ -101,6 +103,8 @@ class product{
     header('Location:productlist.php');
     return $result;
     }
+
+
 
 
 
@@ -313,6 +317,7 @@ public function update_product($data, $file, $sanpham_id) {
     $sanpham_gia = $data['sanpham_gia'];
     $sanpham_chitiet = $data['sanpham_chitiet'];
     $sanpham_baoquan = $data['sanpham_baoquan'];
+    $sanpham_soluong = $data['sanpham_soluong'];
 
     // Lấy thông tin về tệp ảnh chính và các tệp ảnh phụ được tải lên
     $file_name = $file['sanpham_anh']['name'];
@@ -355,7 +360,9 @@ public function update_product($data, $file, $sanpham_id) {
         color_id = '$color_id',
         sanpham_gia = '$sanpham_gia',
         sanpham_chitiet = '$sanpham_chitiet',
-        sanpham_baoquan = '$sanpham_baoquan'";
+        sanpham_baoquan = '$sanpham_baoquan',
+        sanpham_soluong = '$sanpham_soluong'";
+    
     if (!empty($file_name)) {
         $query .= ", sanpham_anh = '$sanpham_anh'";
     }

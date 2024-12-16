@@ -122,6 +122,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                         ?>
                 </select>
 
+                <label for="soLuongSanPham">Số lượng sản phẩm <span style="color: red;">*</span> </label><br>
+                <input value="<?php echo $result['sanpham_soluong'] ?>" require type="text" name="sanpham_soluong"
+                    id="soLuongSanPham"><br>
+
                 <label for="giaSanPham">Giá sản phẩm <span style="color: red;">*</span> </label><br>
                 <input value="<?php echo $result['sanpham_gia'] ?>" require type="text" name="sanpham_gia"
                     id="giaSanPham"><br>
