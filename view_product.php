@@ -11,7 +11,6 @@ if(isset($_GET['sanpham_id']) && $_GET['sanpham_id'] != NULL ){
 }
 // Kiểm tra trạng thái đăng nhập
 $is_logged_in = isset($_SESSION['login']) && $_SESSION['login'] === true;
-echo $userid;
 ?>
 
 <!DOCTYPE html>
@@ -270,13 +269,43 @@ echo $userid;
                     },
                     success: function(data) {
                         console.log(data); // Kiểm tra phản hồi từ server
-                        $(location).attr('href', 'cart.php');
+                        $.ajax({
+                            url: "ajax/update_quantity.php",
+                            method: "POST",
+                            data: {
+                                sanpham_id: sp,
+                                quantity: q
+                            },
+                            success: function(data) {
+                                console.log(
+                                    data); // Kiểm tra phản hồi từ server
+                                $(location).attr('href', 'cart.php');
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr
+                                    .responseText); // Kiểm tra lỗi nếu có
+                            }
+                        });
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText); // Kiểm tra lỗi nếu có
                     }
                 });
-                <?php } else { ?>      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <?php } else { ?>
                 $(location).attr('href', 'login.php');
                 <?php } ?>
             }

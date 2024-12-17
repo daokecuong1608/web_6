@@ -454,6 +454,5 @@ public function check_product_code($maSanPham) {
     return false; // Nếu không có sản phẩm nào
 }
 
-
 }
 ?>
