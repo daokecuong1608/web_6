@@ -60,7 +60,7 @@ $product = new product(); // Đảm bảo tên lớp là Product với chữ P v
                 ?>
                 <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php $ma = substr($result['user_id'],0,8); echo $ma   ?></td>
+                    <td><?php echo $result['order_id']?></td>
                     <td> <?php echo $result['order_date']?></td>
                     <td> <?php echo $result['customer_name']?></td>
                     <td> <?php echo $result['customer_phone'] ?></td>

@@ -28,8 +28,7 @@ if (!isset($_SESSION['user_id'])) {
             <div class="detail-top">
                 <p>CHI TIẾT ĐƠN HÀNG</p>
             </div>
-            <h1>Mã đơn hàng:<span style="font-size: 20px; color: #378000;">IVY<?php $ma = substr($userid, 0, 8);
-                                                                            echo $ma   ?></span></h1>
+            <h1>Mã đơn hàng:<span style="font-size: 20px; color: #378000;">IVY<?php echo $result['order_id']?></span></h1>
             <div class="detail-text">
                 <div class="detail-text-left-content">
                     <p><span style="font-weight: bold; color:red">Thông tin giao hàng</span></p>
@@ -85,7 +84,9 @@ if (!isset($_SESSION['user_id'])) {
 
                             ?>
                             <tr class="product-row">
-                                <td class="product-image"><img src="<?php echo $result['sanpham_anh'] ?>" alt=""></td>
+                                <td class="product-image"><img src="images/product/<?php echo $result['sanpham_anh'] ?>"
+                                        alt="">
+                                </td>
                                 <td class="product-title"><?php echo $result['sanpham_tieude'] ?></td>
                                 <td class="product-color"><img src="<?php echo $result['color_anh'] ?>" alt=""></td>
                                 <td class="product-size"><?php echo $result['sanpham_size'] ?></td>

@@ -1,26 +1,17 @@
 /* Tùy chỉnh các class CSS cho header */
 
-
 .navbar {
     background-color: #f8f9fa;
-    /* Màu nền của navbar */
     padding-top     : 1rem;
-    /* Khoảng cách padding trên */
     padding-right   : 1rem;
-    /* Khoảng cách padding phải */
     padding-bottom  : 1rem;
-    /* Khoảng cách padding dưới */
     padding-left    : 1rem;
-    /* Khoảng cách padding trái */
     border-radius   : 15px;
-    /* Bo tròn thanh navbar nếu bạn muốn bo tròn cả header */
     box-shadow      : 0 4px 10px rgba(0, 0, 0, 0.1);
-    /* Thêm hiệu ứng bóng đổ cho thanh header */
 }
 
 .navbar-brand img {
     height: 24px;
-    /* Chiều cao của logo */
 }
 
 /* Tùy chỉnh màu chữ và các liên kết */
@@ -28,19 +19,15 @@
     color: #292727;
 }
 
-/* header.css */
-
 /* Đặt kiểu dáng cho menu thả xuống */
 .navbar-nav .dropdown-menu {
     display         : none;
-    /* Ẩn menu thả xuống mặc định */
     position        : absolute;
     background-color: #cdc4c4;
     box-shadow      : 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index         : 1000;
     margin-top      : 0;
     border-radius   : 10px;
-    /* Bo tròn menu thả xuống */
     border          : 1px solid #ddd;
 }
 
@@ -80,133 +67,59 @@
     color           : #007bff;
 }
 
-
 .form-control {
     margin-right: 1rem;
-    /* Tăng khoảng cách bên phải của ô tìm kiếm */
 }
 
-
-.btn-cart {
-    border          : 1px solid #000;
-    /* Thêm viền cho nút */
-    padding         : 3px;
-    /* Thêm khoảng đệm */
-    display         : inline-flex;
-    /* Căn chỉnh các phần tử bên trong nút */
-    align-items     : center;
-    /* Căn giữa biểu tượng theo chiều dọc */
-    justify-content : center;
-    /* Căn giữa biểu tượng theo chiều ngang */
-    background-color: #f8f9fa;
-    /* Thêm màu nền */
-    transition      : border-color 0.3s, transform 0.3s, background-color 0.3s;
-    /* Thêm hiệu ứng chuyển đổi khi di chuột */
-    margin-right    : 10px;
-    /* Thêm khoảng cách bên phải */
-}
-
-.btn-cart i {
-    font-size : 24px;
-    /* Tăng kích thước biểu tượng */
-    transition: transform 0.3s;
-    /* Thêm hiệu ứng chuyển đổi khi di chuột */
-}
-
-.btn-cart:hover {
-    border-color    : #007bff;
-    /* Thay đổi màu viền khi di chuột */
-    background-color: #b4cbd2;
-    /* Thay đổi màu nền khi di chuột */
-}
-
-.btn-cart:hover i {
-    transform: scale(1.2);
-    /* Tăng kích thước biểu tượng khi di chuột */
-}
-
+/* Căn chỉnh nút giỏ hàng và login */
+.btn-cart,
 .btn-login {
-    display        : inline-flex;
-    /* Căn chỉnh các phần tử bên trong nút */
-    align-items    : center;
-    /* Căn giữa biểu tượng theo chiều dọc */
-    justify-content: center;
-    /* Căn giữa biểu tượng theo chiều ngang */
-    padding        : 5px;
-    /* Thêm khoảng đệm */
-    border         : 2px solid #000;
-    /* Thêm viền cho nút */
-    border-radius  : 5px;
-    /* Thêm bo tròn cho viền */
-    transition     : background-color 0.3s, border-color 0.3s;
-    /* Thêm hiệu ứng chuyển đổi khi di chuột */
     margin-right   : 10px;
-    /* Thêm khoảng cách bên phải */
+    padding        : 10px;
+    border-radius  : 5px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
 }
 
+.btn-cart i,
 .btn-login i {
-    font-size   : 20px;
-    /* Tăng kích thước biểu tượng */
-    transition  : transform 0.3s;
-    /* Thêm hiệu ứng chuyển đổi khi di chuột */
-    margin-right: 5px;
-    /* Thêm khoảng cách 5px bên phải biểu tượng */
+    font-size: 20px; /* Điều chỉnh kích thước icon */
 }
 
-.btn-login:hover {
-    background-color: #7d8b99;
-    /* Thay đổi màu nền khi di chuột */
-    border-color    : #091a79;
-    /* Thay đổi màu viền khi di chuột */
-}
-
+.btn-cart:hover i,
 .btn-login:hover i {
     transform: scale(1.2);
-    /* Tăng kích thước biểu tượng khi di chuột */
 }
 
 .btn-outline-success {
     color           : #28a745;
-    /* Màu chữ của nút outline success */
     border-color    : #28a745;
-    /* Màu viền của nút outline success */
     background-color: #f8f9fa;
-    /* Màu nền xám nhạt */
     border-radius   : 5px;
-    /* Bo tròn viền */
     transition      : background-color 0.3s, border-color 0.3s;
-    /* Thêm hiệu ứng chuyển đổi khi di chuột */
 }
 
 .btn-outline-success i {
-    font-size : 20px;
-    /* Tăng kích thước biểu tượng */
-    transition: transform 0.3s;
-    /* Thêm hiệu ứng chuyển đổi khi di chuột */
+    font-size: 20px; /* Điều chỉnh kích thước icon */
 }
 
 .btn-outline-success:hover {
     background-color: #28a745;
-    /* Thay đổi màu nền khi di chuột */
     border-color    : #28a745;
-    /* Thay đổi màu viền khi di chuột */
     color           : #fff;
-    /* Thay đổi màu chữ khi di chuột */
 }
 
 .btn-outline-success:hover i {
     transform: scale(1.2);
-    /* Tăng kích thước biểu tượng khi di chuột */
 }
 
 /* Điều chỉnh navbar để căn chỉnh các phần tử trong thanh điều hướng */
 .navbar-nav {
     display        : flex;
     flex-wrap      : wrap;
-    /* Cho phép các phần tử trong navbar xuống dòng khi không đủ không gian */
     align-items    : center;
     justify-content: flex-start;
-    /* Căn chỉnh các mục về phía bên trái */
 }
 
 /* Đảm bảo rằng menu thả xuống không tràn ra ngoài */
@@ -225,7 +138,6 @@
     border-radius   : 10px;
     border          : 1px solid #ddd;
     width           : 200px;
-    /* Thiết lập độ rộng cố định cho dropdown */
 }
 
 /* Hiển thị menu khi hover */
@@ -239,7 +151,6 @@
     color          : #504f4f;
     text-decoration: none;
     white-space    : nowrap;
-    /* Đảm bảo không bị xuống dòng */
 }
 
 /* Hiệu ứng hover cho các item trong dropdown */
@@ -252,7 +163,6 @@
 .form-control {
     margin-right: 1rem;
     flex        : 1;
-    /* Cho phép ô tìm kiếm chiếm hết không gian còn lại */
 }
 
 /* Căn chỉnh nút giỏ hàng và login */
@@ -267,8 +177,6 @@
 }
 
 @media (max-width: 768px) {
-
-    /* Điều chỉnh cho các màn hình nhỏ */
     .navbar-nav {
         display: block;
         width  : 100%;
@@ -291,7 +199,6 @@
         display: block;
     }
 
-    /* Thu nhỏ ô tìm kiếm cho phù hợp */
     .form-control {
         width       : 100%;
         margin-right: 0;

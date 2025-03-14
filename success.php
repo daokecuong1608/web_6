@@ -25,18 +25,18 @@ if ($userid == 0) {
 <body>
 
     <?php
-include 'header.php';
-include 'carousel.php';
-$userid = $_SESSION['user_id']; // Lấy ra user_id từ phiên
+    include 'header.php';
+    include 'carousel.php';
+    $userid = $_SESSION['user_id']; // Lấy ra user_id từ phiên
 
-?>
+    ?>
     <?php
- if (!defined('__ROOT__')) {
-    define('__ROOT__', dirname(__FILE__));
-}
-require_once(__ROOT__ . '/class/index_class.php'); // Đường dẫn chính xác đến tệp index_class.php
-$index = new index();
-?>
+    if (!defined('__ROOT__')) {
+        define('__ROOT__', dirname(__FILE__));
+    }
+    require_once(__ROOT__ . '/class/index_class.php'); // Đường dẫn chính xác đến tệp index_class.php
+    $index = new index();
+    ?>
     <section class="success">
         <div class="success-top">
             <p>ĐẶT HÀNG THÀNH CÔNG</p>
@@ -44,28 +44,27 @@ $index = new index();
         <div class="success-text">
             <?php
 
-        $show_cart = $index->show_order($userid);
-        if ($show_cart) {
-            while ($result_cart = $show_cart->fetch_assoc()) {
-        ?>
-            <p>Chào <span style="font-size: 20px; color: #378000;"><?php echo $result_cart['customer_name'] ?></span>,
-                đơn hàng của bạn với mã <span
-                    style="font-size: 20px; color: #378000;"><?php $ma = substr($userid, 0, 8);
-                                                                                                                                                                                                echo $ma   ?></span>
-                đã được đặt thành công. <br>
-                Đơn hàng của bạn đã được xác nhận tự động. <br>
-                <span style="font-weight: bold;">Hiện tại do đang trong Chương trình Sale lớn, đơn hàng của quý khách sẽ
-                    gửi chậm hơn so với thời gian dự kiến từ 5-10 ngày. Rất mong quý khách thông cảm vì sự bất tiện
-                    này!</span><br>
-                <span style="color: red;">(Lưu ý: Nếu bạn không hài lòng gì về chúng tôi hay liên hệ với shop của chúng
-                    tôi . Đừng vội đánh giá chúng tôi 1 sao nha.)</span><br>
-                Cám ơn <span style="font-size: 20px; color: #378000;"><?php echo $result_cart['customer_name'] ?></span>
-                đã tin dùng sản phẩm của shop.
-            </p>
+            $show_cart = $index->show_order($userid);
+            if ($show_cart) {
+                while ($result_cart = $show_cart->fetch_assoc()) {
+            ?>
+                    <p>Chào <span style="font-size: 20px; color: #378000;"><?php echo $result_cart['customer_name'] ?></span>,
+                        đơn hàng của bạn với mã <span
+                            style="font-size: 20px; color: #378000;"><?php echo $result_cart['order_id']; ?></span>
+                        đã được đặt thành công. <br>
+                        Đơn hàng của bạn đã được xác nhận tự động. <br>
+                        <span style="font-weight: bold;">Hiện tại do đang trong Chương trình Sale lớn, đơn hàng của quý khách sẽ
+                            gửi chậm hơn so với thời gian dự kiến từ 5-10 ngày. Rất mong quý khách thông cảm vì sự bất tiện
+                            này!</span><br>
+                        <span style="color: red;">(Lưu ý: Nếu bạn không hài lòng gì về chúng tôi hay liên hệ với shop của chúng
+                            tôi . Đừng vội đánh giá chúng tôi 1 sao nha.)</span><br>
+                        Cám ơn <span style="font-size: 20px; color: #378000;"><?php echo $result_cart['customer_name'] ?></span>
+                        đã tin dùng sản phẩm của shop.
+                    </p>
             <?php
+                }
             }
-        }
-        ?>
+            ?>
         </div>
         <div class="success-button">
             <a href="detaill.php"><button>XEM CHI TIẾT ĐƠN HÀNG</button></a>
@@ -75,8 +74,6 @@ $index = new index();
             </span> hoặc chat với kênh hỗ trợ trên website để được hỗ trợ nhanh nhất.</p>
 
     </section>
-
-
 
     <?php
     include 'footer.php';

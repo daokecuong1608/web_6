@@ -1,6 +1,6 @@
 <?php
 // Kết nối cơ sở dữ liệu
-$conn = new mysqli('localhost:3307', 'root', '', 'web_quan_ao');
+$conn = new mysqli('localhost:3306', 'root', '', 'web_quan_ao');
 
 // Kiểm tra kết nối
 if ($conn->connect_error) {
