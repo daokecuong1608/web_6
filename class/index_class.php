@@ -357,5 +357,13 @@ class index {
         }
     }
 
+    public function update_sanpham_quantity($sanpham_id, $quantity) {
+        $query = "UPDATE tbl_sanpham SET sanpham_soluong = sanpham_soluong - ? WHERE sanpham_id = ?";
+        $stmt =  $this->db->link->prepare($query);
+        $stmt->bind_param("ii", $quantity, $sanpham_id);
+        return $stmt->execute();
+    }
+    
+
 }
 ?>

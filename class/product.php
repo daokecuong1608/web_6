@@ -32,6 +32,7 @@ class product{
     }
 
 
+
     public function insert_product($data , $file){
     $sanpham_tieude = $data['sanpham_tieude'];
     $sanpham_ma = $data['sanpham_ma'];
@@ -41,7 +42,9 @@ class product{
     $sanpham_gia = $data['sanpham_gia'];
     $sanpham_chitiet = $data['sanpham_chitiet'];
     $sanpham_baoquan = $data['sanpham_baoquan'];
+    $sanpham_soluong = $data['sanpham_soluong'];
 
+    
     // Lấy thông tin về tệp ảnh chính và các tệp ảnh phụ được tải lên
     $file_name = $file['sanpham_anh']['name'];
     $file_size = $file['sanpham_anh']['size'];
@@ -73,9 +76,9 @@ class product{
             return false;
         }
     }
-      $query = "INSERT INTO tbl_sanpham (sanpham_tieude,sanpham_ma,danhmuc_id,loaisanpham_id,color_id,sanpham_gia,sanpham_chitiet,sanpham_baoquan,sanpham_anh) 
+      $query = "INSERT INTO tbl_sanpham (sanpham_tieude,sanpham_ma,danhmuc_id,loaisanpham_id,color_id,sanpham_gia,sanpham_chitiet,sanpham_baoquan,sanpham_anh,sanpham_soluong) 
             VALUES 
-          ('$sanpham_tieude','$sanpham_ma','$danhmuc_id','$loaisanpham_id','$color_id','$sanpham_gia','$sanpham_chitiet','$sanpham_baoquan','$sanpham_anh')";
+          ('$sanpham_tieude','$sanpham_ma','$danhmuc_id','$loaisanpham_id','$color_id','$sanpham_gia','$sanpham_chitiet','$sanpham_baoquan','$sanpham_anh' , '$sanpham_soluong')";
           $result = $this ->db ->insert($query);
     //Thêm các tệp ảnh phụ và kích thước sản phẩm vào cơ sở dữ liệu
     if($result){
@@ -100,6 +103,11 @@ class product{
     header('Location:productlist.php');
     return $result;
     }
+
+
+
+
+
 
     public function show_order_detail($order_ma){
         $query = "SELECT * FROM tbl_carta WHERE user_id = '$order_ma' ORDER BY cart_id DESC";
@@ -190,14 +198,15 @@ public function show_orderAll(){
         return $result;
     }
 
-public function get_anh($sanpham_id){
-    $query = "SELECT tbl_sanpham_anh.* , tbl_sanpham.sanpham_ma
-    FROM tbl_sanpham_anh INNER JOIN tbl_sanpham ON tbl_sanpham_anh.sanpham_id = tbl_sanpham.sanpham_id
-    WHERE tbl_sanpham_anh.sanpham_id = $sanpham_id
-    ORDER BY tbl_sanpham_anh.sanpham_anh_id DESC  ";
-    $result = $this -> db ->select($query);
-    return $result;
-}
+    public function get_anh($sanpham_id){
+        $query = "SELECT tbl_sanpham_anh.* , tbl_sanpham.sanpham_ma
+        FROM tbl_sanpham_anh 
+        INNER JOIN tbl_sanpham ON tbl_sanpham_anh.sanpham_id = tbl_sanpham.sanpham_id
+        WHERE tbl_sanpham_anh.sanpham_id = $sanpham_id
+        ORDER BY tbl_sanpham_anh.sanpham_anh_id DESC  ";
+        $result = $this -> db ->select($query);
+        return $result;
+    }
 
 public function get_all_size(){
     $query = "SELECT  tbl_sanpham_size.*,tbl_sanpham.sanpham_ma
@@ -308,6 +317,7 @@ public function update_product($data, $file, $sanpham_id) {
     $sanpham_gia = $data['sanpham_gia'];
     $sanpham_chitiet = $data['sanpham_chitiet'];
     $sanpham_baoquan = $data['sanpham_baoquan'];
+    $sanpham_soluong = $data['sanpham_soluong'];
 
     // Lấy thông tin về tệp ảnh chính và các tệp ảnh phụ được tải lên
     $file_name = $file['sanpham_anh']['name'];
@@ -317,7 +327,7 @@ public function update_product($data, $file, $sanpham_id) {
     $filetmps = $_FILES['sanpham_anhs']['tmp_name'];
 
     // Tách đuôi file
-    $div = explode('.', $file_name);
+    $div = explode('.', $file_name); 
     $file_ext = strtolower(end($div));
     // Sử dụng chuỗi hàm băm MD5 để tạo tên file mới để tránh trùng lặp
     $sanpham_anh = substr(md5(time()), 0, 10) . '.' . $file_ext;
@@ -350,7 +360,9 @@ public function update_product($data, $file, $sanpham_id) {
         color_id = '$color_id',
         sanpham_gia = '$sanpham_gia',
         sanpham_chitiet = '$sanpham_chitiet',
-        sanpham_baoquan = '$sanpham_baoquan'";
+        sanpham_baoquan = '$sanpham_baoquan',
+        sanpham_soluong = '$sanpham_soluong'";
+    
     if (!empty($file_name)) {
         $query .= ", sanpham_anh = '$sanpham_anh'";
     }
@@ -418,7 +430,29 @@ public function insert_cart($sanpham_id, $user_id, $sanpham_tieude, $sanpham_gia
     return $result;
 }
 
+public function check_product_name($sanpham_tieude) {
+    // Truy vấn để kiểm tra xem tên sản phẩm đã tồn tại trong bảng tbl_sanpham hay chưa
+    $query = "SELECT * FROM tbl_sanpham WHERE sanpham_tieude = '$sanpham_tieude'";
+    $result = $this->db->select($query);
+    
+    // Nếu có kết quả thì tên sản phẩm đã tồn tại
+    if ($result && $result->num_rows > 0) {
+        return true;
+    }
+    
+    // Nếu không có kết quả, nghĩa là tên sản phẩm chưa tồn tại
+    return false;
+}
 
+public function check_product_code($maSanPham) {
+    $query = "SELECT * FROM tbl_sanpham WHERE sanpham_ma = '$maSanPham'"; // Thực hiện truy vấn kiểm tra
+    $result = $this->db->select($query); // Giả sử $this->db là kết nối cơ sở dữ liệu
+
+    if ($result->num_rows > 0) {
+        return true; // Nếu có sản phẩm với mã này
+    }
+    return false; // Nếu không có sản phẩm nào
+}
 
 }
 ?>

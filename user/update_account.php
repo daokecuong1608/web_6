@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'];
     $username = $_POST['username'];
     $email = $_POST['email'];
-
     $result = $user_model->update_account($user_id, $username, $email);
     if ($result) {
         header("Location: account_settings.php?status=success");

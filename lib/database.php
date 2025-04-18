@@ -23,6 +23,7 @@ public function connectDB(){
     }
 }
  
+
 // Select or Read data
 public function select($query){
     mysqli_set_charset($this->link,'UTF8');
@@ -35,6 +36,8 @@ public function select($query){
     }
    }
    
+
+ 
    public function selectdc($query){
     mysqli_set_charset($this->link,'UTF8');
     $result = $this->link->query($query) or 
@@ -77,7 +80,6 @@ public function insert($query){
       return false;
      }
     }
-  
 
 }
 ?>

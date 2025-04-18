@@ -47,8 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
                 <label for="tenSanPham">Tên sản phẩm<span style="color: red;">*</span></label> <br>
                 <input required type="text" name="sanpham_tieude" id="tenSanPham"> <br>
+                <span id="tenSanPhamError" style="color: red;"></span>
+
                 <label for="maSanPham">Mã sản phẩm<span style="color: red;">*</span></label> <br>
                 <input required type="text" name="sanpham_ma" id="maSanPham"> <br>
+                <span id="maSanPhamError" style="color: red;"></span>
+
 
                 <label for="">Chọn danh mục<span style="color: red;">*</span></label> <br>
                 <select required="required" name="danhmuc_id" id="danhmuc_id">
@@ -96,7 +100,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     <p>XXL</p> <input type="checkbox" name="sanpham_size[]" value="XXL">
                 </div>
                 <label for="">Giá sản phẩm<span style="color: red;">*</span></label> <br>
-                <input required type="text" name="sanpham_gia"> <br>
+                <input required type="text" name="sanpham_gia" id="sanpham_gia"> <br>
+                <span id="sanpham_gia_error" style="color: red;"></span> <!-- Thông báo lỗi cho giá sản phẩm -->
+
+                <label for="">Số lượng sản phẩm<span style="color: red;">*</span></label> <br>
+                <input required type="text" name="sanpham_soluong" id="sanpham_soluong"> <br>
+                <span id="sanpham_soluong_error" style="color: red;"></span>
+                <!-- Thông báo lỗi cho số lượng sản phẩm -->
+
                 <label for="">Chi tiết<span style="color: red;">*</span></label> <br>
                 <textarea class="ckeditor" required name="sanpham_chitiet" cols="60" rows="5"></textarea><br>
                 <label for="">Bảo quản<span style="color: red;">*</span></label> <br>
@@ -113,6 +124,119 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
     <script>
     $(document).ready(function() {
+        //blur : khi người dùng rời khỏi ô input API sẽ được gọi 
+        $("#tenSanPham").blur(function() {
+            var tenSanPham = $(this).val();
+            if (tenSanPham.trim() !== "") {
+                $.get("../ajax/check_product_name.php", {
+                        sanpham_tieude: tenSanPham
+                    })
+                    .done(function(data) {
+                        console.log("Dữ liệu trả về từ server:",
+                            data); // Kiểm tra dữ liệu trả về từ server
+                        try {
+                            // Nếu dữ liệu trả về là đối tượng JSON hợp lệ
+                            if (typeof data === 'object') {
+                                // Không cần phải parse nếu dữ liệu đã là object
+                                if (data.exists) {
+                                    $("#tenSanPhamError").text(
+                                        "Tên sản phẩm đã tồn tại!"); // Hiển thị lỗi
+                                } else {
+                                    $("#tenSanPhamError").text(""); // Không có lỗi
+                                }
+                            } else {
+                                // Nếu dữ liệu trả về không phải object, parse nó
+                                var result = JSON.parse(data);
+                                if (result.exists) {
+                                    $("#tenSanPhamError").text("Tên sản phẩm đã tồn tại!");
+                                } else {
+                                    $("#tenSanPhamError").text("");
+                                }
+                            }
+                        } catch (e) {
+                            console.error("Lỗi parse JSON:", e);
+                            $("#tenSanPhamError").text("Lỗi kiểm tra tên sản phẩm.");
+                        }
+                    })
+                    .fail(function(xhr, status, error) {
+                        if (xhr.status !== 200) {
+                            $("#tenSanPhamError").text("Không thể kết nối đến server.");
+                        }
+                    });
+            } else {
+                $("#maSanPhamError").text(""); // Nếu ô input trống, xóa thông báo lỗi
+            }
+        });
+
+
+
+        // Kiểm tra mã sản phẩm
+        $("#maSanPham").blur(function() {
+            var maSanPham = $(this).val();
+            if (maSanPham.trim() !== "") {
+                $.get("../ajax/check_product_code.php", {
+                        sanpham_ma: maSanPham
+                    })
+                    .done(function(data) {
+                        console.log("Dữ liệu trả về từ server:",
+                            data); // Kiểm tra dữ liệu trả về từ server
+                        try {
+                            // Nếu dữ liệu trả về là đối tượng JSON hợp lệ
+                            if (typeof data === 'object') {
+                                if (data.exists) {
+                                    $("#maSanPhamError").text(
+                                        "Mã sản phẩm đã tồn tại!"); // Hiển thị lỗi
+                                } else {
+                                    $("#maSanPhamError").text(""); // Không có lỗi
+                                }
+                            } else {
+                                var result = JSON.parse(
+                                    data); // Parse JSON nếu dữ liệu trả về là chuỗi
+                                if (result.exists) {
+                                    $("#maSanPhamError").text("Mã sản phẩm đã tồn tại!");
+                                } else {
+                                    $("#maSanPhamError").text("");
+                                }
+                            }
+                        } catch (e) {
+                            console.error("Lỗi parse JSON:", e);
+                            $("#maSanPhamError").text("Lỗi kiểm tra mã sản phẩm.");
+                        }
+                    })
+                    .fail(function(xhr, status, error) {
+                        if (xhr.status !== 200) {
+                            $("#maSanPhamError").text("Không thể kết nối đến server.");
+                        }
+                    });
+            } else {
+                $("#maSanPhamError").text(""); // Nếu ô input trống, xóa thông báo lỗi
+            }
+
+        });
+
+
+
+        $("#sanpham_gia").blur(function() {
+            var giaSanPham = $(this).val();
+            if (isNaN(giaSanPham) || giaSanPham <= 0) {
+                $("#sanpham_gia_error").text("Giá sản phẩm phải là một số lớn hơn 0.");
+            } else {
+                $("#sanpham_gia_error").text("");
+            }
+        });
+
+        // Kiểm tra giá trị số lượng sản phẩm
+        $("#sanpham_soluong").blur(function() {
+            var soLuongSanPham = $(this).val();
+            if (isNaN(soLuongSanPham) || soLuongSanPham <= 0) {
+                $("#sanpham_soluong_error").text("Số lượng sản phẩm phải là một số lớn hơn 0.");
+            } else {
+                $("#sanpham_soluong_error").text("");
+            }
+        });
+
+
+
         $("#danhmuc_id").change(function() {
             var x = $(this).val();
             $.get("../ajax/productadd_ajax.php", {
@@ -121,6 +245,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 $("#loaisanpham_id").html(data);
             });
         });
+
+
+        // Xử lý khi gửi form
+        $("form").submit(function(event) {
+            if ($("#tenSanPhamError").text() !== "" || $("#maSanPhamError").text() !== "" || $(
+                    "#sanpham_gia_error").text() !== "" || $("#sanpham_soluong_error").text() !== "") {
+                event.preventDefault();
+                alert("Vui lòng sửa lỗi trước khi gửi form!");
+            }
+        });
+
+
     });
     </script>
 
