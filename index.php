@@ -136,10 +136,9 @@ if ($conn->connect_error) {
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
         intent="WELCOME"
-        chat-title="Chat_Shop_AI"
-        agent-id="ab7a00d3-d7f8-41bb-8af3-9696ffdf2815"
-        language-code="vi">
-    </df-messenger>
+        chat-title="CHAT_AI"
+        agent-id="b72a91e3-20db-47a9-a133-353d0b6387df"
+        language-code="vi"></df-messenger>
 
 </body>
 
