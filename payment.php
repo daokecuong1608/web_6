@@ -194,7 +194,8 @@ if ($show_cart) {
             function updateDeliveryInfo(input) {
                 const fee = parseInt(input.getAttribute('data-fee')) || 0;
                 const daysToAdd = parseInt(input.getAttribute('data-days')) || 0;
-                const newTotal = baseTotalPrice + fee;
+                let shippingFee = baseTotalPrice > 2000000 ? 0 : fee;
+                const newTotal = baseTotalPrice + shippingFee;
                 totalPriceElement.textContent = newTotal.toLocaleString() + 'đ';
                 totalPriceInput.value = newTotal;
                 estimatedDeliveryDateElement.textContent = `Ngày giao hàng dự kiến: ${calculateDeliveryDate(daysToAdd)}`;
