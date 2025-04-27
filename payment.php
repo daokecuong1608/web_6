@@ -25,12 +25,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($method_payment == 'vnpay') {
+        // Chuyển hướng đến trang thanh toán VNPay
         header("Location: vnpay_payment.php?amount=$total_price&deliver_method=$deliver_method&method_payment=$method_payment&today=$today&userid=$userid");
         exit();
     } else {
+        // Xử lý các phương thức thanh toán khác
         $insert_payment = $index->insert_payment($userid, $deliver_method, $method_payment, $today);
         if ($insert_payment) {
-            echo "<script>alert('Thanh toán thành công!'); window.location.href='index.php';</script>";
+            // Chuyển hướng đến trang success.php
+            header("Location: success.php?amount=$total_price&deliver_method=$deliver_method&method_payment=$method_payment");
+            exit();
         } else {
             echo "<script>alert('Lỗi: Không thể lưu đơn hàng.');</script>";
         }
@@ -95,39 +99,39 @@ if ($show_cart) {
                         <div class="payment-content-left-method-payment mt-4">
                             <p><strong>Phương thức thanh toán</strong></p>
                             <p>Mọi giao dịch đều được bảo mật và mã hóa.</p>
-                                <div class="payment-content-left-method-payment-item">
-                                    <input name="method-payment" type="radio">
-                                    <label for="">Thanh toán bằng thẻ tín dụng(OnePay)</label>
-                                </div>
-                                <div class="payment-content-left-method-payment-item-img">
-                                    <img src="images/visa.png" alt="Visa">
-                                </div>
-                                <div class="payment-content-left-method-payment-item">
-                                    <input name="method-payment" type="radio">
-                                    <label for="">Thanh toán bằng thẻ ATM(OnePay)</label>
-                                </div>
-                                <div class="payment-content-left-method-payment-item-img">
-                                    <img src="images/vcb.png" alt="VCB">
-                                </div>
-                                <div class="payment-content-left-method-payment-item">
-                                    <input name="method-payment" type="radio">
-                                    <label for="">Thanh toán Momo</label>
-                                </div>
-                                <div class="payment-content-left-method-payment-item-img">
-                                    <img src="images/momo.png" alt="Momo">
-                                </div>
-                                <div class="payment-content-left-method-payment-item">
-                                    <input name="method-payment" value="vnpay" type="radio" id="vnpay-option">
-                                    <label for="">Thanh toán VNPay</label>
-                                </div>
-                                <div class="payment-content-left-method-payment-item-img">
-                                    <img src="images/vnpay.png" alt="VNPay">
-                                </div>
-                                <div class="payment-content-left-method-payment-item">
-                                    <input value="Thanh toán khi nhận hàng" checked name="method-payment" type="radio">
-                                    <label for="">Thanh toán khi nhận hàng</label>
-                                </div>
+                            <div class="payment-content-left-method-payment-item">
+                                <input name="method-payment" type="radio" value="creditcard">
+                                <label for="">Thanh toán bằng thẻ tín dụng(OnePay)</label>
                             </div>
+                            <div class="payment-content-left-method-payment-item-img">
+                                <img src="images/visa.png" alt="Visa">
+                            </div>
+                            <div class="payment-content-left-method-payment-item">
+                                <input name="method-payment" type="radio" value="atm">
+                                <label for="">Thanh toán bằng thẻ ATM(OnePay)</label>
+                            </div>
+                            <div class="payment-content-left-method-payment-item-img">
+                                <img src="images/vcb.png" alt="VCB">
+                            </div>
+                            <div class="payment-content-left-method-payment-item">
+                                <input name="method-payment" type="radio" value="momo">
+                                <label for="">Thanh toán Momo</label>
+                            </div>
+                            <div class="payment-content-left-method-payment-item-img">
+                                <img src="images/momo.png" alt="Momo">
+                            </div>
+                            <div class="payment-content-left-method-payment-item">
+                                <input name="method-payment" value="vnpay" type="radio" id="vnpay-option">
+                                <label for="">Thanh toán VNPay</label>
+                            </div>
+                            <div class="payment-content-left-method-payment-item-img">
+                                <img src="images/vnpay.png" alt="VNPay">
+                            </div>
+                            <div class="payment-content-left-method-payment-item">
+                                <input type="radio" name="method-payment" value="cod" checked>
+                                <label for="">Thanh toán khi nhận hàng</label>
+                            </div>
+                        </div>
 
                         <div class="payment-content-right mt-4">
                             <p><strong>Tổng cộng:</strong> <span id="total-price"><?php echo number_format($total_price); ?>đ</span></p>
@@ -206,7 +210,12 @@ if ($show_cart) {
         });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
