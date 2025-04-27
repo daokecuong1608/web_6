@@ -33,6 +33,9 @@ class index {
         }
         return $result;
     }
+
+    
+
     
     public function show_carta($user_id){
         $query = "SELECT * FROM tbl_carta WHERE user_id = '$user_id' ORDER BY cart_id DESC";
@@ -366,4 +369,5 @@ class index {
     
 
 }
+
 ?>

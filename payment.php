@@ -1,54 +1,45 @@
 <?php
-include 'header.php'; // Path to your header.php
-include 'carousel.php'; // Path to your carousel.php
+include 'header.php';
+include 'carousel.php';
 
-// Kiểm tra xem phiên đã được bắt đầu hay chưa
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$userid = $_SESSION['user_id']; // Lấy ra user_id từ phiên
-
 if (!isset($_SESSION['user_id'])) {
-    // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
     header("Location: login.php");
     exit();
 }
 
-$index = new index(); // Instantiate the index class
+$userid = $_SESSION['user_id'];
+$index = new index();
 
-// Handle POST requests for payment submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $today = date('Y-m-d'); // Định dạng ngày chuẩn
+    $today = date('Y-m-d');
     $deliver_method = $_POST['deliver-method'] ?? 'Mặc định';
-    $method_payment = $_POST['method-payment'] ?? 'cod'; // Mặc định thanh toán khi nhận hàng
+    $method_payment = $_POST['method-payment'] ?? 'cod';
     $total_price = isset($_POST['total_price']) ? intval($_POST['total_price']) : 0;
 
-    // Kiểm tra giá trị total_price và userid
     if (empty($total_price) || empty($userid)) {
         die("Lỗi: Một số giá trị quan trọng bị thiếu.");
     }
 
-    // Xử lý khi chọn VNPay
     if ($method_payment == 'vnpay') {
         header("Location: vnpay_payment.php?amount=$total_price&deliver_method=$deliver_method&method_payment=$method_payment&today=$today&userid=$userid");
         exit();
     } else {
-        // Lưu đơn hàng vào CSDL, thêm cả total_price
         $insert_payment = $index->insert_payment($userid, $deliver_method, $method_payment, $today);
-
         if ($insert_payment) {
-            echo "<script>alert('Thanh toán thành công! Đơn hàng của bạn đã được ghi nhận.');</script>";
+            echo "<script>alert('Thanh toán thành công!'); window.location.href='index.php';</script>";
         } else {
-            echo "<script>alert('Lỗi: Không thể lưu đơn hàng, vui lòng thử lại.');</script>";
+            echo "<script>alert('Lỗi: Không thể lưu đơn hàng.');</script>";
         }
     }
 }
 
-// ========================= TÍNH TỔNG GIÁ TRỊ GIỎ HÀNG =========================
 $total_price = 0;
 $total_quantity = 0;
-$show_cart = $index->show_cartB($userid); // Lấy giỏ hàng từ database
+$show_cart = $index->show_cartB($userid);
 
 if ($show_cart) {
     while ($result = $show_cart->fetch_assoc()) {
@@ -76,33 +67,34 @@ if ($show_cart) {
         <div class="container">
             <div class="payment-top-wrap">
                 <div class="payment-top">
-                    <div class="delivery-top-delivery payment-top-item"><i class="fas fa-shopping-cart"></i></div>
-                    <div class="delivery-top-adress payment-top-item"><i class="fas fa-map-marker-alt"></i></div>
-                    <div class="delivery-top-payment payment-top-item"><i class="fas fa-money-check-alt"></i></div>
+                    <div class="payment-top-item"><i class="fas fa-shopping-cart"></i></div>
+                    <div class="payment-top-item"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="payment-top-item"><i class="fas fa-money-check-alt"></i></div>
                 </div>
             </div>
-        </div>
 
-        <div class="container">
             <div class="payment-content row">
                 <div class="col-md-6">
-                    <div class="payment-content-left">
-                        <form action="" method="POST" id="payment-form">
-                            <input type="hidden" name="total_price" value="<?php echo $total_price; ?>">
-                            <input type="hidden" name="order_id" value="<?php echo $insert_payment; ?>">
-                            <div class="payment-content-left-method-delivery">
-                                <p style="font-weight: bold;">Phương thức giao hàng</p>
-                                <div class="payment-content-left-method-delivery-item">
-                                    <input name="deliver-method" value="Ship hỏa tốc" checked type="radio">
-                                    <label for="">Ship hỏa tốc</label><br>
-                                    <input name="deliver-method" value="Giao hàng chuyển phát nhanh" type="radio">
-                                    <label for="">Giao hàng chuyển phát nhanh</label>
-                                </div>
+                    <form action="" method="POST" id="payment-form">
+                        <input type="hidden" name="total_price" value="<?php echo $total_price; ?>">
+
+                        <div class="payment-content-left-method-delivery">
+                            <p><strong>Phương thức giao hàng</strong></p>
+                            <div class="payment-content-left-method-delivery-item">
+                                <input type="radio" name="deliver-method" value="Ship hỏa tốc" data-fee="30000" data-days="1" checked> Ship hỏa tốc (+30,000đ)
                             </div>
-                            <br>
-                            <div class="payment-content-left-method-payment">
-                                <p style="font-weight: bold;">Phương thức thanh toán</p>
-                                <p>Mọi giao dịch đều được bảo mật và mã hóa.</p>
+                            <div class="payment-content-left-method-delivery-item">
+                                <input type="radio" name="deliver-method" value="Giao hàng chuyển phát nhanh" data-fee="20000" data-days="3"> Giao hàng chuyển phát nhanh (+20,000đ)
+                            </div>
+                            <div class="payment-content-left-method-delivery-item">
+                                <input type="radio" name="deliver-method" value="Giao hàng tiêu chuẩn" data-fee="10000" data-days="7"> Giao hàng tiêu chuẩn (+10,000đ)
+                            </div>
+                            <p id="estimated-delivery-date" style="margin-top:10px;font-weight:bold;"></p>
+                        </div>
+
+                        <div class="payment-content-left-method-payment mt-4">
+                            <p><strong>Phương thức thanh toán</strong></p>
+                            <p>Mọi giao dịch đều được bảo mật và mã hóa.</p>
                                 <div class="payment-content-left-method-payment-item">
                                     <input name="method-payment" type="radio">
                                     <label for="">Thanh toán bằng thẻ tín dụng(OnePay)</label>
@@ -132,60 +124,43 @@ if ($show_cart) {
                                     <img src="images/vnpay.png" alt="VNPay">
                                 </div>
                                 <div class="payment-content-left-method-payment-item">
-                                    <input value="Thanh toán khi nhận hàng " checked name="method-payment" type="radio">
+                                    <input value="Thanh toán khi nhận hàng" checked name="method-payment" type="radio">
                                     <label for="">Thanh toán khi nhận hàng</label>
                                 </div>
                             </div>
-                            <div class="payment-content-right-payment">
-                                <button type="submit" id="complete-button">HOÀN THÀNH</button>
-                                <button type="button" id="continue-button" style="display: none;">TIẾP TỤC</button>
-                            </div>
-                        </form>
-                    </div>
+
+                        <div class="payment-content-right mt-4">
+                            <p><strong>Tổng cộng:</strong> <span id="total-price"><?php echo number_format($total_price); ?>đ</span></p>
+                            <button type="submit" class="btn btn-primary w-100 mt-3">Hoàn tất thanh toán</button>
+                        </div>
+                    </form>
                 </div>
+
                 <div class="col-md-6">
                     <div class="payment-content-right">
-                        <div class="payment-content-right-button">
-                            <input type="text" placeholder="Mã giảm giá/Quà tặng">
-                            <button class="btn-check"><i class="fas fa-check"></i></button>
-                        </div>
-                        <div class="payment-content-right-button">
-                            <input type="text" placeholder="Mã cộng tác viên">
-                            <button class="btn-check"><i class="fas fa-check"></i></button>
-                        </div>
-                        <div class="payment-content-right-mnv">
-                            <select name="" id="">
-                                <option value="">Chọn mã nhân viên thân thiết</option>
-                                <option value="">D345</option>
-                                <option value="">C333</option>
-                                <option value="">T567</option>
-                                <option value="">D333</option>
-                            </select>
-                        </div>
-                        <br>
-                        <table>
-                            <tr>
-                                <th>Tên sản phẩm</th>
-                                <th>Đơn giá</th>
-                                <th>Số lượng</th>
-                                <th>Thành tiền</th>
-                            </tr>
-
-                            <?php if ($show_cart) {
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>SL</th>
+                                    <th>Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
                                 $show_cart = $index->show_cartB($userid);
-                                while ($result = $show_cart->fetch_assoc()) { ?>
-                                    <tr>
-                                        <td><?php echo $result['sanpham_tieude']; ?></td>
-                                        <td><?php echo number_format($result['sanpham_gia']); ?>đ</td>
-                                        <td><?php echo $result['quantitys']; ?></td>
-                                        <td><?php echo number_format($result['sanpham_gia'] * $result['quantitys']); ?>đ</td>
-                                    </tr>
-                            <?php }
-                            } ?>
-                            <tr style="border-top: 2px solid red">
-                                <td colspan="3" style="font-weight: bold;">Tổng</td>
-                                <td style="font-weight: bold;"><?php echo number_format($total_price); ?>đ</td>
-                            </tr>
+                                if ($show_cart) {
+                                    while ($result = $show_cart->fetch_assoc()) { ?>
+                                        <tr>
+                                            <td><?php echo $result['sanpham_tieude']; ?></td>
+                                            <td><?php echo number_format($result['sanpham_gia']); ?>đ</td>
+                                            <td><?php echo $result['quantitys']; ?></td>
+                                            <td><?php echo number_format($result['sanpham_gia'] * $result['quantitys']); ?>đ</td>
+                                        </tr>
+                                <?php }
+                                } ?>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -193,35 +168,45 @@ if ($show_cart) {
         </div>
     </section>
 
-    <?php include 'footer.php'; // Path to your footer.php 
-    ?>
+    <?php include 'footer.php'; ?>
+
     <script>
-        document.getElementById('vnpay-option').addEventListener('change', function() {
-            document.getElementById('complete-button').style.display = 'none';
-            document.getElementById('continue-button').style.display = 'block';
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const deliveryInputs = document.querySelectorAll('input[name="deliver-method"]');
+            const totalPriceElement = document.getElementById('total-price');
+            const totalPriceInput = document.querySelector('input[name="total_price"]');
+            const estimatedDeliveryDateElement = document.getElementById('estimated-delivery-date');
+            let baseTotalPrice = <?php echo $total_price; ?>;
 
-        document.getElementById('continue-button').addEventListener('click', function() {
-            document.getElementById('payment-form').submit();
-        });
+            function calculateDeliveryDate(daysToAdd) {
+                const currentDate = new Date();
+                currentDate.setDate(currentDate.getDate() + daysToAdd);
+                const day = currentDate.getDate();
+                const month = currentDate.getMonth() + 1;
+                const year = currentDate.getFullYear();
+                return `${day}/${month < 10 ? '0' + month : month}/${year}`;
+            }
 
-        // Reset buttons when các phương thức thanh toán khác được chọn
-        document.querySelectorAll('input[name="method-payment"]').forEach(function(element) {
-            element.addEventListener('change', function() {
-                if (this.value !== 'vnpay') {
-                    document.getElementById('complete-button').style.display = 'block';
-                    document.getElementById('continue-button').style.display = 'none';
-                }
+            function updateDeliveryInfo(input) {
+                const fee = parseInt(input.getAttribute('data-fee')) || 0;
+                const daysToAdd = parseInt(input.getAttribute('data-days')) || 0;
+                const newTotal = baseTotalPrice + fee;
+                totalPriceElement.textContent = newTotal.toLocaleString() + 'đ';
+                totalPriceInput.value = newTotal;
+                estimatedDeliveryDateElement.textContent = `Ngày giao hàng dự kiến: ${calculateDeliveryDate(daysToAdd)}`;
+            }
+
+            deliveryInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    updateDeliveryInfo(this);
+                });
             });
+
+            updateDeliveryInfo(document.querySelector('input[name="deliver-method"]:checked'));
         });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

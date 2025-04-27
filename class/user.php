@@ -78,6 +78,8 @@ class user{
             }
         }
 
+        
+
     // Lấy thông tin người dùng theo ID
     public function get_user_by_id($user_id) {
         $query = "SELECT username, email FROM users WHERE id = ?";
